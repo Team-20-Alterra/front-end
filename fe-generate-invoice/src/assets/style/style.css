@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Lobster&family=Ms+Madi&family=Quicksand:wght@400;500&family=Rock+Salt&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+/* styling navbar */
+
+.navBar{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+
+.navbar-left{
+    display: flex;
+    flex-direction: row;
+    gap: 44px;
+}
+
+.logo {
+    width: 100px;
+    height: 50px;
+    color: white;
+    background-color: rgba(80, 80, 80, 1);
+    padding: 12px 32px;
+}
+
+.navLink {
+    padding: 12px 32px;
+}
+
+.navLink:hover{
+    cursor: pointer;
+}
+
+.navLink:hover{
+    cursor: pointer;
+}
+
+.navbar-right{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.signup {
+    padding: 12px 16px;
+    color: white;
+    background-color: rgba(80, 80, 80, 1);
+    border-radius: 10px;
+}
+
+.login {
+    padding: 12px 16px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+/* styling navbar */
+
+/* styling hero */
+.hero {
+    height: 500px;
+    margin-bottom: 100px;
+}
+
+.hero-right{
+    width: 30%;
+    background-color: rgba(80, 80, 80, 1);
+}
+
+.hero-left{
+    width: 40%;
+    padding: 50px 0;
+}
+
+.hero-left h1{
+    font-size: 50px;
+}
+
+.hero-left h3{
+    font-size: 30px;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.hero-button{
+    gap: 20px
+}
+
+.hero-button .border{
+    padding: 10px;
+    width: 200px;
+    height: 55px;
+    border-radius: 10px;
+}
+
+.hero-button .border:hover{
+    background-color: rgba(80, 80, 80, 1);
+    color: white;
+    cursor: pointer;
+}
+
+
+.daftar{
+    font-size: 20px;
+    text-align: center;
+}
+
+.dapatkan{
+    font-size: 20px;
+    text-align: center;
+}
+/* styling hero */
+
+/* content */
+.desc-title-main{
+    padding: 0 50px;
+    margin-bottom: 100px;
+    font-weight: 400;
+}
+
+.options-tab{
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 50px;
+    padding: 8px;
+    gap: 10px;
+    background-color: rgba(80, 80, 80, 1);
+    border-radius: 20px;
+
+}
+
+.options-tab .client-admin{
+    width: 100%;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(80, 80, 80, 1);
+    border: 0px;
+    border-radius: 10px;
+}
+
+.options-tab .client-admin p{
+    font-size: 25px;
+}
+
+.options-tab .client-admin:hover{
+    cursor: pointer;
+    color: black;
+    background: #DADADA;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+/* content */
+
+/* get app */
+.get-app{
+    height: 500px;
+    gap: 50px;
+}
+
+.title-getApp{
+    font-size: 55px;
+    padding: 50px 0;
+}
+
+.button-getApp{
+    width: 200px;
+    color: black;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.button-getApp p{
+    margin-top: 15px;
+}
+
+.pstore{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.button-getApp:hover{
+    cursor: pointer;
+    background-color: rgba(80, 80, 80, 1);
+    color: white;
+    border: 3px solid black;
+}
+/* get app */
