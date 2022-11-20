@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.register-input input::placeholder{
+    color: #696969;
+}
+.register-input-checkbox {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  .register-input-checkbox {
+    cursor: pointer;
+    padding-left: 2rem; 
+    vertical-align: middle;
+    position: relative;
+  }
+  
+  .register-input-checkbox::before,
+  .register-input-checkbox::after {
+    content: "";
+    display: block;
+    position: absolute;
+  }
+  
+  .register-input-checkbox::before {
+    background-color: #fff;
+    border-radius: 0%;
+    border: 1px solid #666464;
+    width: 1.5rem; 
+    height: 1.5rem; 
+    transform: translateY(-50%);
+    top: 50%;
+    left: .25rem;
+  }
+  
+  .register-input-checkbox::after {
+    border-bottom: 3px solid #666464; 
+    border-left: 3px solid #666464; 
+    opacity: 0; 
+    height: 8px; 
+    width: 18px; 
+    transform: rotate(-45deg);
+    top: -7px; 
+    left: 8px; 
+    transition: opacity .3s;
+  }
+  .register-input-checkbox:checked::after {
+    opacity: 1;
+  }
+.register-button{
+    border: none;
+    background-color: #297061;
+    width: 90%;
+    margin: auto;
+    margin-top: 25px;
+    color: #FFFFFF;
+    padding: 9px;
+    border-radius: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.register-button:hover{
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  width: 91%;
+  transform: translateY(-2px);
+}
+.register-link:hover{
+  font-weight: bolder;
+}
