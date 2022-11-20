@@ -5,12 +5,13 @@
 import '../src/assets/style/style.css'
 import '../src/assets/style/admin.css'
 import '../src/assets/style/client.css'
+import './assets/style/login.css'
 
 import Router from './routes/router';
 
 function App() {
   return (
-    <Router/>
+    <Router />
   );
 }
 
