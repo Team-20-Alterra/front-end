@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export default function Header(props){
+export default function Header(props) {
     return (
         <div className="navBar container mt-4">
             <div className="navbar-left">
@@ -11,9 +11,9 @@ export default function Header(props){
             </div>
             <div className="navbar-right">
                 <p className="navLink signup">Sign Up</p>
-                <p className="navLink login">Login</p>
+                <Link to="/login"><p className="navLink login">Login</p></Link>
             </div>
         </div>
     )
-    
+
 }
