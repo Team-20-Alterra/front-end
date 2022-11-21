@@ -19,9 +19,9 @@ const Login = () => {
                     </div>
                 </div>
                 <a href='/' className='forgetPassword' >Lupa kata sandi?</a>
-                <button type="button" class="btn-primary">Masuk</button>
-                <div class="text-divider">Atau masuk dengan</div>
-                <button type="button" class="btn-secondary">Google</button>
+                <button type="button" className="btn-primary">Masuk</button>
+                <div className="text-divider">Atau masuk dengan</div>
+                <button type="button" className="btn-secondary">Google</button>
                 <div className="containerTextRegister">
                     <a href='/register' className='textRegister' >Belum punya akun?</a>
                 </div>
