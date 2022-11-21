@@ -1,19 +1,16 @@
-import React from 'react'
-import {
-  Route,
-  BrowserRouter,
-  Routes,
-} from "react-router-dom";
-import RegisterPage from '../pages/RegisterPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from '../pages/Index';
+import GetApp from '../pages/DapatkanAplikasi';
 
-const Router = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/register' element={<RegisterPage/>}></Route>
-      </Routes>
-    </BrowserRouter>
-  )
+function Router(){
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' exact element={<Home/>}/>
+                <Route path='/getapp' exact element={<GetApp/>}/>
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default Router

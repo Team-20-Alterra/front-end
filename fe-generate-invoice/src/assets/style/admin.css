@@ -1,0 +1,66 @@
+.admin-header{
+    gap: 150px;
+    margin-top: 80px;
+    margin-bottom: 100px;
+    font-family: 'Inter', sans-serif;
+}
+
+.icon-header{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px black;
+    background-color: grey;
+}
+
+.name-icon {
+    font-size: 17px;
+}
+
+.atur-invoices{
+    height: 300px;
+    gap:50px;
+}
+
+.img-post{
+    width: 40%;
+    background-color: rgba(80, 80, 80, 1);
+}
+
+.link-atur-invoices{
+    width: 50%;
+    padding: 60px 0;
+}
+
+.title-atur-invoices{
+    margin-bottom: 50px;
+}
+
+.atur-pelanggan{
+    height: 300px;
+    gap:50px;
+}
+
+.link-atur-pelanggan{
+    width: 50%;
+    padding: 60px 0;
+}
+
+.title-atur-pelanggan{
+    margin-bottom: 50px;
+}
+
+.notif-invoices{
+    height: 300px;
+    gap:50px;
+}
+
+.link-notif{
+    width: 50%;
+    padding: 60px 0;
+}
+
+.title-notif{
+    margin-bottom: 50px;
+}
