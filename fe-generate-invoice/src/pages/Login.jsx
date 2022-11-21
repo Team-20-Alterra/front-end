@@ -23,7 +23,7 @@ const Login = () => {
                 <div class="text-divider">Atau masuk dengan</div>
                 <button type="button" class="btn-secondary">Google</button>
                 <div className="containerTextRegister">
-                    <a href='/' className='textRegister' >Belum punya akun?</a>
+                    <a href='/register' className='textRegister' >Belum punya akun?</a>
                 </div>
             </div>
         </div >
