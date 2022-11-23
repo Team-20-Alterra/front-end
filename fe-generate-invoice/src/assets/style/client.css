@@ -1,8 +1,8 @@
 .client-header{
     gap: 150px;
-    margin-top: 80px;
-    margin-bottom: 100px;
     font-family: 'Inter', sans-serif;
+    background-color: #D4E2DF;
+    padding-bottom: 50px;
 }
 
 
