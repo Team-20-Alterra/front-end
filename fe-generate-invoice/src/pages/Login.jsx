@@ -1,16 +1,18 @@
 import React from 'react'
-import loginImage from '../assets/image/pana.png';
+import loginImage from '../assets/image/login-image.png';
+import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
     return (
         <div className="loginWrap">
-            <div className="containerLogin">
-                <div className='loginImage'>
+            <div className="containerLogin d-flex flex-column justify-content-center">
+                <p className='logoLogin text-center'> Ginap</p>
+                <div className='loginImage d-flex justify-content-center'>
                     <img src={loginImage} alt="loginImage" />
                 </div>
                 <div className="containerInput">
                     <div className="input">
-                        <span className="icon"><i className="bi bi-person-circle"></i></span>
+                        <span className="icon"><i className="bi bi-person-fill"></i></span>
                         <input type="text" id="login" placeholder="User ID" />
                     </div>
                     <div className="input">
@@ -19,9 +21,9 @@ const Login = () => {
                     </div>
                 </div>
                 <a href='/' className='forgetPassword' >Lupa kata sandi?</a>
-                <button type="button" class="btn-primary">Masuk</button>
-                <div class="text-divider">Atau masuk dengan</div>
-                <button type="button" class="btn-secondary">Google</button>
+                <button type="button" className="btn-primary">Masuk</button>
+                <div className="text-divider">Atau masuk dengan</div>
+                <button type="button" className="btn-secondary"><FcGoogle /> Google</button>
                 <div className="containerTextRegister">
                     <a href='/register' className='textRegister' >Belum punya akun?</a>
                 </div>
