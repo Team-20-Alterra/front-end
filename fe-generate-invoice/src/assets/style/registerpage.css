@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.register-container{
+    font-family: 'Poppins', sans-serif;
+}
+.app-name_register{
+    text-align: center;
+    color: #297061;
+    margin-top: 20px;
+    font-weight: bold;
+}
 .register-input{
     display: flex;
     align-items: center;
@@ -5,15 +15,10 @@
     justify-content: center;
     margin-bottom: 10px;
 }
-.register-input span{
-    font-size: 1.2rem;
-    position: absolute;
-    left: 26px;
-}
 .register-input input{
     width: 100%;
     padding: 8px;
-    padding-left: 30px;
+    padding-left: 20px;
     margin: 0 20px;
     border-radius: 7px;
     border: none;
@@ -28,8 +33,8 @@
 .register-button{
     border: none;
     background-color: #297061;
-    width: 80%;
-    margin: auto;
+    width: 90%;
+    margin-left: 20px;
     margin-top: 25px;
     color: #FFFFFF;
     padding: 7px;
@@ -38,7 +43,7 @@
 }
 .register-button:hover{
   box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
-  width: 81%;
+  width: 90%;
   transform: translateY(-2px);
 }
 .register-link:hover{
