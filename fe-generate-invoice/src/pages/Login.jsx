@@ -1,5 +1,5 @@
 import React from 'react'
-import loginImage from '../assets/image/login-image.png';
+import loginImage from '../assets/image/Auth/login-image.png';
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
@@ -21,9 +21,9 @@ const Login = () => {
                     </div>
                 </div>
                 <a href='/' className='forgetPassword' >Lupa kata sandi?</a>
-                <button type="button" className="btn-primary">Masuk</button>
+                <button type="button" className="btn-primary" id='ButtonMasuk'>Masuk</button>
                 <div className="text-divider">Atau masuk dengan</div>
-                <button type="button" className="btn-secondary"><FcGoogle /> Google</button>
+                <button type="button" className="btn-secondary" id='ButtonGoogle'><FcGoogle /> Google</button>
                 <div className="containerTextRegister">
                     <a href='/register' className='textRegister' >Belum punya akun?</a>
                 </div>
