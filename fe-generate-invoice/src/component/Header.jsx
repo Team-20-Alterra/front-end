@@ -10,8 +10,8 @@ export default function Header(props) {
                 <Link to="/getapp"><p className="navLink">Dapatkan Aplikasi</p></Link>
             </div>
             <div className="navbar-right">
-                <p className="navLink signup">Sign Up</p>
-                <Link to="/login"><p className="navLink login">Login</p></Link>
+                <p className="navLink signup">Daftar</p>
+                <Link to="/login"><p className="navLink login">Masuk</p></Link>
             </div>
         </div>
     )

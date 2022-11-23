@@ -1,21 +1,21 @@
 .admin-header{
     gap: 150px;
-    margin-top: 80px;
-    margin-bottom: 100px;
     font-family: 'Inter', sans-serif;
+    background-color: #D4E2DF;
+    padding-bottom: 50px;
 }
 
 .icon-header{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border: 4px black;
-    background-color: grey;
+    background-color: #D4E2DF;
 }
 
 .name-icon {
     font-size: 17px;
+    font-weight: 800;
 }
 
 .atur-invoices{

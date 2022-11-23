@@ -9,7 +9,7 @@ export default function Home(){
     const [ myShow, setShow] = useState('')
     return (
         <>
-            <Header name="GIS"/>
+            <Header name="Ginap"/>
             <div className="hero container d-flex flex-row justify-content-between">
                 <div className="hero-left">
                     <h1 className="mb-4">Heading 1</h1>
@@ -23,9 +23,10 @@ export default function Home(){
                     
                 </div>
             </div>
-            <div className="main container">
-                <h2 className="title-main text-center mb-4">Generate Invoice System</h2>
-                <h4 className="desc-title-main text-center" id="fitur">(Tentang Aplikasi)Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.</h4>
+            <div className="main">
+                <div className="container-fluid coba">
+                <h2 className="title-main text-center mb-4 container">Ginap</h2>
+                <h4 className="desc-title-main text-center container" id="fitur">(Tentang Aplikasi)Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.</h4>
                 {/* <div className="options-tab">
                     <div className="client-side text-center">
                         <p>Client</p>
@@ -34,7 +35,7 @@ export default function Home(){
                         <p>Admin</p>
                     </div>
                 </div> */}
-                <div className="options-tab">
+                <div className="options-tab container">
                 {tipeUser.map(tipeUser=>(
                     <button
                         type="button" 
@@ -45,6 +46,7 @@ export default function Home(){
                     {tipeUser.toLocaleUpperCase()}
                     </button>
                 ))}
+                </div>
                 </div>
                 <div>
                     {myShow === "admin" && (<Admin/>)}
