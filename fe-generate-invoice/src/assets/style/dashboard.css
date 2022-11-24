@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+:root {
+  --primary-color: #297061;
+}
+body {
+  font-family: "Poppins";
+  margin: 0;
+}
+
+.adminLogo {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+  padding-top: 16px;
+  padding-bottom: 32px;
+}
+
+.containerSidebar {
+  font-family: Poppins;
+  max-width: 240px;
+  height: 100vh;
+  color: white;
+  background-color: var(--primary-color);
+}
+.nav-link {
+  text-align: start;
+  font-size: 14px !important;
+  padding-left: 16px !important;
+  color: white !important;
+}
+.nav-link.active {
+  background-color: #0e2520 !important;
+  border-radius: 0 !important;
+  font-weight: 600;
+}
+.containerMenu {
+  padding: 5px 10px;
+}
+
+.iconMenu {
+  width: 24px;
+  height: 24px;
+  margin-right: 14px;
+}
+
+nav {
+  height: 72px;
+  background-color: var(--primary-color) !important;
+}
+
+.imgNavbar {
+  height: 40px;
+  width: 40px;
+}
+
+.TextNavbar {
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  padding-left: 12px;
+}
+
+.IconNotif {
+  height: 27px;
+  width: 27px;
+  margin-top: 9px;
+}
+.dropdown-menu:hover {
+  background-color: #d4e2df;
+}
+.dropdown-menu {
+  background-color: white !important;
+  padding: 0 !important;
+}
+.dropdown-divider {
+  margin: 0 !important;
+}
+.navProfile {
+  width: 174px !important;
+}
+.navProfile .dropdown-item {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.iconLogout {
+  height: 20px;
+  width: 20px;
+}
+.headerNotif {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 30px;
+  padding: 6px 16px;
+}
+.navNotif {
+  width: 400px !important;
+}
+.dropdown-menu.navNotif {
+  left: -190px !important;
+}
+.unreadNotif {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.bodyNotif {
+  font-weight: 400;
+  font-size: 12px;
+}
+.footerNotif {
+  font-size: 12px;
+  color: #9a9a9a;
+}
