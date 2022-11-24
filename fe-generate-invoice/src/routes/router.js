@@ -4,6 +4,7 @@ import GetApp from '../pages/DapatkanAplikasi';
 import Login from '../pages/Login';
 import RegisterPage from '../pages/RegisterPage';
 import RegisterBusiness from '../pages/RegisterBusiness';
+import AdminPage from '../pages/AdminPage';
 
 function Router() {
     return (
@@ -13,7 +14,8 @@ function Router() {
                 <Route path='/getapp' exact element={<GetApp />} />
                 <Route path='/login' exact element={<Login />} />
                 <Route path='/register' exact element={<RegisterPage />}></Route>
-                <Route path='/register-business' exact element={<RegisterBusiness/>}></Route>
+                <Route path='/register-business' exact element={<RegisterBusiness />}></Route>
+                <Route path='/admin' exact element={<AdminPage />}></Route>
             </Routes>
         </BrowserRouter>
     )

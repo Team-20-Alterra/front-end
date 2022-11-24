@@ -11,13 +11,14 @@ body {
 
 .loginWrap {
   background-color: #70a096;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .containerLogin {
   width: 22.5rem;
+  height: 97%;
   background-color: #ffffff;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
