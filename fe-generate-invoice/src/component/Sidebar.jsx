@@ -1,6 +1,7 @@
 import React from 'react'
 import { HiOutlineHome, HiOutlinePencil, HiOutlineUser, HiClock } from 'react-icons/hi'
 import { HiOutlineCog6Tooth } from 'react-icons/hi2'
+import { Link } from 'react-router-dom'
 
 const sidebar = () => {
     return (
@@ -18,7 +19,9 @@ const sidebar = () => {
                         role="tab"
                     >
                         <div className="containerMenu d-flex align-items-center">
+                            <Link to={'beranda'}>
                             <HiOutlineHome className='iconMenu' /> <span>Beranda</span>
+                            </Link>
                         </div>
                     </button>
                     <button className="nav-link"
@@ -40,7 +43,9 @@ const sidebar = () => {
                         role="tab"
                     >
                         <div className="containerMenu d-flex align-items-center">
-                            <HiOutlineUser className='iconMenu' /> <span>Pelanggan</span>
+                        <Link to={'pelanggan'}>
+                                <HiOutlineUser className='iconMenu' /> <span>Pelanggan</span>
+                        </Link>
                         </div>
                     </button>
                     <button className="nav-link"

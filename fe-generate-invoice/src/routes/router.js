@@ -4,7 +4,10 @@ import GetApp from '../pages/DapatkanAplikasi';
 import Login from '../pages/Login';
 import RegisterPage from '../pages/RegisterPage';
 import RegisterBusiness from '../pages/RegisterBusiness';
-import AdminPage from '../pages/AdminPage';
+import AdminPage from '../pages/BerandaPage';
+import BerandaPage from '../pages/BerandaPage';
+import PelangganPage from '../pages/PelangganPage';
+import Layout from '../component/Layout';
 
 function Router() {
     return (
@@ -15,9 +18,15 @@ function Router() {
                 <Route path='/login'  element={<Login />} />
                 <Route path='/register'  element={<RegisterPage />}></Route>
                 <Route path='/register-business'  element={<RegisterBusiness />}></Route>
-                <Route path='/admin' element={<AdminPage />} />
+            <Route path='/admin' element={<Layout />}>
+                <Route path='beranda' element={<BerandaPage />} />
+                <Route path='pelanggan' element={<PelangganPage />} />
+             </Route>
             </Routes>
+
             
+            
+             
             
         </BrowserRouter>
     )

@@ -5,7 +5,7 @@ export default function Header(props) {
         <div className="navBar container mt-4">
             <div className="navbar-left">
                 <p className="logo">{props.name}</p>
-                <a href="/"><p className="navLink">Beranda</p></a>
+                <a href="/admin"><p className="navLink">Beranda</p></a>
                 <a href="#fitur"><p className="navLink">Fitur</p></a>
                 <Link to="/getapp"><p className="navLink">Dapatkan Aplikasi</p></Link>
             </div>
