@@ -1,6 +1,6 @@
 import React from 'react'
-import ImgEmpty from '../assets/image/Admin/Pelanggan-Kosong.png'
-import ButtonAddPelanggan from './ButtonAddPelanggan'
+import ImgEmpty from '../../assets/image/Admin/Pelanggan-Kosong.png'
+import ButtonAddPelanggan from '../ButtonAddPelanggan'
 
 const PelangganEmpty = () => {
     return (

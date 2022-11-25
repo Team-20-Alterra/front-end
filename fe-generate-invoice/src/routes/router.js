@@ -4,8 +4,8 @@ import GetApp from '../pages/DapatkanAplikasi';
 import Login from '../pages/Login';
 import RegisterPage from '../pages/RegisterPage';
 import RegisterBusiness from '../pages/RegisterBusiness';
-import BerandaPage from '../pages/BerandaPage';
-import PelangganPage from '../pages/PelangganPage';
+import BerandaPage from '../pages/Dashboard/BerandaPage';
+import PelangganPage from '../pages/Dashboard/PelangganPage';
 import Layout from '../component/Layout';
 
 function Router() {
