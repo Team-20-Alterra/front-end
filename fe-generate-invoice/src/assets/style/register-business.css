@@ -13,7 +13,9 @@
     align-items: center;
     position: relative;
     justify-content: center;
+    flex-direction: column;
     margin-bottom: 10px;
+    padding: 0 20px;
 }
 .register-business_input input{
     width: 100%;
@@ -85,4 +87,10 @@
     width: 100%;
     opacity: 0;
     z-index: -1;
+}
+.register-business_error{
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 20px;
+    color: red;
 }
