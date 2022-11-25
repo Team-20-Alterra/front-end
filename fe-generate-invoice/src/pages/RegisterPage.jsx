@@ -1,6 +1,5 @@
 import React from 'react'
 import RegisterImage from '../assets/image/Auth/Login-Register.png'
-import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 

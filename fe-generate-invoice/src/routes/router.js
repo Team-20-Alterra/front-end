@@ -4,7 +4,6 @@ import GetApp from '../pages/DapatkanAplikasi';
 import Login from '../pages/Login';
 import RegisterPage from '../pages/RegisterPage';
 import RegisterBusiness from '../pages/RegisterBusiness';
-import AdminPage from '../pages/BerandaPage';
 import BerandaPage from '../pages/BerandaPage';
 import PelangganPage from '../pages/PelangganPage';
 import Layout from '../component/Layout';

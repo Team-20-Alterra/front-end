@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { BiBell } from 'react-icons/bi'
 import { HiOutlineArrowRightOnRectangle, HiOutlineClock } from 'react-icons/hi2'
