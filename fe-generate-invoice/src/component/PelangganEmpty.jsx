@@ -1,12 +1,16 @@
 import React from 'react'
 import ImgEmpty from '../assets/image/Admin/Pelanggan-Kosong.png'
+import ButtonAddPelanggan from './ButtonAddPelanggan'
 
 const PelangganEmpty = () => {
     return (
-        <div className="container pt-2">
-            <h5>Pelanggan</h5>
-            <div className="d-flex justify-content-center align-items-center">
+        <div className="container">
+            <div className="containerHeader">
+                <p className='textHeader'>Pelanggan</p>
+            </div>
+            <div className="d-flex justify-content-center align-items-center flex-column">
                 <img src={ImgEmpty} alt="emptyData" />
+                <ButtonAddPelanggan />
             </div>
         </div>
     )
