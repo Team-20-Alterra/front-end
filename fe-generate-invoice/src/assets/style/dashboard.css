@@ -44,6 +44,10 @@ body {
   margin-right: 14px;
 }
 
+.pengaturan {
+  margin-top: 350px;
+}
+
 nav {
   height: 72px;
   background-color: var(--primary-color) !important;

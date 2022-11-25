@@ -59,7 +59,7 @@ const sidebar = () => {
                             <HiClock className='iconMenu' /> <span>Riwayat</span>
                         </div>
                     </button>
-                    <button className="nav-link align-self-end"
+                    <button className="nav-link align-self-end  pengaturan"
                         id="v-pills-settings-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#v-pills-settings"
