@@ -18,7 +18,7 @@ body {
 
 .containerSidebar {
   font-family: Poppins;
-  max-width: 240px;
+  max-width: 250px;
   height: 100vh;
   color: white;
   background-color: var(--primary-color);
@@ -36,6 +36,7 @@ body {
 }
 .containerMenu {
   padding: 5px 10px;
+  color: white;
 }
 
 .iconMenu {
@@ -166,3 +167,69 @@ nav {
   width: 75px;
   border-radius: 4px;
 }
+
+/* Pengaturan */
+.form{
+  width: 70%;
+}
+
+.form-content{
+  gap: 80px;
+}
+
+.form-part{
+  gap: 50px;
+}
+
+.form-part-left{
+  width: 50%;
+}
+
+.form-part-right{
+  width: 50%;
+}
+
+.form-submit{
+  display: inline-block;
+  background: rgba(41, 112, 97, 1);
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.rekening-content {
+  gap: 20px;
+}
+
+.rekening-content img{
+  width: 80px;
+  height: 80px;
+  background-color: grey;
+}
+
+.rekening-data p {
+  opacity: 0.6  ;
+}
+
+.add-rekening{
+  cursor: pointer;
+  font-weight: bold;
+  color: rgba(41, 112, 97, 1);
+  font-size: 20px;
+}
+
+.p-profil{
+  width: 200px;
+  height: 200px;
+  background-color: black;
+}
+
+.profil-edit{
+  cursor: pointer;
+  background-color: rgba(41, 112, 97, 1);
+  display: block;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+}
+/* Pengaturan */
