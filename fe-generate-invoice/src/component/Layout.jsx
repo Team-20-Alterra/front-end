@@ -6,6 +6,7 @@ import PelangganPage from '../pages/Dashboard/PelangganPage';
 import PengaturanPage from '../pages/Dashboard/Pengaturan';
 import { Outlet, Route, Routes } from 'react-router-dom'
 import RiwayatPage from '../pages/Dashboard/RiwayatPage';
+import InvoicePage from '../pages/Dashboard/InvoicePage';
 
 const Layout = () => {
     return (
@@ -16,10 +17,11 @@ const Layout = () => {
                     <Navbar />
                     <Outlet />
                     <Routes>
-                    <Route path='beranda' element={<BerandaPage />} />
-                    <Route path='pelanggan' element={<PelangganPage />} />
-                    <Route path='pengaturan' element={<PengaturanPage />} />
-                    <Route path='riwayat' element={<RiwayatPage/>}/>
+                        <Route path='beranda' element={<BerandaPage />} />
+                        <Route path='invoice' element={<InvoicePage />} />
+                        <Route path='pelanggan' element={<PelangganPage />} />
+                        <Route path='pengaturan' element={<PengaturanPage />} />
+                        <Route path='riwayat' element={<RiwayatPage />} />
                     </Routes>
                 </div>
             </div>
