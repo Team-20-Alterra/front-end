@@ -56,7 +56,9 @@ const sidebar = () => {
                         role="tab"
                     >
                         <div className="containerMenu d-flex align-items-center">
+                            <Link to={'riwayat'}>
                             <HiClock className='iconMenu' /> <span>Riwayat</span>
+                            </Link>
                         </div>
                     </button>
                     <Link to={'pengaturan'}>

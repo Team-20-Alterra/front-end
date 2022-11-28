@@ -1,7 +1,11 @@
 import React from 'react'
 import Sidebar from '../component/Sidebar'
 import Navbar from '../component/Navbar'
-import { Outlet } from 'react-router-dom'
+import BerandaPage from '../pages/Dashboard/BerandaPage';
+import PelangganPage from '../pages/Dashboard/PelangganPage';
+import PengaturanPage from '../pages/Dashboard/Pengaturan';
+import { Outlet, Route, Routes } from 'react-router-dom'
+import RiwayatPage from '../pages/Dashboard/RiwayatPage';
 
 const Layout = () => {
     return (
@@ -10,7 +14,13 @@ const Layout = () => {
                 <Sidebar />
                 <div className="flex-column w-100">
                     <Navbar />
-                    <Outlet/>
+                    <Outlet />
+                    <Routes>
+                    <Route path='beranda' element={<BerandaPage />} />
+                    <Route path='pelanggan' element={<PelangganPage />} />
+                    <Route path='pengaturan' element={<PengaturanPage />} />
+                    <Route path='riwayat' element={<RiwayatPage/>}/>
+                    </Routes>
                 </div>
             </div>
         </div>
