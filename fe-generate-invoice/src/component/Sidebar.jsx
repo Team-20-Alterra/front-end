@@ -11,56 +11,61 @@ const sidebar = () => {
             </div>
             <div className="menu w-100">
                 <div className="d-flex flex-column nav nav-pills w-100 " id="v-pills-tab" role="tablist">
-                    <button className="nav-link active"
-                        id="v-pills-home-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#v-pills-home"
-                        type="button"
-                        role="tab"
-                    >
-                        <div className="containerMenu d-flex align-items-center">
-                            <Link to={'beranda'}>
-                            <HiOutlineHome className='iconMenu text-light' /> <span className='text-light'>Beranda</span>
-                            </Link>
-                        </div>
-                    </button>
-                    <button className="nav-link"
-                        id="v-pills-profile-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#v-pills-profile"
-                        type="button"
-                        role="tab"
-                    >
-                        <div className="containerMenu d-flex align-items-center">
-                            <HiOutlinePencil className='iconMenu' /> <span>Invoice</span>
-                        </div>
-                    </button>
-                    <button className="nav-link"
-                        id="v-pills-disabled-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#v-pills-disabled"
-                        type="button"
-                        role="tab"
-                    >
-                        <div className="containerMenu d-flex align-items-center">
-                        <Link to={'pelanggan'}>
+                    <Link to={'beranda'}>
+                        <button className="nav-link active"
+                            id="v-pills-home-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#v-pills-home"
+                            type="button"
+                            role="tab"
+                        >
+                            <div className="containerMenu d-flex align-items-center">
+                                <HiOutlineHome className='iconMenu text-light' /> <span className='text-light'>Beranda</span>
+                            </div>
+                        </button>
+                    </Link>
+                    <Link to={'invoice'}>
+                        <button className="nav-link"
+                            id="v-pills-profile-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#v-pills-profile"
+                            type="button"
+                            role="tab"
+                        >
+                            <div className="containerMenu d-flex align-items-center">
+                                <HiOutlinePencil className='iconMenu' /> <span>Invoice</span>
+                            </div>
+                        </button>
+                    </Link>
+
+                    <Link to={'pelanggan'}>
+                        <button className="nav-link"
+                            id="v-pills-disabled-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#v-pills-disabled"
+                            type="button"
+                            role="tab"
+                        >
+                            <div className="containerMenu d-flex align-items-center">
                                 <HiOutlineUser className='iconMenu text-light' /> <span className='text-light'>Pelanggan</span>
-                        </Link>
-                        </div>
-                    </button>
-                    <button className="nav-link"
-                        id="v-pills-messages-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#v-pills-messages"
-                        type="button"
-                        role="tab"
-                    >
-                        <div className="containerMenu d-flex align-items-center">
-                            <Link to={'riwayat'}>
-                            <HiClock className='iconMenu' /> <span>Riwayat</span>
-                            </Link>
-                        </div>
-                    </button>
+                            </div>
+                        </button>
+                    </Link>
+
+                    <Link to={'riwayat'}>
+                        <button className="nav-link"
+                            id="v-pills-messages-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#v-pills-messages"
+                            type="button"
+                            role="tab"
+                        >
+                            <div className="containerMenu d-flex align-items-center">
+                                <HiClock className='iconMenu' /> <span>Riwayat</span>
+                            </div>
+                        </button>
+                    </Link>
+
                     <Link to={'pengaturan'}>
                         <button className="nav-link align-self-end  pengaturan"
                             id="v-pills-settings-tab"
