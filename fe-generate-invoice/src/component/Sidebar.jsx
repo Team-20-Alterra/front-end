@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const sidebar = () => {
     return (
-        <div className="d-flex flex-column align-items-center containerSidebar" >
+        <div className="d-flex flex-column align-items-center sticky-top containerSidebar" >
             <div className="d-flex align-items-center text-decoration-none">
                 <span className="adminLogo">Ginap</span>
             </div>
@@ -20,7 +20,7 @@ const sidebar = () => {
                     >
                         <div className="containerMenu d-flex align-items-center">
                             <Link to={'beranda'}>
-                            <HiOutlineHome className='iconMenu' /> <span>Beranda</span>
+                            <HiOutlineHome className='iconMenu text-light' /> <span className='text-light'>Beranda</span>
                             </Link>
                         </div>
                     </button>
@@ -44,7 +44,7 @@ const sidebar = () => {
                     >
                         <div className="containerMenu d-flex align-items-center">
                         <Link to={'pelanggan'}>
-                                <HiOutlineUser className='iconMenu' /> <span>Pelanggan</span>
+                                <HiOutlineUser className='iconMenu text-light' /> <span className='text-light'>Pelanggan</span>
                         </Link>
                         </div>
                     </button>
@@ -59,16 +59,18 @@ const sidebar = () => {
                             <HiClock className='iconMenu' /> <span>Riwayat</span>
                         </div>
                     </button>
-                    <button className="nav-link align-self-end  pengaturan"
-                        id="v-pills-settings-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#v-pills-settings"
-                        type="button"
-                        role="tab">
-                        <div className="containerMenu d-flex align-items-center">
-                            <HiOutlineCog6Tooth className='iconMenu' /> <span>Pengaturan</span>
-                        </div>
-                    </button>
+                    <Link to={'pengaturan'}>
+                        <button className="nav-link align-self-end  pengaturan"
+                            id="v-pills-settings-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#v-pills-settings"
+                            type="button"
+                            role="tab">
+                            <div className="containerMenu d-flex align-items-center">
+                                <HiOutlineCog6Tooth className='iconMenu' /> <span>Pengaturan</span>
+                            </div>
+                        </button>
+                    </Link>
                 </div>
                 <div className="tab-content" id="v-pills-tabContent">
                     <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" tabIndex="0"></div>

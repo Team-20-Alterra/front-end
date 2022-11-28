@@ -7,7 +7,7 @@ import DefaultProfile from '../assets/image/defaultProfile.png'
 const Navbar = () => {
     return (
         <>
-            <nav className="navbar">
+            <nav className="navbar sticky-top">
                 <div className="container">
                     <a className="navbar-brand d-flex align-items-center justify-content-center">
                         <img src={DefaultProfile} alt="Logo" className="imgNavbar d-inline-block align-text-top" />
