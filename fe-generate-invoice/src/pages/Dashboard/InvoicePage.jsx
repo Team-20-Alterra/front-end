@@ -6,7 +6,7 @@ const InvoicePage = () => {
     return (
         <div className="container">
             <div className="containerHeader">
-                <HeaderDashboard name="Invoice" />
+                <HeaderDashboard name="Buat Invoice" />
             </div>
             <div className="headerInvoice d-flex align-items-center justify-content-between">
                 <img src={logoPerusahaan} alt="Logo" />
@@ -27,7 +27,7 @@ const InvoicePage = () => {
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td className='data'>: Email Perusahaan</td>
+                                    <td className='data'>: Email@Perusahaan.com</td>
                                 </tr>
                                 <tr>
                                     <td>No.Telepon</td>

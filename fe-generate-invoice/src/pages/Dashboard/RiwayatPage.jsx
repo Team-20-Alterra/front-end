@@ -6,7 +6,7 @@ import ListRiwayat from '../../component/DashboardFeature/ListRiwayat'
 
 const RiwayatPage = () => {
     return (
-        <div className='riwayat-page__container'>
+        <div className='container'>
             <HeaderDashboard name="Riwayat" />
             <div className='riwayat-page__navbar'>
                 <ul>
@@ -32,7 +32,7 @@ const RiwayatPage = () => {
                 <button><HiFilter className='filter-icon' />Filter</button>
             </div>
             <div className='riwayat-list__container'>
-                <ListRiwayat/>
+                <ListRiwayat />
             </div>
         </div>
     )

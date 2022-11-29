@@ -11,18 +11,18 @@ const ButtonAddPelanggan = () => {
         <>
             <button className='btn-primary pelanggan' data-bs-toggle="modal" data-bs-target="#exampleModal"><HiPlus /> Customer</button>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Pelanggan</h1>
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Tambah Pelanggan</h1>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <h6>User ID</h6>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <input type="text" className='inputModal' placeholder="User ID" {...register("User ID", { required: true })} />
                                 <div className="btn-modal">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button className='btn-primary' type="submit">Tambahkan</button>
                                 </div>
                             </form>
