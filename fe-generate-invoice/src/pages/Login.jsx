@@ -3,34 +3,24 @@ import loginImage from '../assets/image/Auth/login-image.png';
 import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
-    const navigate = useNavigate()
     const [values, setValues] = useState({
         email: "",
         password: "",
         showPassword: false
     })
 
-    const handleLoginButton = (event) => {
+    const handleLoginButton = async (event) => {
         event.preventDefault()
         // eslint-disable-next-line no-unused-expressions
-        axios({
-            method: 'POST',
-            url: "http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/login",
-            data: {
-                email: values.email,
-                password: values.password
-            },
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-        }
-        )
-        .then(response => console.log(response.data.token))
-        .catch(error => console.log(error))
+
+        axios.post("http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/login", {
+            email: values.email,
+            password: values.password
+        }).then((response) => response.data)
+            .catch((error) => console.log(error))
     }
 
     return (
