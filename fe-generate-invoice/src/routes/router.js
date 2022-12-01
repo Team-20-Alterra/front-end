@@ -5,18 +5,22 @@ import Login from '../pages/Login';
 import RegisterPage from '../pages/RegisterPage';
 import RegisterBusiness from '../pages/RegisterBusiness';
 import Layout from '../component/Layout';
+import ForgetPasswordPage from '../pages/ForgetPasswordPage';
+import SentLinkPage from '../pages/SentLinkPage';
 
 function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/'  element={<Home />} />
-                <Route path='/getapp'  element={<GetApp />} />
-                <Route path='/login'  element={<Login />} />
-                <Route path='/register'  element={<RegisterPage />}></Route>
-                <Route path='/register-business'  element={<RegisterBusiness />}></Route>
-            <Route path='/admin/*' element={<Layout />}>
-            </Route>
+                <Route path='/' element={<Home />} />
+                <Route path='/getapp' element={<GetApp />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<RegisterPage />}></Route>
+                <Route path='/register-business' element={<RegisterBusiness />}></Route>
+                <Route path='/forget-password' element={<ForgetPasswordPage />}></Route>
+                <Route path='/link-sent' element={<SentLinkPage />}></Route>
+                <Route path='/admin/*' element={<Layout />}>
+                </Route>
             </Routes>
         </BrowserRouter>
     )
