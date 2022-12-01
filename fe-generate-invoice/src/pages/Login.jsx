@@ -19,30 +19,23 @@ const Login = () => {
         axios.post("http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/login", {
             email: values.email,
             password: values.password
-        }).then((response) => response.data)
+        }).then((response) => console.log(response.data))
             .catch((error) => console.log(error))
     }
 
     return (
-        <div className="loginWrap">
+        <div className="Wrap">
             <div className="containerLogin d-flex flex-column justify-content-center">
-                <p className='logoLogin text-center'> Ginap</p>
-                <div className='loginImage d-flex justify-content-center'>
+                <p className='textGinap text-center'> Ginap</p>
+                <div className='d-flex justify-content-center w-100' style={{ marginBottom: "32px" }}>
                     <img src={loginImage} alt="loginImage" />
                 </div>
                 <form className="containerInput" onSubmit={handleLoginButton}>
-                    <div className="input">
-                        <span className="icon"><i className="bi bi-person-fill"></i></span>
-                        <input type='email' id="login" placeholder="User ID" onChange={(e) => setValues({...values, email : e.target.value})}/>
-                    </div>
-                    <div className="input">
-                        <span className="icon"><i className="bi bi-lock-fill"></i></span>
-                        <input type="password" id="login" placeholder="Kata Sandi" onChange={(e) => setValues({...values, password : e.target.value})} />
-                    </div>
-                    <input type="submit" />
+                    <input type='email' className="input" placeholder="User ID" onChange={(e) => setValues({ ...values, email: e.target.value })} />
+                    <input type="password" className="input" placeholder="Kata Sandi" onChange={(e) => setValues({ ...values, password: e.target.value })} />
+                    <a href='/forget-password' className='forgetPassword' >Lupa kata sandi?</a>
+                    <button type="submit" className="btn-primary" id='ButtonMasuk'>Masuk</button>
                 </form>
-                <a href='/' className='forgetPassword' >Lupa kata sandi?</a>
-                <button type="button" className="btn-primary" id='ButtonMasuk'>Masuk</button>
                 <div className="text-divider">Atau masuk dengan</div>
                 <button type="button" className="btn-secondary" id='ButtonGoogle'><FcGoogle /> Google</button>
                 <div className="containerTextRegister">
