@@ -1,7 +1,10 @@
 import React from 'react'
 import RegisterBusinessImage from '../assets/image/Auth/Bisnis-Register.png'
 import { useForm } from "react-hook-form";
+import { useState, useEffect } from 'react';
 const RegisterBusiness = () => {
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState()
   const {
     register,
     handleSubmit,
@@ -10,9 +13,33 @@ const RegisterBusiness = () => {
   const onSubmit = (data) => {
     alert(JSON.stringify(data))
   };
+
+  // create a preview as a side effect, whenever selected file is changed
+  useEffect(() => {
+      if (!selectedFile) {
+          setPreview(undefined)
+          return
+      }
+
+      const objectUrl = URL.createObjectURL(selectedFile)
+      setPreview(objectUrl)
+
+      // free memory when ever this component is unmounted
+      return () => URL.revokeObjectURL(objectUrl)
+  }, [selectedFile])
+
+  const onSelectFile = e => {
+      if (!e.target.files || e.target.files.length === 0) {
+          setSelectedFile(undefined)
+          return
+      }
+
+      // I've kept this example simple by using the first image instead of multiple
+      setSelectedFile(e.target.files[0])
+  }
     return (
       <>
-        <div className="register-business_container" style={{ backgroundColor: "#70A096", height: "110vh" }}>
+        <div className="register-business_container" style={{ backgroundColor: "#70A096", height: "120vh" }}>
           <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-xl-4 col-sm-6 col-md-5">
@@ -70,10 +97,10 @@ const RegisterBusiness = () => {
                           <i class="bi bi-plus"></i>
                         </span>
                       </div>
-                      <input type="file" accept="image/*" className="image-input"
-                        {...register("TambahLogo", { required: true})}
+                      <input type="file" accept="image/*" className="image-input" onChange={onSelectFile}
                       />
                     </div>
+                    {selectedFile && <img src={preview} alt={preview} style={{ width: "250px", height: "150px", display:"block", marginLeft:"auto", marginRight:"auto", marginTop:"5px" }} />}
                     <div className='register-business_error'>
                         {errors?.TambahLogo?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
                     </div>
