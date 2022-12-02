@@ -3,9 +3,11 @@ import forgetPasswordImage from '../assets/image/Auth/forget-password.png';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 
 const ForgetPasswordPage = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit, setError, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
@@ -19,16 +21,25 @@ const ForgetPasswordPage = () => {
                 email: data.email,
             })
                 .then((res) => {
-                    console.log(res)
-                    toast.success('success add product to cart', {
-                        position: "top-center",
-                        autoClose: 3000,
-                    })
+                    if (res.status === 200) {
+                        toast.success(res.data.message, {
+                            position: "top-right",
+                            autoClose: 3000,
+                        })
+                        navigate("/sent-link")
+                    } else {
+                        toast.error(res.data.message, {
+                            position: "top-right",
+                            autoClose: 3000,
+                        })
+                    }
+
                 })
-                .catch((error) => console.log(error))
+                .catch((error) => {
+                    console.log(error)
+                })
         }
     };
-    console.log(errors);
 
     return (
         <div className="Wrap">
@@ -60,7 +71,7 @@ const ForgetPasswordPage = () => {
                         {errors?.confirmEmail?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Alamat Email Tidak Valid!</p>}
                         {errors?.confirmEmail?.type === "match" && <p><i className="bi bi-exclamation-circle"></i> {errors.confirmEmail.message}</p>}
                     </div>
-                    <button type="submit" className="btn-primary mt-3" id>Lanjut</button>
+                    <button type="submit" className="btn-primary mt-3">Lanjut</button>
                 </form>
             </div>
         </div >

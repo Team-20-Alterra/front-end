@@ -75,6 +75,10 @@ body {
   font-weight: 700;
   font-size: 16px;
   color: #ffffff;
+  opacity: 1;
+}
+.btn-primary:hover {
+  opacity: 0.9;
 }
 .text-divider {
   position: relative;
@@ -158,4 +162,39 @@ body {
   border-radius: 25px;
   padding: 32px;
 }
+.inputChangePassword input {
+  height: 40px;
+  width: 100%;
+  background: #ffffff;
+  border: none;
+  font-size: 16px;
+  padding-left: 15px;
+  padding-right: 45px;
+  box-shadow: 0px 0px 10px rgba(37, 37, 37, 0.2);
+  border-radius: 4px;
+}
+.inputChangePassword input:focus {
+  outline: #297061 auto 2px;
+}
+.inputChangePassword .icon {
+  position: absolute;
+  margin-left: 265px;
+  margin-top: 7px;
+}
+
+.successChange:hover {
+  color: #ffffff;
+}
 /* New Password */
+
+/* Tostify */
+.Toastify__toast-icon svg {
+  fill: var(--primary-color);
+}
+.Toastify__toast--error svg {
+  fill: red;
+}
+.Toastify__progress-bar--success {
+  background: var(--primary-color);
+}
+/* Tostify */

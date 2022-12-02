@@ -8,6 +8,7 @@ import Layout from '../component/Layout';
 import ForgetPasswordPage from '../pages/ForgetPasswordPage';
 import SentLinkPage from '../pages/SentLinkPage';
 import SetNewPasswordPage from '../pages/SetNewPasswordPage';
+import SuccessChangePasswordPage from '../pages/SuccessChangePasswordPage';
 
 function Router() {
     return (
@@ -21,6 +22,7 @@ function Router() {
                 <Route path='/forget-password' element={<ForgetPasswordPage />}></Route>
                 <Route path='/sent-link' element={<SentLinkPage />}></Route>
                 <Route path='/new-password' element={<SetNewPasswordPage />}></Route>
+                <Route path='/success-password' element={<SuccessChangePasswordPage />}></Route>
                 <Route path='/admin/*' element={<Layout />}>
                 </Route>
             </Routes>
