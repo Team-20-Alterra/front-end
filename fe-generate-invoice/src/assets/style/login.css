@@ -22,12 +22,12 @@ body {
   background-color: #ffffff;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
-  padding: 32px;
+  padding: 20px 32px;
 }
 .textGinap {
   font-weight: 700;
   font-size: 32px;
-  line-height: 48px;
+  padding: 0;
   color: var(--primary-color);
 }
 
@@ -41,7 +41,6 @@ body {
   padding-right: 15px;
   box-shadow: 0px 0px 10px rgba(37, 37, 37, 0.2);
   border-radius: 4px;
-  margin-bottom: 12px;
 }
 .input:focus {
   outline: #297061 auto 2px;
@@ -51,7 +50,11 @@ body {
   justify-content: flex-start;
   padding: 0;
   color: red;
+  margin-top: 7px;
   font-size: 12px;
+}
+.input_error p {
+  margin-bottom: 0 !important;
 }
 .forgetPassword {
   display: flex;
@@ -72,6 +75,10 @@ body {
   font-weight: 700;
   font-size: 16px;
   color: #ffffff;
+  opacity: 1;
+}
+.btn-primary:hover {
+  opacity: 0.9;
 }
 .text-divider {
   position: relative;
@@ -115,7 +122,7 @@ body {
   font-size: 14px;
   line-height: 18px;
   color: var(--primary-color);
-  padding-top: 25px;
+  margin-top: 23px;
 }
 
 /* Forget*/
@@ -134,6 +141,7 @@ body {
   margin: 32px 0 16px 0;
 }
 /* Forget */
+
 /* Link Sent */
 .containerSent {
   width: 360px;
@@ -144,3 +152,49 @@ body {
   padding: 32px;
 }
 /* Link Sent */
+
+/* New Password */
+.containerNewPass {
+  width: 360px;
+  max-height: 586.6px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  padding: 32px;
+}
+.inputChangePassword input {
+  height: 40px;
+  width: 100%;
+  background: #ffffff;
+  border: none;
+  font-size: 16px;
+  padding-left: 15px;
+  padding-right: 45px;
+  box-shadow: 0px 0px 10px rgba(37, 37, 37, 0.2);
+  border-radius: 4px;
+}
+.inputChangePassword input:focus {
+  outline: #297061 auto 2px;
+}
+.inputChangePassword .icon {
+  position: absolute;
+  margin-left: 265px;
+  margin-top: 7px;
+}
+
+.successChange:hover {
+  color: #ffffff;
+}
+/* New Password */
+
+/* Tostify */
+.Toastify__toast-icon svg {
+  fill: var(--primary-color);
+}
+.Toastify__toast--error svg {
+  fill: red;
+}
+.Toastify__progress-bar--success {
+  background: var(--primary-color);
+}
+/* Tostify */

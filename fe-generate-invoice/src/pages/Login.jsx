@@ -32,8 +32,8 @@ const Login = () => {
                 </div>
                 <form className="containerInput" onSubmit={handleLoginButton}>
                     <input type='email' className="input" placeholder="User ID" onChange={(e) => setValues({ ...values, email: e.target.value })} />
-                    <input type="password" className="input" placeholder="Kata Sandi" onChange={(e) => setValues({ ...values, password: e.target.value })} />
-                    <a href='/forget-password' className='forgetPassword' >Lupa kata sandi?</a>
+                    <input type="password" className="input mt-1" placeholder="Kata Sandi" onChange={(e) => setValues({ ...values, password: e.target.value })} />
+                    <a href='/forget-password' className='forgetPassword mt-1' >Lupa kata sandi?</a>
                     <button type="submit" className="btn-primary" id='ButtonMasuk'>Masuk</button>
                 </form>
                 <div className="text-divider">Atau masuk dengan</div>
