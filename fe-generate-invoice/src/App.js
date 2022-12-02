@@ -1,7 +1,9 @@
 // import logo from './logo.svg';
 // import './App.css';
 
-// import styling
+// import styling\
+
+import 'react-toastify/dist/ReactToastify.css';
 import '../src/assets/style/style.css'
 import '../src/assets/style/admin.css'
 import '../src/assets/style/client.css'

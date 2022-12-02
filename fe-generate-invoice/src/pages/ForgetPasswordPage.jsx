@@ -1,17 +1,32 @@
 import React from 'react'
 import forgetPasswordImage from '../assets/image/Auth/forget-password.png';
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 import axios from 'axios'
 
 
 const ForgetPasswordPage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (data) => {
+    const { register, handleSubmit, setError, formState: { errors } } = useForm();
 
-        axios.post("http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/forgot-password", {
-            email: data.email,
-        }).then((response) => response.data)
-            .catch((error) => console.log(error))
+    const onSubmit = (data) => {
+        if (data.email !== data.confirmEmail) {
+            setError("confirmEmail", {
+                type: "match",
+                message: "Email Tidak Sama"
+            });
+        } else {
+            axios.post("http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/forgot-password", {
+                email: data.email,
+            })
+                .then((res) => {
+                    console.log(res)
+                    toast.success('success add product to cart', {
+                        position: "top-center",
+                        autoClose: 3000,
+                    })
+                })
+                .catch((error) => console.log(error))
+        }
     };
     console.log(errors);
 
@@ -36,15 +51,16 @@ const ForgetPasswordPage = () => {
                     </div>
                     <input
                         type="email"
-                        placeholder="KonfirmasiEmail"
-                        className="input"
+                        placeholder="Konfirmasi Email"
+                        className="input mt-1"
                         {...register("confirmEmail", { required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ })}
                     />
                     <div className='input_error'>
                         {errors?.confirmEmail?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
                         {errors?.confirmEmail?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Alamat Email Tidak Valid!</p>}
+                        {errors?.confirmEmail?.type === "match" && <p><i className="bi bi-exclamation-circle"></i> {errors.confirmEmail.message}</p>}
                     </div>
-                    <button type="submit" className="btn-primary" id>Lanjut</button>
+                    <button type="submit" className="btn-primary mt-3" id>Lanjut</button>
                 </form>
             </div>
         </div >
