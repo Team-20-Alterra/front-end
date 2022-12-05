@@ -2,9 +2,16 @@
 import React from 'react'
 import { BiBell } from 'react-icons/bi'
 import { HiOutlineArrowRightOnRectangle, HiOutlineClock } from 'react-icons/hi2'
+import { useNavigate } from 'react-router-dom'
 import DefaultProfile from '../assets/image/defaultProfile.png'
+import Auth from '../utils/Auth/Auth'
 
 const Navbar = () => {
+    const navigate = useNavigate()
+    const handleLogOut = () => {
+        Auth.isLoggedOut()
+        navigate("/")
+    }
     return (
         <>
             <nav className="navbar sticky-top">
@@ -19,7 +26,7 @@ const Navbar = () => {
                                 <BiBell className="IconNotif" />
                                 <span className="badge rounded-pill badge-notification bg-danger">1</span>
                             </a>
-                            <ul className="dropdown-menu dropdown-menu-light shadow mt-3 navNotif">
+                            <ul className="dropdown-menu dropdown-menu-light shadow navNotif">
                                 <li className="headerNotif">Notifikasi</li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item">
@@ -40,10 +47,10 @@ const Navbar = () => {
                                 <img src={DefaultProfile} alt="Profile" className="imgNavbar rounded-circle me-1" />
                                 <strong className='TextNavbar me-2'>Admin</strong>
                             </a>
-                            <ul className="dropdown-menu dropdown-menu-light text-small shadow mt-3 navProfile">
+                            <ul className="dropdown-menu dropdown-menu-light text-small shadow navProfile">
                                 <li><a className="dropdown-item">Akun</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item">Sign out <HiOutlineArrowRightOnRectangle className='iconLogout' /> </a></li>
+                                <li><a className="dropdown-item" onClick={handleLogOut}>Sign out <HiOutlineArrowRightOnRectangle className='iconLogout' /> </a></li>
                             </ul>
                         </div>
                     </div>

@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Poppins&family=Quicksand:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 
+:root {
+  --primary-color: #297061;
+}
 body {
   margin: 0;
   padding: 0;
@@ -18,6 +23,140 @@ a {
 }
 .mt-1 {
   margin-top: 12px !important;
+}
+.mt-7 {
+  margin-top: 5px !important;
+}
+/* admin */
+.admin-header {
+  gap: 150px;
+  font-family: "Inter", sans-serif;
+  background-color: #d4e2df;
+  padding-bottom: 50px;
+}
+
+.icon-header {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 4px black;
+  background-color: #d4e2df;
+}
+
+.name-icon {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.atur-invoices {
+  height: 300px;
+  gap: 50px;
+}
+
+.img-post {
+  width: 40%;
+  background-color: rgba(80, 80, 80, 1);
+}
+
+.link-atur-invoices {
+  width: 50%;
+  padding: 60px 0;
+}
+
+.title-atur-invoices {
+  margin-bottom: 50px;
+}
+
+.atur-pelanggan {
+  height: 300px;
+  gap: 50px;
+}
+
+.link-atur-pelanggan {
+  width: 50%;
+  padding: 60px 0;
+}
+
+.title-atur-pelanggan {
+  margin-bottom: 50px;
+}
+
+.notif-invoices {
+  height: 300px;
+  gap: 50px;
+}
+
+.link-notif {
+  width: 50%;
+  padding: 60px 0;
+}
+
+.title-notif {
+  margin-bottom: 50px;
+}
+
+/* client */
+.client-header {
+  gap: 150px;
+  font-family: "Inter", sans-serif;
+  background-color: #d4e2df;
+  padding-bottom: 50px;
+}
+
+.invoices {
+  margin-top: 120px;
+  margin-bottom: 100px;
+}
+
+.lihat-invoices {
+  height: 300px;
+  gap: 50px;
+}
+
+.img-post {
+  width: 40%;
+  background-color: rgba(80, 80, 80, 1);
+}
+
+.link-lihat {
+  width: 50%;
+  padding: 60px 0;
+}
+
+.title-lihat {
+  margin-bottom: 50px;
+}
+
+.bayar-invoices {
+  height: 300px;
+  gap: 50px;
+}
+
+.link-bayar {
+  width: 50%;
+  padding: 60px 0;
+}
+
+.title-bayar {
+  margin-bottom: 50px;
+}
+
+.notif-pelanggan {
+  height: 300px;
+  gap: 50px;
+}
+
+.link-notif-pelanggan {
+  width: 50%;
+  padding: 60px 0;
+}
+
+.title-notif-pelanggan {
+  margin-bottom: 50px;
+}
+
+.desc {
+  font-weight: 200;
 }
 /* styling navbar */
 
@@ -221,3 +360,213 @@ a {
   background-color: white;
 }
 /* get app */
+
+.Wrap {
+  background-color: #70a096;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerLogin {
+  width: 360px;
+  max-height: 920px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  padding: 32px 32px;
+}
+.textGinap {
+  font-weight: 700;
+  font-size: 32px;
+  padding: 0;
+  color: var(--primary-color);
+}
+
+.input {
+  height: 38px;
+  width: 100%;
+  background: #ffffff;
+  border: none;
+  font-size: 16px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-shadow: 0px 0px 10px rgba(37, 37, 37, 0.2);
+  border-radius: 4px;
+}
+.input:focus {
+  outline: #297061 auto 2px;
+}
+.input_error {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+  color: red;
+  margin-top: 7px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+.input_error p {
+  margin-bottom: 0 !important;
+}
+.forgetPassword {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--primary-color);
+  margin-top: 4px;
+  margin-bottom: 32px;
+}
+.forgetPassword:hover {
+  color: var(--primary-color);
+  opacity: 0.8 !important;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  padding: 8px 16px;
+  width: 100%;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+  opacity: 1;
+}
+.btn-primary:hover {
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  transform: translateY(-1px);
+}
+.text-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  line-height: 14px;
+  margin: 16px 0;
+  font-weight: 400;
+  font-size: 14px;
+}
+.text-divider:before {
+  margin-right: 10px;
+}
+.text-divider:after,
+.text-divider:before {
+  content: "";
+  display: block;
+  height: 1px;
+  flex: 1;
+  background: #252525;
+}
+.text-divider:after {
+  margin-left: 10px;
+}
+.btn-secondary {
+  background-color: #ffffff;
+  border: 1px solid var(--primary-color);
+  padding: 8px 16px;
+  width: 100%;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+}
+.btn-secondary:hover {
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  transform: translateY(-1px);
+}
+.textRegister {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--primary-color);
+  margin-top: 23px;
+}
+.textRegister:hover {
+  color: var(--primary-color);
+  opacity: 0.8 !important;
+}
+
+/* Forget*/
+.containerForget {
+  width: 360px;
+  max-height: 564px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  padding: 32px;
+}
+.textForgetPass {
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  margin: 32px 0 16px 0;
+}
+/* Forget */
+
+/* Register */
+.textDetailSandi {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  padding: 0 8px;
+  color: #555555;
+}
+/* Register */
+
+/* Link Sent */
+.containerSent {
+  width: 360px;
+  max-height: 384.6px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  padding: 32px;
+}
+/* Link Sent */
+
+/* New Password */
+.containerNewPass {
+  width: 360px;
+  max-height: 586.6px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  padding: 32px;
+}
+.inputChangePassword input {
+  height: 40px;
+  width: 100%;
+  background: #ffffff;
+  border: none;
+  font-size: 16px;
+  padding-left: 15px;
+  padding-right: 45px;
+  box-shadow: 0px 0px 10px rgba(37, 37, 37, 0.2);
+  border-radius: 4px;
+}
+.inputChangePassword input:focus {
+  outline: #297061 auto 2px;
+}
+.inputChangePassword .icon {
+  position: absolute;
+  margin-left: 265px;
+  margin-top: 7px;
+}
+
+.successChange:hover {
+  color: #ffffff;
+}
+/* New Password */
+
+/* Tostify */
+.Toastify__toast-icon svg {
+  fill: var(--primary-color);
+}
+.Toastify__toast--error svg {
+  fill: red;
+}
+.Toastify__progress-bar--success {
+  background: var(--primary-color);
+}
+/* Tostify */
