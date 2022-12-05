@@ -1,6 +1,7 @@
 import React from 'react'
 import { initialName } from '../../utils/initialName'
 import { hargaFormat } from '../../utils/hargaFormat'
+import { randomColor } from '../../utils/randomColor'
 
 const ListRiwayat = () => {
   return (
@@ -17,7 +18,7 @@ const ListRiwayat = () => {
       </thead>
       <tbody>
         <tr>
-          <td className='d-flex align-items-center'><div className='box'>{initialName('john doe')}</div>John Doe</td>
+          <td className='d-flex align-items-center'><div className='box' style={{ background: `#${randomColor()}` }}>{initialName('john doe')}</div>John Doe</td>
           <td>#0000001</td>
           <td>30/11/2022</td>
           <td>12/12/2022</td>

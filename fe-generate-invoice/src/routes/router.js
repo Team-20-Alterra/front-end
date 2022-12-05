@@ -9,7 +9,7 @@ import ForgetPasswordPage from '../pages/ForgetPasswordPage';
 import SentLinkPage from '../pages/SentLinkPage';
 import SetNewPasswordPage from '../pages/SetNewPasswordPage';
 import SuccessChangePasswordPage from '../pages/SuccessChangePasswordPage';
-import { PrivateRoute } from './PrivateRoute';
+import { PrivateRoute } from './PrivateRoute.js';
 
 function Router() {
     return (
@@ -25,11 +25,11 @@ function Router() {
                 <Route path='/new-password' element={<SetNewPasswordPage />}></Route>
                 <Route path='/success-password' element={<SuccessChangePasswordPage />}></Route>
                 <Route path='/admin/*' element={<PrivateRoute>
-                    <Layout/>
+                    <Layout />
                 </PrivateRoute>} />
-                
+
             </Routes>
-        </BrowserRouter>
+        </BrowserRouter >
     )
 }
 

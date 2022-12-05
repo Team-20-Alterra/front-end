@@ -26,7 +26,7 @@ const Navbar = () => {
                                 <BiBell className="IconNotif" />
                                 <span className="badge rounded-pill badge-notification bg-danger">1</span>
                             </a>
-                            <ul className="dropdown-menu dropdown-menu-light shadow mt-3 navNotif">
+                            <ul className="dropdown-menu dropdown-menu-light shadow navNotif">
                                 <li className="headerNotif">Notifikasi</li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item">
@@ -47,7 +47,7 @@ const Navbar = () => {
                                 <img src={DefaultProfile} alt="Profile" className="imgNavbar rounded-circle me-1" />
                                 <strong className='TextNavbar me-2'>Admin</strong>
                             </a>
-                            <ul className="dropdown-menu dropdown-menu-light text-small shadow mt-3 navProfile">
+                            <ul className="dropdown-menu dropdown-menu-light text-small shadow navProfile">
                                 <li><a className="dropdown-item">Akun</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" onClick={handleLogOut}>Sign out <HiOutlineArrowRightOnRectangle className='iconLogout' /> </a></li>

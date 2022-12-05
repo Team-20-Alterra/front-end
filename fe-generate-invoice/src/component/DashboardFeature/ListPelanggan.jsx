@@ -2,8 +2,10 @@ import React from 'react'
 import { initialName } from '../../utils/initialName'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { sliceAlamat } from '../../utils/sliceAlamat'
+import { randomColor } from '../../utils/randomColor'
 
 const ListPelanggan = () => {
+
   return (
     <table className='table-list text-center' cellPadding="15px">
       <thead>
@@ -17,7 +19,9 @@ const ListPelanggan = () => {
       </thead>
       <tbody>
         <tr>
-          <td className='d-flex align-items-center'><div className='box'>{initialName('john doe')}</div>John Doe</td>
+          <td className='d-flex align-items-center'>
+            <div className='box' style={{ background: `#${randomColor()}` }}>{initialName('john doe')}</div>John Doe
+          </td>
           <td>#0000001</td>
           <td>{sliceAlamat('Jl. Pangeran Diponegoro No.58, RT.1/RW.2, Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10320, Indonesia')}...</td>
           <td> 083123310081118</td>
