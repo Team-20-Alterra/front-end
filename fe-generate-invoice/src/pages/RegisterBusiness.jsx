@@ -85,6 +85,9 @@ const RegisterBusiness = () => {
                         </option>
                         <option value="">Makanan</option>
                         <option value="">Minuman</option>
+                        <option value="">Elektronik</option>
+                        <option value="">Finance</option>
+                        <option value="">Fashion</option>
                       </select>
                       <div className='register-business_error'>
                         {errors?.NomorTelepon?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}

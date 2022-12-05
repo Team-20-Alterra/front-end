@@ -6,6 +6,7 @@ import axios from 'axios'
 import Auth from '../utils/Auth/Auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import CONST from '../utils/constant/constant';
 
 
 const Login = () => {
@@ -20,21 +21,19 @@ const Login = () => {
         event.preventDefault()
         // eslint-disable-next-line no-unused-expressions
 
-        axios.post("http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/login", {
+        axios.post(`${CONST.BASE_API_URL}/login`, {
             email: values.email,
             password: values.password
         }).then((response) => {
-            if (response.data.status === true) {
                 Auth.storeUserInfoToCookie(response.data.data.token)
                 navigate("/admin")
-            } else if (response.data.status === false){
-                toast.error(response.data.message, {
+        })
+            .catch((error) => {
+                toast.error(error.response.data.message, {
                     position: "top-right",
                     autoClose: 3000,
                 })
-            }
-        })
-          .catch((error) => console.log(error))
+          })
     }
 
     return (
