@@ -5,8 +5,9 @@ import HeaderDashboard from '../../component/DashboardFeature/HeaderDashboard'
 import ButtonAddPelanggan from '../../component/DashboardFeature/ButtonAddPelanggan'
 
 const PelangganPage = () => {
+  
   return (
-    <div className="container">
+    <div className="container-content">
       <HeaderDashboard name="Pelanggan" />
       <div className="subHeader d-flex align-items-center justify-content-between">
         <input type="text" className="search w-25" placeholder="Cari" />

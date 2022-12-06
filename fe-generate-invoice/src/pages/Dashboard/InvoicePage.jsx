@@ -4,7 +4,7 @@ import logoPerusahaan from '../../assets/image/Admin/Logo-Perusahaan.png'
 
 const InvoicePage = () => {
     return (
-        <div className="container">
+        <div className="container-content">
             <div className="containerHeader">
                 <HeaderDashboard name="Buat Invoice" />
             </div>
