@@ -6,7 +6,7 @@ import ListRiwayat from '../../component/DashboardFeature/ListRiwayat'
 
 const RiwayatPage = () => {
     return (
-        <div className='container'>
+        <div className='container-content'>
             <HeaderDashboard name="Riwayat" />
             <div className='riwayat-page__navbar'>
                 <ul>

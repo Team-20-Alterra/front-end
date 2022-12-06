@@ -7,7 +7,11 @@ body {
   font-family: "Poppins";
   margin: 0;
 }
-
+.dashboard-navbar {
+  padding: 11px 24px;
+}
+.container-content {
+}
 .adminLogo {
   font-weight: 700;
   font-size: 32px;
@@ -18,7 +22,7 @@ body {
 
 .containerSidebar {
   font-family: Poppins;
-  max-width: 250px;
+  width: 240px;
   height: 100vh;
   color: white;
   background-color: var(--primary-color);
@@ -125,8 +129,8 @@ nav {
   font-size: 12px;
   color: #9a9a9a;
 }
-.containerHeader {
-  margin-top: 16px;
+.container-content {
+  padding: 24px 32px;
 }
 
 /* Pelanggan */

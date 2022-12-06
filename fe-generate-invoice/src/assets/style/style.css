@@ -34,67 +34,6 @@ a {
   background-color: #d4e2df;
   padding-bottom: 50px;
 }
-
-.icon-header {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border: 4px black;
-  background-color: #d4e2df;
-}
-
-.name-icon {
-  font-size: 17px;
-  font-weight: 800;
-}
-
-.atur-invoices {
-  height: 300px;
-  gap: 50px;
-}
-
-.img-post {
-  width: 40%;
-  background-color: rgba(80, 80, 80, 1);
-}
-
-.link-atur-invoices {
-  width: 50%;
-  padding: 60px 0;
-}
-
-.title-atur-invoices {
-  margin-bottom: 50px;
-}
-
-.atur-pelanggan {
-  height: 300px;
-  gap: 50px;
-}
-
-.link-atur-pelanggan {
-  width: 50%;
-  padding: 60px 0;
-}
-
-.title-atur-pelanggan {
-  margin-bottom: 50px;
-}
-
-.notif-invoices {
-  height: 300px;
-  gap: 50px;
-}
-
-.link-notif {
-  width: 50%;
-  padding: 60px 0;
-}
-
-.title-notif {
-  margin-bottom: 50px;
-}
-
 /* client */
 .client-header {
   gap: 150px;
@@ -103,76 +42,38 @@ a {
   padding-bottom: 50px;
 }
 
-.invoices {
-  margin-top: 120px;
-  margin-bottom: 100px;
+.container-fitur-page {
+  margin: 64px 0;
+  max-height: 472px;
 }
 
-.lihat-invoices {
-  height: 300px;
-  gap: 50px;
+.container-fitur-page .title {
+  font-weight: 600;
+  font-size: 28px;
 }
-
-.img-post {
-  width: 40%;
-  background-color: rgba(80, 80, 80, 1);
+.container-fitur-page .desc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .link-lihat {
-  width: 50%;
-  padding: 60px 0;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
 }
 
-.title-lihat {
-  margin-bottom: 50px;
-}
-
-.bayar-invoices {
-  height: 300px;
-  gap: 50px;
-}
-
-.link-bayar {
-  width: 50%;
-  padding: 60px 0;
-}
-
-.title-bayar {
-  margin-bottom: 50px;
-}
-
-.notif-pelanggan {
-  height: 300px;
-  gap: 50px;
-}
-
-.link-notif-pelanggan {
-  width: 50%;
-  padding: 60px 0;
-}
-
-.title-notif-pelanggan {
-  margin-bottom: 50px;
-}
-
-.desc {
-  font-weight: 200;
-}
 /* styling navbar */
 
 .navBar {
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
+  margin-top: 34px;
 }
-
-.navbar-left {
-  display: flex;
-  flex-direction: row;
-  gap: 44px;
+.gap-lg-5 {
+  gap: 40px !important;
 }
 
 .logo {
@@ -186,15 +87,12 @@ a {
 
 .navLink {
   padding: 12px 32px;
+  color: var(--primary-color);
 }
-
-.navLink:hover {
-  cursor: pointer;
-}
-
-.navLink:hover {
-  cursor: pointer;
-}
+/* .navbar-nav li a :hover {
+  font-weight: bolder;
+  border-bottom: #297061 2px solid;
+} */
 
 .navbar-right {
   display: flex;
@@ -203,16 +101,21 @@ a {
 }
 
 .signup {
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
   padding: 12px 16px;
   color: white;
   background-color: #297061;
-  border-radius: 10px;
 }
 
 .login {
-  padding: 12px 16px;
-  border: 2px solid;
-  border-radius: 10px;
+  padding: 10px 16px;
+  border: 1px solid #297061;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 /* styling navbar */
@@ -223,41 +126,35 @@ a {
   margin-bottom: 100px;
 }
 
-.hero-right {
-  width: 30%;
-  background-color: rgba(80, 80, 80, 1);
-}
-
 .hero-left {
   width: 40%;
   padding: 50px 0;
 }
 
 .hero-left h1 {
-  font-size: 50px;
+  font-weight: 600;
+  font-size: 40px;
+}
+.hero-subjudul {
+  width: 400px;
 }
 
-.hero-left h3 {
-  font-size: 30px;
-  font-weight: 300;
-  margin-bottom: 40px;
+.hero-subjudul h3 {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 42px;
+}
+.hero-detail {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin-top: 30px;
 }
 
 .hero-button {
   gap: 20px;
-}
-
-.hero-button .border {
-  padding: 10px;
-  width: 200px;
-  height: 55px;
-  border-radius: 10px;
-}
-
-.hero-button .border:hover {
-  background-color: #297061;
-  color: white;
-  cursor: pointer;
+  margin-top: 46px;
 }
 
 .daftar {
@@ -272,19 +169,24 @@ a {
 /* styling hero */
 
 /* content */
-.coba {
+.bg-fitur {
   background-color: #d4e2df;
-  padding: 50px 0px;
+  padding: 30px 0px;
 }
 
 .title-main {
-  margin-top: 50px;
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 32px;
+  margin-bottom: 40px;
 }
 
 .desc-title-main {
-  padding: 0 50px;
-  margin-bottom: 50px;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 42px;
+  text-align: center;
+  margin-bottom: 70px;
 }
 
 .options-tab {
@@ -296,7 +198,7 @@ a {
   padding: 8px;
   gap: 10px;
   background-color: #0e2520;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 
 .options-tab .client-admin {
@@ -311,13 +213,20 @@ a {
 .options-tab .client-admin p {
   font-size: 25px;
 }
-
-.options-tab .client-admin:hover {
+.client-admin.active {
   cursor: pointer;
   color: black;
   background: #70a096;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: 8px;
+}
+
+.client-admin:hover {
+  cursor: pointer;
+  color: black;
+  background: #70a096;
+  font-weight: bold;
+  border-radius: 8px;
 }
 
 /* content */
@@ -325,39 +234,39 @@ a {
 /* get app */
 .get-app {
   height: 500px;
-  gap: 50px;
+  gap: 128px;
 }
 
 .title-getApp {
-  font-size: 55px;
-  padding: 50px 0;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
 }
 
 .button-getApp {
-  width: 280px;
+  width: 196px;
+  height: 64px;
   padding: 8px;
   color: black;
   background-color: black;
-  border: 2px solid purple;
-  border-radius: 20px;
+  border-radius: 15px;
   cursor: pointer;
 }
 
 .button-getApp p {
-  margin-top: 15px;
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 12px;
   color: white;
 }
 
 .pstore {
-  font-size: 25px;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 20px;
 }
 
-.logo-android img {
-  margin-top: 5px;
-  width: 80px;
-  height: 80px;
-  background-color: white;
+.logo-android {
+  color: white;
 }
 /* get app */
 

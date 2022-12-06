@@ -5,7 +5,7 @@ import HeaderDashboard from "../../component/DashboardFeature/HeaderDashboard";
 export default function PengaturanPage() {
     return (
         <>
-            <div className="container">
+            <div className="container-content">
                 <HeaderDashboard name="Pengaturan Bisnis" />
             </div>
             <form className="container mb-4">

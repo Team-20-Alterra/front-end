@@ -1,26 +1,24 @@
 import Header from "../component/Header"
+import dapatkanAplikasi from '../assets/image/Dapatkan-Aplikasi.png'
+import { DiAndroid } from 'react-icons/di'
 
-import android from "../assets/image/android3.png"
-
-export default function GetApp(){
-    return(
+export default function GetApp() {
+    return (
         <>
-            <Header name="Ginap"/>
+            <Header name="Ginap" />
             <div className="container">
                 <div className="get-app d-flex flex-row">
-                    <div className="img-post">
-
-                    </div>
-                    <div >
-                        <div>
-                            <h1 className="title-getApp">
+                    <img src={dapatkanAplikasi} alt="dapatkanAplikasi" />
+                    <div className="align-self-center">
+                        <div className="d-flex flex-column" style={{ width: "80%", gap: "32px" }}>
+                            <div className="title-getApp">
                                 Dapatkan aplikasinya sekarang
-                            </h1>
-                            <div className="button-getApp text-center d-flex flex-row">
+                            </div>
+                            <div className="button-getApp text-center d-flex flex-row align-items-center">
                                 <div className="logo-android">
-                                    <img src={android} alt="android" />
+                                    <DiAndroid size={40} />
                                 </div>
-                                <p>Dapatkan Sekarang di <span className="pstore">Playstore</span></p>
+                                <p>Dapatkan Sekarang <span className="pstore">Playstore</span></p>
                             </div>
                         </div>
                     </div>

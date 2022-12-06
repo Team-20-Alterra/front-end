@@ -5,7 +5,7 @@ import ListItem from '../../component/DashboardFeature/ListItem'
 import { HiPlus } from 'react-icons/hi'
 const InvoicePage = () => {
     return (
-        <div className="container mb-5">
+        <div className="container mb-5-content">
             <div className="containerHeader">
                 <HeaderDashboard name="Buat Invoice" />
             </div>

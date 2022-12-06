@@ -2,18 +2,32 @@ import { Link } from "react-router-dom"
 
 export default function Header(props) {
     return (
-        <div className="navBar container mt-4">
-            <div className="navbar-left">
-                <p className="logo">{props.name}</p>
-                <a href="/admin"><p className="navLink">Beranda</p></a>
-                <a href="#fitur"><p className="navLink">Fitur</p></a>
-                <Link to="/getapp"><p className="navLink">Dapatkan Aplikasi</p></Link>
-            </div>
-            <div className="navbar-right">
-                <Link to="/register"><p className="navLink signup">Daftar</p></Link>
-                <Link to="/login"><p className="navLink login">Masuk</p></Link>
-            </div>
-        </div>
+        <>
+            <nav className="navbar navbar-expand-lg bg-transparent navBar">
+                <div className="container gap-lg-5">
+                    <div className="logo">{props.name}</div>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul className="navbar-nav me-auto mb-lg-0 gap-md-0 mb-3 ">
+                            <li className="nav-item">
+                                <a href="/"><div className="navLink">Beranda</div></a>                            </li>
+                            <li className="nav-item">
+                                <a href="#fitur"><div className="navLink">Fitur</div></a>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/getapp"><div className="navLink">Dapatkan Aplikasi</div></Link>
+                            </li>
+                        </ul>
+                        <div className="navbar-right">
+                            <Link to="/register"><div className="navLink signup">Daftar</div></Link>
+                            <Link to="/login"><div className="navLink login">Masuk</div></Link>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </>
     )
 
 }
