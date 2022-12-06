@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import CONST from '../utils/constant/constant';
 import { useForm } from "react-hook-form";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
+import { axiosInstance } from '../config/axiosInstance';
 
 
 
@@ -18,7 +19,7 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        axios.post("http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/login", {
+        axiosInstance.post('/login', {
             email: data.email,
             password: data.password
         })

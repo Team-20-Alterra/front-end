@@ -1,10 +1,11 @@
 import React from 'react'
 import HeaderDashboard from '../../component/DashboardFeature/HeaderDashboard'
 import logoPerusahaan from '../../assets/image/Admin/Logo-Perusahaan.png'
-
+import ListItem from '../../component/DashboardFeature/ListItem'
+import { HiPlus } from 'react-icons/hi'
 const InvoicePage = () => {
     return (
-        <div className="container">
+        <div className="container mb-5">
             <div className="containerHeader">
                 <HeaderDashboard name="Buat Invoice" />
             </div>
@@ -67,7 +68,32 @@ const InvoicePage = () => {
                     </div>
                 </div>
             </div>
+            <div className='invoice-item__container'>
+                <ListItem />
+                <button className='add-item_button d-flex'><HiPlus style={{fontSize:"24px", marginRight:"4px", color:"#E4EDEB"}}/>Item</button>
+            </div>
 
+            <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
+                <div className='invoice-item__note'>
+                    <h5>Catatan:</h5>
+                    <textarea name="" id="" cols="55" rows="5"></textarea>
+                </div>
+
+                <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>
+                    <div className='invoice-item__subtotal'>
+                        <h6>Subtotal</h6>
+                        <h6>Rp.XXXXXX</h6>
+                    </div>
+                    <div className='invoice-item__diskon align-self-end'>
+                        <h6 style={{fontWeight:"bolder", color: "#297061"}}><HiPlus/>Diskon</h6>
+                    </div>
+                    <div className='invoice-item__total'>
+                        <h6>Total</h6>
+                        <h6>Rp.XXXXXX</h6>
+                    </div>
+                    <button type='submit' className='justify-content-end'>Kirim Invoice</button>
+                </div>
+            </div>
         </div >
     )
 }

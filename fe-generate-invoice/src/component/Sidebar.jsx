@@ -1,9 +1,22 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
 import { HiOutlineHome, HiOutlinePencil, HiOutlineUser, HiClock } from 'react-icons/hi'
 import { HiOutlineCog6Tooth } from 'react-icons/hi2'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink} from 'react-router-dom'
+import { axiosInstance } from '../config/axiosInstance';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import InvoicePage from '../pages/Dashboard/InvoicePage';
 
 const sidebar = () => {
+    const navigate = useNavigate()
+    const handleAddInvoice = () => {
+        axiosInstance.post('/invoices')
+            .then((response) => {
+                navigate(`invoice/${response.data.data.ID}`)
+                return <InvoicePage/>
+        })
+    }
     return (
         <div className="d-flex flex-column align-items-center sticky-top containerSidebar" >
             <span className="adminLogo">Ginap</span>
@@ -19,9 +32,10 @@ const sidebar = () => {
                     </div>
                 </NavLink>
                 <NavLink
-                    to={"invoice"}
+                    onClick={handleAddInvoice}
                     className={({ isActive }) =>
-                        isActive ? 'nav-link active' : 'nav-link'
+                        isActive ?
+                        'nav-link active' : 'nav-link'
                     }
                 >
                     <div className="containerMenu d-flex align-items-center">
