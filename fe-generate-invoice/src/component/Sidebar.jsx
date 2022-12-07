@@ -13,9 +13,10 @@ const sidebar = () => {
     const handleAddInvoice = () => {
         axiosInstance.post('/invoices')
             .then((response) => {
+                console.log(response)
                 navigate(`invoice/${response.data.data.ID}`)
                 return <InvoicePage/>
-        })
+            })
     }
     return (
         <div className="d-flex flex-column align-items-center sticky-top containerSidebar" >

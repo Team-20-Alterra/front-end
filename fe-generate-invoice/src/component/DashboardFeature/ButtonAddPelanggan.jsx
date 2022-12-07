@@ -45,27 +45,20 @@ const ButtonAddPelanggan = () => {
                             <h6>User ID</h6>
                             <form onSubmit={handleTambahPelanggan}>
                                 <input type="text" className='inputModal' placeholder="User ID" onChange={(e) => searchItems(e.target.value)} />
-                                {searchInput.length > 1 ? (
+                                {searchInput.length >= 1 ? (
                                     filteredResults.map((item) => {
                                         return (
                                             <div class="card">
                                                 <div class="card-body">
                                                     {item.ID}
+                                                    {item.name}
                                                 </div>
                                             </div>
                                         )
                                     })
-                                ) : (
-                                    APIData.map((item) => {
-                                        return (
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    {item.ID}
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                )}
+                                
+                                ) : ""
+                                }
                                 <div className="btn-modal">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button className='btn-primary' type="submit">Tambahkan</button>

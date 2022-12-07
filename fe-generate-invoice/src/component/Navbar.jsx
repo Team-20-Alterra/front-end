@@ -41,16 +41,12 @@ const Navbar = () => {
                             </a></li>
                         </ul>
                     </div>
-                    <div className="dropdown me-3">
-                        <a className=" text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown">
+                    <div className="me-3">
+                        <a className=" text-white text-decoration-none">
                             <img src={DefaultProfile} alt="Profile" className="imgNavbar rounded-circle me-1" />
                             <strong className='TextNavbar me-2'>Admin</strong>
                         </a>
-                        <ul className="dropdown-menu dropdown-menu-light text-small shadow navProfile">
-                            <li><a className="dropdown-item">Akun</a></li>
-                            <li><hr className="dropdown-divider" /></li>
-                            <li><a className="dropdown-item" onClick={handleLogOut}>Sign out <HiOutlineArrowRightOnRectangle className='iconLogout' /> </a></li>
-                        </ul>
+                        <i className="bi bi-box-arrow-right" style={{ fontSize: "20px", color: "white", cursor:"pointer"}} onClick={handleLogOut}></i>
                     </div>
                 </div>
             </nav>

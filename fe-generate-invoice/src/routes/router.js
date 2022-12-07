@@ -10,6 +10,7 @@ import SentLinkPage from '../pages/SentLinkPage';
 import SetNewPasswordPage from '../pages/SetNewPasswordPage';
 import SuccessChangePasswordPage from '../pages/SuccessChangePasswordPage';
 import { PrivateRoute } from './PrivateRoute.js';
+import InvoicePage from '../pages/Dashboard/InvoicePage';
 
 function Router() {
     return (
