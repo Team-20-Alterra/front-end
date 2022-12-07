@@ -22,7 +22,7 @@ function Router() {
                 <Route path='/register-business' element={<RegisterBusiness />}></Route>
                 <Route path='/forget-password' element={<ForgetPasswordPage />}></Route>
                 <Route path='/sent-link' element={<SentLinkPage />}></Route>
-                <Route path='/new-password' element={<SetNewPasswordPage />}></Route>
+                <Route path='/resetPassword/:resetToken' element={<SetNewPasswordPage />}></Route>
                 <Route path='/success-password' element={<SuccessChangePasswordPage />}></Route>
                 <Route path='/admin/*' element={<PrivateRoute>
                     <Layout />

@@ -24,7 +24,6 @@ const Login = () => {
             password: data.password
         })
             .then((response) => {
-                console.log(response)
                 Auth.storeUserInfoToCookie(response.data.data.token)
                 navigate("/admin")
             })
