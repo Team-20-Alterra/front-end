@@ -5,10 +5,8 @@ import ListItem from '../../component/DashboardFeature/ListItem'
 import { HiPlus } from 'react-icons/hi'
 const InvoicePage = () => {
     return (
-        <div className="container mb-5-content">
-            <div className="containerHeader">
-                <HeaderDashboard name="Buat Invoice" />
-            </div>
+        <div className="container-content mb-5-content">
+            <HeaderDashboard name="Buat Invoice" />
             <div className="headerInvoice d-flex align-items-center justify-content-between">
                 <img src={logoPerusahaan} alt="Logo" />
                 <div className='flex-column text-end'>
@@ -70,7 +68,7 @@ const InvoicePage = () => {
             </div>
             <div className='invoice-item__container'>
                 <ListItem />
-                <button className='add-item_button d-flex'><HiPlus style={{fontSize:"24px", marginRight:"4px", color:"#E4EDEB"}}/>Item</button>
+                <button className='add-item_button d-flex'><HiPlus style={{ fontSize: "24px", marginRight: "4px", color: "#E4EDEB" }} />Item</button>
             </div>
 
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
@@ -85,7 +83,7 @@ const InvoicePage = () => {
                         <h6>Rp.XXXXXX</h6>
                     </div>
                     <div className='invoice-item__diskon align-self-end'>
-                        <h6 style={{fontWeight:"bolder", color: "#297061"}}><HiPlus/>Diskon</h6>
+                        <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6>
                     </div>
                     <div className='invoice-item__total'>
                         <h6>Total</h6>

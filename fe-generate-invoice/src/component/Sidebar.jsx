@@ -2,7 +2,7 @@
 import React from 'react'
 import { HiOutlineHome, HiOutlinePencil, HiOutlineUser, HiClock } from 'react-icons/hi'
 import { HiOutlineCog6Tooth } from 'react-icons/hi2'
-import { Link, NavLink} from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { axiosInstance } from '../config/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -14,8 +14,8 @@ const sidebar = () => {
         axiosInstance.post('/invoices')
             .then((response) => {
                 navigate(`invoice/${response.data.data.ID}`)
-                return <InvoicePage/>
-        })
+                return <InvoicePage />
+            })
     }
     return (
         <div className="d-flex flex-column align-items-center sticky-top containerSidebar" >
@@ -35,7 +35,7 @@ const sidebar = () => {
                     onClick={handleAddInvoice}
                     className={({ isActive }) =>
                         isActive ?
-                        'nav-link active' : 'nav-link'
+                            'nav-link active' : 'nav-link'
                     }
                 >
                     <div className="containerMenu d-flex align-items-center">
@@ -73,7 +73,7 @@ const sidebar = () => {
                     </div>
                 </NavLink>
             </div>
-        </div>
+        </div >
     )
 }
 
