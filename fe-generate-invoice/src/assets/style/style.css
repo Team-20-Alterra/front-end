@@ -487,3 +487,41 @@ a {
   background: var(--primary-color);
 }
 /* Tostify */
+.header-page__navbar ul {
+  display: flex;
+  gap: 50px;
+  padding: 0;
+  margin: 0;
+}
+.header-page__navbar ul li {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header-page__navbar ul li a {
+  text-decoration: none;
+  color: #000000;
+  position: relative;
+}
+.header-page__navbar ul li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: 5px;
+  left: 0;
+  background-color: #45514e;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.25s linear;
+  border-radius: 10px;
+}
+.header-page__navbar ul li a:hover:after {
+  transform: scaleY(-1);
+  transform-origin: bottom;
+}
+.header-page__navbar ul li a:hover {
+  font-weight: bolder;
+}

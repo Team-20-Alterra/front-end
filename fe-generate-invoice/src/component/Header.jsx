@@ -10,9 +10,11 @@ export default function Header(props) {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                        <ul className="navbar-nav me-auto mb-lg-0 gap-md-0 mb-3 ">
+                        <div className="navbar-nav me-auto mb-lg-0 gap-md-0 mb-3 header-page__navbar">
+                        <ul>
                             <li className="nav-item">
-                                <a href="/"><div className="navLink">Beranda</div></a>                            </li>
+                                <a href="/"><div className="navLink">Beranda</div></a>
+                            </li>
                             <li className="nav-item">
                                 <a href="#fitur"><div className="navLink">Fitur</div></a>
                             </li>
@@ -20,6 +22,7 @@ export default function Header(props) {
                                 <Link to="/getapp"><div className="navLink">Dapatkan Aplikasi</div></Link>
                             </li>
                         </ul>
+                        </div>
                         <div className="navbar-right">
                             <Link to="/register"><div className="navLink signup">Daftar</div></Link>
                             <Link to="/login"><div className="navLink login">Masuk</div></Link>

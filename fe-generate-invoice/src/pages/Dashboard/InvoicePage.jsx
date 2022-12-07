@@ -3,7 +3,9 @@ import HeaderDashboard from '../../component/DashboardFeature/HeaderDashboard'
 import logoPerusahaan from '../../assets/image/Admin/Logo-Perusahaan.png'
 import ListItem from '../../component/DashboardFeature/ListItem'
 import { HiPlus } from 'react-icons/hi'
+import ButtonAddItem from '../../component/DashboardFeature/ButtonAddItem'
 const InvoicePage = () => {
+
     return (
         <div className="container-content mb-5-content">
             <HeaderDashboard name="Buat Invoice" />
@@ -68,7 +70,7 @@ const InvoicePage = () => {
             </div>
             <div className='invoice-item__container'>
                 <ListItem />
-                <button className='add-item_button d-flex'><HiPlus style={{ fontSize: "24px", marginRight: "4px", color: "#E4EDEB" }} />Item</button>
+                <ButtonAddItem />
             </div>
 
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>

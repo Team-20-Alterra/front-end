@@ -2,38 +2,34 @@ import React from 'react'
 import loginImage from '../assets/image/Auth/login-image.png';
 import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react';
-import axios from 'axios'
 import Auth from '../utils/Auth/Auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import CONST from '../utils/constant/constant';
 import { useForm } from "react-hook-form";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import { axiosInstance } from '../config/axiosInstance';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAdmin } from '../store/LoginSlice';
+import { useEffect } from 'react';
 
 
 
 const Login = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {adminInfo} = useSelector((state) => state.login)
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        axiosInstance.post('/login', {
-            email: data.email,
-            password: data.password
-        })
-            .then((response) => {
-                Auth.storeUserInfoToCookie(response.data.data.token)
-                navigate("/admin")
-            })
-            .catch((error) => {
-                toast.error(error.response.data.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                })
-            })
+        dispatch(loginAdmin(data))
     };
+
+    useEffect(() => {
+        if (adminInfo) {
+            navigate("/admin/*")
+        }
+    })
 
     return (
         <div className="Wrap">
