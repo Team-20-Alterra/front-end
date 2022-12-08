@@ -22,11 +22,11 @@ const RegisterPage = () => {
     formState: { errors }
   } = useForm();
 
-  // useEffect(() => {
-  //   if (success) {
-  //     navigate('/register-business')
-  //   }
-  // }, [navigate, success])
+  useEffect(() => {
+    if (success) {
+      navigate('/register-business')
+    }
+  }, [navigate, success])
 
   const onSubmit = (data) => {
     dispatch(registerAdminFirstStep(data))
@@ -43,14 +43,14 @@ const RegisterPage = () => {
             type="text"
             className='input'
             placeholder="Nama Lengkap"
-            {...register("NamaLengkap", { required: true, maxLength: 20, pattern: /^[A-Z a-z]+$/i })}
+            {...register("Name", { required: true, maxLength: 20, pattern: /^[A-Z a-z]+$/i })}
           />
           <div className='input_error'>
-            {errors?.NamaLengkap?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            {errors?.NamaLengkap?.type === "maxLength" && (
+            {errors?.Name?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
+            {errors?.Name?.type === "maxLength" && (
               <p><i className="bi bi-exclamation-circle"></i> First name cannot exceed 20 characters!</p>
             )}
-            {errors?.NamaLengkap?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Nama Lengkap Harus Berupa Huruf!</p>}
+            {errors?.Name?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Nama Lengkap Harus Berupa Huruf!</p>}
           </div>
           <input
             type="email"

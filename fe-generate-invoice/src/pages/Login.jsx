@@ -8,28 +8,32 @@ import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import { axiosInstance } from '../config/axiosInstance';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginAdmin } from '../store/LoginSlice';
-import { useEffect } from 'react';
+
 
 
 
 const Login = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const {adminInfo} = useSelector((state) => state.login)
     const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        dispatch(loginAdmin(data))
-    };
-
-    useEffect(() => {
-        if (adminInfo) {
-            navigate("/admin/*")
+        axiosInstance.post('/login/admin', {
+            email: data.email,
+            password: data.password
+        })
+            .then((response) => {
+                console.log(response)
+                Auth.storeUserInfoToCookie(response.data.data.token)
+                navigate('/admin')
+            })
+            .catch((error) => {
+                toast.error(error.response.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                })
+            })
         }
-    })
 
     return (
         <div className="Wrap">
