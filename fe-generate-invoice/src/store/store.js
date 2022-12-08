@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import firstRegisterSlice from './RegisterFirstStep'
-import adminLoginSlice from './LoginSlice'
+import secRegisterSlice from './RegisterSecStep'
 
 const store = configureStore({
     reducer: {
         first: firstRegisterSlice,
-        login: adminLoginSlice
+        second : secRegisterSlice
     }
 })
 

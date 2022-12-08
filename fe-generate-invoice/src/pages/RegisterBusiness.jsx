@@ -3,8 +3,15 @@ import RegisterBusinessImage from '../assets/image/Auth/Bisnis-Register.png'
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 import { HiOutlinePlus } from 'react-icons/hi'
+import { useDispatch, useSelector } from 'react-redux';
+import { registerAdminSecStep } from '../store/RegisterSecStep';
+import Auth from '../utils/Auth/Auth';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterBusiness = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {loading, error, success} = useSelector((state) => state.second)
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
   const {
@@ -13,20 +20,17 @@ const RegisterBusiness = () => {
     formState: { errors }
   } = useForm();
   const onSubmit = (data) => {
-    alert(JSON.stringify(data))
+    dispatch(registerAdminSecStep(data))
+    navigate("/admin")
   };
 
-  // create a preview as a side effect, whenever selected file is changed
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined)
       return
     }
-
     const objectUrl = URL.createObjectURL(selectedFile)
     setPreview(objectUrl)
-
-    // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl)
   }, [selectedFile])
 
@@ -35,8 +39,6 @@ const RegisterBusiness = () => {
       setSelectedFile(undefined)
       return
     }
-
-    // I've kept this example simple by using the first image instead of multiple
     setSelectedFile(e.target.files[0])
   }
   return (
@@ -72,11 +74,26 @@ const RegisterBusiness = () => {
               <option value="" disabled selected hidden>
                 Jenis Bisnis
               </option>
-              <option value="">Makanan</option>
-              <option value="">Minuman</option>
+              <option value="Makanan">Makanan</option>
+              <option value="Minuman">Minuman</option>
+              <option value="Elektronik">Elektronik</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Finance">Finance</option>
             </select>
             <div className='input_error'>
               {errors?.NomorTelepon?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
+            </div>
+            <input type="text" placeholder="Rekening Bank" className='input mt-7'
+              {...register("account_number", { required: true })}
+            />
+            <div className='input_error'>
+              {errors?.account_number?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
+            </div>
+            <input type="text" placeholder="Kode Bank" className='input mt-7'
+              {...register("code", { required: true })}
+            />
+            <div className='input_error'>
+              {errors?.code?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
             </div>
             <div className="register-business_input-image">
               <div className="label-input_image">

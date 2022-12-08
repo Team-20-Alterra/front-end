@@ -13,19 +13,19 @@ export default function Header(props) {
                         <div className="navbar-nav me-auto mb-lg-0 gap-md-0 mb-3 header-page__navbar">
                         <ul>
                             <li className="nav-item">
-                                <a href="/"><div className="navLink">Beranda</div></a>
+                                <a href="/" id="buttonBeranda"><div className="navLink">Beranda</div></a>
                             </li>
                             <li className="nav-item">
-                                <a href="#fitur"><div className="navLink">Fitur</div></a>
+                                <a href="#fitur" id="buttonFitur"><div className="navLink">Fitur</div></a>
                             </li>
                             <li className="nav-item">
-                                <Link to="/getapp"><div className="navLink">Dapatkan Aplikasi</div></Link>
+                                <Link to="/getapp" id="buttonDapatkanAplikasi"><div className="navLink">Dapatkan Aplikasi</div></Link>
                             </li>
                         </ul>
                         </div>
                         <div className="navbar-right">
-                            <Link to="/register"><div className="navLink signup">Daftar</div></Link>
-                            <Link to="/login"><div className="navLink login">Masuk</div></Link>
+                            <Link to="/register"><div className="navLink signup" id="buttonDaftar">Daftar</div></Link>
+                            <Link to="/login"><div className="navLink login" id="buttonMasuk">Masuk</div></Link>
                         </div>
                     </div>
                 </div>

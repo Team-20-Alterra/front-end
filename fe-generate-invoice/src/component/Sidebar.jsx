@@ -7,6 +7,7 @@ import { axiosInstance } from '../config/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import InvoicePage from '../pages/Dashboard/InvoicePage';
+import PengaturanPage from '../pages/Dashboard/Pengaturan';
 
 const sidebar = () => {
     const navigate = useNavigate()
@@ -64,7 +65,7 @@ const sidebar = () => {
                     </div>
                 </NavLink>
                 <NavLink
-                    to={"pengaturan"}
+                    to={'pengaturan'}
                     className={({ isActive }) =>
                         isActive ? 'nav-link active mt-auto' : 'nav-link mt-auto'
                     }
