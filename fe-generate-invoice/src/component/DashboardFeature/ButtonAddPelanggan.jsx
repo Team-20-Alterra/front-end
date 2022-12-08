@@ -5,8 +5,8 @@ import { axiosInstance } from '../../config/axiosInstance';
 
 const ButtonAddPelanggan = () => {
     const [APIData, setAPIData] = useState([])
-    const [searchInput, setSearchInput] = useState('');
-    const [filteredResults, setFilteredResults] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
         axiosInstance.get('/role/user')
@@ -14,22 +14,28 @@ const ButtonAddPelanggan = () => {
                 setAPIData(response.data.data);
             })
     }, [])
+
     const searchItems = (e) => {
-        setSearchInput(e)
-        if (searchInput !== '') {
-            const filteredData = APIData.filter((item) => {
-                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
-            })
-            setFilteredResults(filteredData)
-        }
-        else {
-            setFilteredResults(APIData)
-        }
+        setSearchTerm(e);
     }
-    console.log(filteredResults)
+
+    useEffect(() => {
+        const results = APIData.filter(data =>
+            data.ID.toString().concat(data.name).toLowerCase().includes(searchTerm)
+        );
+        setSearchResults(results);
+    }, [searchTerm]);
+
+    const handleSelected = (e) => {
+        setSearchTerm(e.target.innerText)
+    }
 
     const handleTambahPelanggan = () => {
-
+        axiosInstance.post('/add-customer', {
+            user_id: searchTerm
+        }).then((response) => {
+            console.log(response)
+        })
     }
 
     return (
@@ -44,21 +50,17 @@ const ButtonAddPelanggan = () => {
                         <div className="modal-body">
                             <h6>User ID</h6>
                             <form onSubmit={handleTambahPelanggan}>
-                                <input type="text" className='inputModal' placeholder="User ID" onChange={(e) => searchItems(e.target.value)} />
-                                {searchInput.length >= 1 ? (
-                                    filteredResults.map((item) => {
-                                        return (
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    {item.ID}
-                                                    {item.name}
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                
-                                ) : ""
-                                }
+                                <input type="text" className='inputModal' placeholder="User ID" value={searchTerm} onChange={(e) => searchItems(e.target.value)} />
+                                {searchTerm ? (
+                                    <div className="card" >
+                                        <ul className="list-group list-group-flush">
+                                            {searchResults.map((data) => (
+                                                <li className="list-group-item" onClick={(e) => handleSelected(e)} key={data.ID}># {data.ID} {data.name}</li>
+                                            ))
+                                            }
+                                        </ul>
+                                    </div>
+                                ) : null}
                                 <div className="btn-modal">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button className='btn-primary' type="submit">Tambahkan</button>

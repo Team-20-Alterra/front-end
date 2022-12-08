@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { BiBell } from 'react-icons/bi'
-import { HiOutlineArrowRightOnRectangle, HiOutlineClock } from 'react-icons/hi2'
+import { HiArrowRightOnRectangle, HiOutlineClock } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import DefaultProfile from '../assets/image/defaultProfile.png'
 import Auth from '../utils/Auth/Auth'
@@ -46,7 +46,7 @@ const Navbar = () => {
                             <img src={DefaultProfile} alt="Profile" className="imgNavbar rounded-circle me-1" />
                             <strong className='TextNavbar me-2'>Admin</strong>
                         </a>
-                        <i className="bi bi-box-arrow-right" style={{ fontSize: "20px", color: "white", cursor:"pointer"}} onClick={handleLogOut}></i>
+                        <HiArrowRightOnRectangle size={24} style={{ color: "white", cursor: "pointer", marginLeft: "16px" }} onClick={handleLogOut} />
                     </div>
                 </div>
             </nav>

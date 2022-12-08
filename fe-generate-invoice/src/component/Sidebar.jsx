@@ -13,7 +13,6 @@ const sidebar = () => {
     const handleAddInvoice = () => {
         axiosInstance.post('/invoices')
             .then((response) => {
-                console.log(response)
                 navigate(`invoice/${response.data.data.ID}`)
                 return <InvoicePage />
             })
