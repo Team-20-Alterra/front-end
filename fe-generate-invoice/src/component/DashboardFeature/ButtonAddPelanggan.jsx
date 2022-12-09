@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { HiPlus } from 'react-icons/hi'
 import { axiosInstance } from '../../config/axiosInstance';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 
 
 const ButtonAddPelanggan = () => {
     const [APIData, setAPIData] = useState([])
     const [searchTerm, setSearchTerm] = useState("");
+    const [selectedID, setSelectedID] = useState("")
     const [searchResults, setSearchResults] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(() => {
         axiosInstance.get('/role/user')
@@ -24,19 +28,38 @@ const ButtonAddPelanggan = () => {
             data.ID.toString().concat(data.name).toLowerCase().includes(searchTerm)
         );
         setSearchResults(results);
-    }, [searchTerm]);
+    }, [searchTerm, APIData]);
 
     const handleSelected = (e) => {
         setSearchTerm(e.target.innerText)
+        setSelectedID(e.target.value)
     }
 
-    const handleTambahPelanggan = () => {
+    const handleTambahPelanggan = (e) => {
+        e.preventDefault()
+        console.log(selectedID)
         axiosInstance.post('/add-customer', {
-            user_id: searchTerm
+            user_id: selectedID
         }).then((response) => {
-            console.log(response)
+            if (response.status === 201) {
+                toast.success(response.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                })
+            } else {
+                toast.error(response.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                })
+            }
+        }).catch((error) => {
+            toast.error(error.response.data.message, {
+                position: "top-right",
+                autoClose: 3000,
+            })
         })
     }
+
 
     return (
         <>
@@ -55,7 +78,7 @@ const ButtonAddPelanggan = () => {
                                     <div className="card" >
                                         <ul className="list-group list-group-flush">
                                             {searchResults.map((data) => (
-                                                <li className="list-group-item" onClick={(e) => handleSelected(e)} key={data.ID}># {data.ID} {data.name}</li>
+                                                <li className="list-group-item" value={data.ID} onClick={(e) => handleSelected(e)} key={data.ID}>{data.name} ( #{data.ID} )</li>
                                             ))
                                             }
                                         </ul>

@@ -1,13 +1,23 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BiBell } from 'react-icons/bi'
 import { HiArrowRightOnRectangle, HiOutlineClock } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import DefaultProfile from '../assets/image/defaultProfile.png'
+import { axiosInstance } from '../config/axiosInstance'
 import Auth from '../utils/Auth/Auth'
+
 
 const Navbar = () => {
     const navigate = useNavigate()
+    const [profile, setProfile] = useState([])
+
+    useEffect(() => {
+        axiosInstance.get('/business/user')
+            .then((response) => {
+                setProfile(response.data.data)
+            })
+    }, [])
+
     const handleLogOut = () => {
         Auth.isLoggedOut()
         navigate("/")
@@ -17,7 +27,7 @@ const Navbar = () => {
             <nav className="dashboard-navbar navbar sticky-top">
                 <a className="navbar-brand d-flex align-items-center justify-content-center">
                     <img src={DefaultProfile} alt="Logo" className="imgNavbar d-inline-block align-text-top" />
-                    <p className='TextNavbar m-0'>Nama Perusahaan</p>
+                    <p className='TextNavbar m-0'>{profile.name}</p>
                 </a>
                 <div className="d-flex">
                     <div className="dropdown me-3">
@@ -44,7 +54,7 @@ const Navbar = () => {
                     <div className="me-3">
                         <a className=" text-white text-decoration-none">
                             <img src={DefaultProfile} alt="Profile" className="imgNavbar rounded-circle me-1" />
-                            <strong className='TextNavbar me-2'>Admin</strong>
+                            <strong className='TextNavbar me-2'>{profile.User.name}</strong>
                         </a>
                         <HiArrowRightOnRectangle size={24} style={{ color: "white", cursor: "pointer", marginLeft: "16px" }} onClick={handleLogOut} />
                     </div>
