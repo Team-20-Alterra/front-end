@@ -12,12 +12,18 @@ import PengaturanPage from '../pages/Dashboard/Pengaturan';
 const sidebar = () => {
     const navigate = useNavigate()
     const handleAddInvoice = () => {
-        axiosInstance.post('/invoices')
+        const config = {
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        }
+        axiosInstance.post('/invoices', config)
             .then((response) => {
-                console.log(response)
-                navigate(`invoice/${response.data.data.ID}`)
-                return <InvoicePage />
+            console.log(response)
             })
+            .catch((error) => {
+            console.log(error)
+        })
     }
     return (
         <div className="d-flex flex-column align-items-center sticky-top containerSidebar" >
@@ -34,11 +40,11 @@ const sidebar = () => {
                     </div>
                 </NavLink>
                 <NavLink
-                    onClick={handleAddInvoice}
                     className={({ isActive }) =>
                         isActive ?
                             'nav-link active' : 'nav-link'
                     }
+                    onClick={handleAddInvoice}
                 >
                     <div className="containerMenu d-flex align-items-center">
                         <HiOutlinePencil className='iconMenu' /> <span>Invoice</span>

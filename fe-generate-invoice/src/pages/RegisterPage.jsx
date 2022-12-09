@@ -24,7 +24,7 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (success) {
-      navigate('/register-business')
+      navigate('/login')
     }
   }, [navigate, success])
 

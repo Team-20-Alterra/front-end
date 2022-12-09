@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../config/axiosInstance";
-import Auth from "../utils/Auth/Auth";
 
 
 export const registerAdminSecStep = createAsyncThunk('admin/register-sec', async ({ data }) => {
@@ -8,9 +7,6 @@ export const registerAdminSecStep = createAsyncThunk('admin/register-sec', async
         const payload = new FormData()
         payload.append('data', data)
         await axiosInstance.post('/business', payload)
-            .then((response) => {
-            console.log(response)
-        })
     } catch (error) {
         console.log(error)
     }

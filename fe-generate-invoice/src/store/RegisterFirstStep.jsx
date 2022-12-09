@@ -1,12 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 import { axiosInstance } from "../config/axiosInstance";
+import Auth from "../utils/Auth/Auth";
 
 export const registerAdminFirstStep = createAsyncThunk('admin/register-first', async ({Name,Email,password}) => {
     try {
         await axiosInstance.post('/register/admin',
             { Name, Email, password },
-        )
+        ).then((response) => {
+            console.log(response)
+        })
     }
     catch (error){
         toast.error(error.response.data.message, {
