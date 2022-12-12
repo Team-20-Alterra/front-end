@@ -5,13 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import { axiosInstance } from '../config/axiosInstance';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { addAdmin } from '../store/registerAdmin';
 
 
 const RegisterPage = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   
   const [values, setValues] = useState({
-    Name: "",
+    Owner: "",
     Email: "",
     Password: "",
   })
@@ -33,26 +36,39 @@ const RegisterPage = () => {
 }
 
   const onSubmit = () => {
-    try {
-      axiosInstance.post('/register/admin', {
-        Name: values.Name,
-        Email: values.Email,
-        Password: values.Password
-      }
-      ).then((response) => {
-        toast.success(response.data.message, {
-          position: "top-right",
-          autoClose: 3000,
-        })
-        navigate("/register-business")
-      })
-  }
-  catch (error){
-      toast.error(error.response.data.message, {
-          position: "top-right",
-          autoClose: 3000,
-      })
-  }
+  //   const registerData = new FormData()
+  //       registerData.append("Owner", values.Owner)
+  //       registerData.append("Email", values.Email)
+  //       registerData.append("Password", values.Password)
+    
+  //   const config = {
+  //     headers: {
+  //       'Content-Type' : 'multipart/form-data'
+  //     }
+  //   }
+  //   try {
+  //     axiosInstance.post('/register/busines', {
+  //       Owner: values.Owner,
+  //       Email: values.Email,
+  //       Password: values.Password
+  //     },
+  //       config
+  //     ).then((response) => {
+  //       toast.success(response.data.message, {
+  //         position: "top-right",
+  //         autoClose: 3000,
+  //       })
+  //       navigate("/register-business")
+  //     })
+  // }
+  // catch (error){
+  //     toast.error(error.response.data.message, {
+  //         position: "top-right",
+  //         autoClose: 3000,
+  //     })
+  // }
+    dispatch(addAdmin(values))
+    navigate('/register-business')
   };
   return (
     <div className="Wrap">
@@ -66,20 +82,22 @@ const RegisterPage = () => {
             type="text"
             className='input'
             placeholder="Nama Lengkap"
-            {...register("Name", { required: true, maxLength: 20, pattern: /^[A-Z a-z]+$/i })}
+            name='Owner'
+            {...register("Owner", { required: true, maxLength: 20, pattern: /^[A-Z a-z]+$/i })}
             onChange={handleChange}
           />
           <div className='input_error'>
-            {errors?.Name?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            {errors?.Name?.type === "maxLength" && (
+            {errors?.Owner?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
+            {errors?.Owner?.type === "maxLength" && (
               <p><i className="bi bi-exclamation-circle"></i> First name cannot exceed 20 characters!</p>
             )}
-            {errors?.Name?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Nama Lengkap Harus Berupa Huruf!</p>}
+            {errors?.Owner?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Nama Lengkap Harus Berupa Huruf!</p>}
           </div>
           <input
             type="email"
             className='input mt-7'
             placeholder="Email"
+            name='Email'              
             {...register("Email", { required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ })}
             onChange={handleChange}
           />
@@ -93,6 +111,7 @@ const RegisterPage = () => {
               type={showPassword ? "text" : "password"}
               placeholder="Kata Sandi"
               className="input mt-7"
+              name='Password'
               {...register("Password", { required: true, minLength: 8, pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]/i })}
               onChange={handleChange}
             />

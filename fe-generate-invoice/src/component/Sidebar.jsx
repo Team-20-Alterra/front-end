@@ -20,8 +20,8 @@ const sidebar = () => {
     }
         axiosInstance.post('/invoices', config)
             .then((response) => {
-                console.log(response.data)
-                // return <InvoicePage />
+                navigate(`invoice/${response.data.data.ID}`)
+                return <InvoicePage />
             })
     }
     return (

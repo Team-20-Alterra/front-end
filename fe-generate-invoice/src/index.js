@@ -5,18 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux'
-import { store, persistor } from './store/store'
-import { PersistGate } from 'redux-persist/integration/react';
+import { store } from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}> */}
+    <Provider store={store}>
       <ToastContainer />
       <App />
-      {/* </PersistGate>
-    </Provider> */}
+    </Provider>
   </React.StrictMode>
 );
 
