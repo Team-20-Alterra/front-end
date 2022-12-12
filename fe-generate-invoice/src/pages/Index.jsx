@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import heroImg from '../assets/image/hero.png'
 import Admin from "../component/Admin";
 import Client from "../component/Client";
+import Footer from "../component/Footer";
 
 export default function Home() {
     const tipeUser = ["klien", "admin"];
@@ -50,6 +51,7 @@ export default function Home() {
                     {myShow === "klien" && (<Client />)}
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

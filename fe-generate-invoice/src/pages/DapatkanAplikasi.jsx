@@ -1,12 +1,13 @@
 import Header from "../component/Header"
 import dapatkanAplikasi from '../assets/image/Dapatkan-Aplikasi.png'
 import { DiAndroid } from 'react-icons/di'
+import Footer from "../component/Footer"
 
 export default function GetApp() {
     return (
         <>
             <Header name="Ginap" />
-            <div className="container">
+            <div className="container mb-5">
                 <div className="get-app d-flex flex-row">
                     <img src={dapatkanAplikasi} alt="dapatkanAplikasi" />
                     <div className="align-self-center">
@@ -24,6 +25,7 @@ export default function GetApp() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

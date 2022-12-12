@@ -27,6 +27,9 @@ a {
 .mt-7 {
   margin-top: 5px !important;
 }
+.py-2 {
+  padding: 32px 0 !important;
+}
 /* admin */
 .admin-header {
   gap: 150px;
@@ -524,4 +527,38 @@ a {
 }
 .header-page__navbar ul li a:hover {
   font-weight: bolder;
+}
+.footer {
+  background-color: var(--primary-color);
+  padding: 32px 150px 0 150px !important;
+  color: white;
+}
+.ginap-footer {
+  font-weight: 700;
+  font-size: 48px;
+  display: flex;
+}
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+}
+.footer-content .nav {
+  font-weight: 600 !important;
+  font-size: 16px;
+}
+.footer .row {
+  margin-bottom: 48px;
+}
+.text-copy {
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 16px;
+}
+li.head {
+  font-weight: 400 !important;
+  font-size: 16px;
+  margin-bottom: 23px !important;
+  color: #ffffff;
 }

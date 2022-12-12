@@ -9,13 +9,14 @@ import { toast } from 'react-toastify'
 
 const PelangganPage = () => {
   const [pelanggan, setPelanggan] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     axiosInstance.get('/add-customer/businness')
       .then((response) => {
         setPelanggan(response.data.data)
       })
-  }, [])
+  }, [loading])
 
   const handleDeleteUser = (e) => {
     e.preventDefault()
@@ -28,8 +29,7 @@ const PelangganPage = () => {
             position: "top-right",
             autoClose: 3000,
           })
-          const sisaPelanggan = pelanggan.filter(data => data.ID !== id);
-          setPelanggan(sisaPelanggan);
+          setLoading((prev) => !prev)
         } else {
           toast.error(response.data.message, {
             position: "top-right",
@@ -51,7 +51,7 @@ const PelangganPage = () => {
           <>
             <div className="subHeader d-flex align-items-center justify-content-between">
               <input type="text" className="search w-25" placeholder="Cari" />
-              <ButtonAddPelanggan />
+              <ButtonAddPelanggan setLoading={setLoading} />
             </div>
             <ListPelanggan pelanggan={pelanggan} handleDeleteUser={handleDeleteUser} />
           </>

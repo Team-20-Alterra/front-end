@@ -5,12 +5,11 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
 
 
-const ButtonAddPelanggan = () => {
+const ButtonAddPelanggan = ({ setLoading }) => {
     const [APIData, setAPIData] = useState([])
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedID, setSelectedID] = useState("")
     const [searchResults, setSearchResults] = useState([]);
-    const navigate = useNavigate()
 
     useEffect(() => {
         axiosInstance.get('/role/user')
@@ -37,11 +36,12 @@ const ButtonAddPelanggan = () => {
 
     const handleTambahPelanggan = (e) => {
         e.preventDefault()
-        console.log(selectedID)
         axiosInstance.post('/add-customer', {
             user_id: selectedID
         }).then((response) => {
+            setLoading((prev) => !prev)
             if (response.status === 201) {
+
                 toast.success(response.data.message, {
                     position: "top-right",
                     autoClose: 3000,
