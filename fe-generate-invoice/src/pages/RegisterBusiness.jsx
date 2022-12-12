@@ -6,21 +6,24 @@ import { HiOutlinePlus } from 'react-icons/hi'
 import Auth from '../utils/Auth/Auth';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../config/axiosInstance';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const RegisterBusiness = () => {
   const navigate = useNavigate()
+  const { data } = useSelector((state) => state.register)
   const [values, setValues] = useState({
     Name: "",
     Address: "",
     No_Telp: "",
     Type: "",
     Logo: "",
-    Owner: "",
-    Account_Number: ""
-    
+    Account_Number: "",
+    Bank_id: "",
   })
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
+  const [bankData, setBankData] = useState([])
 
   const handleChange = (event) => {
     setValues({
@@ -28,7 +31,22 @@ const RegisterBusiness = () => {
         [event.target.name] : event.target.value
     })
   }
-  
+
+  const getBankData = () => {
+    axiosInstance.get('/banks')
+      .then((response) => {
+       const dataBank = response.data.bank
+       setBankData(dataBank)
+      })
+      .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  useEffect(() => {
+    getBankData()
+  }, [])
+
   const onSubmit = (e) => {
     e.preventDefault()
     const registerFormData = new FormData()
@@ -38,7 +56,10 @@ const RegisterBusiness = () => {
     registerFormData.append("Type", values.Type)
     registerFormData.append("Logo", values.Logo)
     registerFormData.append("Account_Number", values.Account_Number)
-    registerFormData.append("Owner", values.Owner)
+    registerFormData.append("Owner", data?.newData.Owner)
+    registerFormData.append("Email", data?.newData.Email)
+    registerFormData.append("Password",data?.newData.Password)
+    registerFormData.append("Bank_id", bankData.map((item) => item.ID))
     
     const config = {
       headers: {
@@ -46,19 +67,23 @@ const RegisterBusiness = () => {
       }
     }
 
-     axiosInstance.post('/business',
+     axiosInstance.post('/register/busines',
       registerFormData, 
       config
     ).then((response) => {
-      console.log(response)
+      toast.success(response.data.message, {
+        position: 'top-right',
+        autoClose: 3000
+      })
+      Auth.storeUserInfoToCookie(response.data.token)
     })
       .catch((error) => {
       console.log(error)
     })
 
-    // navigate("/login")
+    
   };
-
+  console.log(bankData)
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined)
@@ -86,10 +111,9 @@ const RegisterBusiness = () => {
           </div>
           <form onSubmit={onSubmit} className='register-business__form'>
             <input type="text" placeholder="Nama Bisnis" className='input' name='Name'
-  
+            
             onChange={handleChange}
             />
-            
             <input type="text" placeholder="Alamat Bisnis" className='input mt-7' name='Address'
               
               onChange={handleChange}
@@ -113,21 +137,27 @@ const RegisterBusiness = () => {
               <option value="Fashion">Fashion</option>
               <option value="Finance">Finance</option>
             </select>
-            
-            <input type="text" placeholder="Owner" className='input mt-7' name='Owner'
+
+            <select name="Bank_id" id="" placeholder="Jenis Bisnis" className='input mt-7'
               
               onChange={handleChange}
-            />
+            >
+              <option value="" disabled selected hidden>
+                Bank
+              </option>
+              {bankData?.map((item) => (
+                <option value={item.name} key={item.ID}>{item.code} - {item.name}</option>
+              ))}
+            </select>
+            
             
             <input type="text" placeholder="Rekening Bank" className='input mt-7' name='Account_Number'
              
               onChange={handleChange}
             />
-           
-            <input type="text" placeholder="Kode Bank" className='input mt-7' name='Code'
-              
-              onChange={handleChange}
-            />
+            <input type="text" name='Owner' hidden onChange={handleChange}/>
+            <input type="text" name='Email' hidden  onChange={handleChange}/>
+            <input type="text" name='Password' hidden  onChange={handleChange}/>
            
             <div className="register-business_input-image">
               <div className="label-input_image">

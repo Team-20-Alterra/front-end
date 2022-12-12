@@ -13,7 +13,7 @@ const Navbar = () => {
 
 
     const getAdminData = () => {
-        axiosInstance.get('business/user')
+        axiosInstance.get('/business/user')
             .then((response) => {
                 const profileAdmin = response.data
                 setProfile(profileAdmin)
