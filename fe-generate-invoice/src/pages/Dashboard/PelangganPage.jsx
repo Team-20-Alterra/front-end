@@ -8,13 +8,18 @@ import { axiosInstance } from '../../config/axiosInstance'
 import { toast } from 'react-toastify'
 
 const PelangganPage = () => {
+  const [empty, setEmpty] = useState(false)
   const [pelanggan, setPelanggan] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     axiosInstance.get('/add-customer/businness')
       .then((response) => {
-        setPelanggan(response.data.data)
+        if (response.data.data.length === 0) {
+          setEmpty(true)
+        } else {
+          setPelanggan(response.data.data)
+        }
       })
   }, [loading])
 
@@ -45,7 +50,7 @@ const PelangganPage = () => {
     <div className="container-content">
       <HeaderDashboard name="Pelanggan" />
       {
-        pelanggan === [] ? (
+        empty ? (
           <PelangganEmpty />
         ) : (
           <>

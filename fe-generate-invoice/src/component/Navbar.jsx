@@ -19,22 +19,22 @@ const Navbar = () => {
                 setProfile(profileAdmin)
             })
             .catch((error) => {
-            console.log(error)
-        })
+                console.log(error)
+            })
     }
 
     useEffect(() => {
         getAdminData()
-    },[])
+    }, [])
 
     const handleLogOut = () => {
         Auth.isLoggedOut()
         navigate("/")
     }
-    console.log(profile)
+
     return (
         <>
-            {}
+            { }
             <nav className="dashboard-navbar navbar sticky-top">
                 <a className="navbar-brand d-flex align-items-center justify-content-center">
                     <img src={DefaultProfile} alt="Logo" className="imgNavbar d-inline-block align-text-top" />
