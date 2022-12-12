@@ -41,7 +41,7 @@ export default function Client() {
                     <img src={selaluDiberitahuImg} alt="selaluDiberitahuImg" />
                     <div className="link-lihat">
                         <h2 className="title">Selalu Diberitahu</h2>
-                        <h4 className="desc">Ketahui apabila ada invoice baru, tenggat waktu dan yang lainnya melalui aplikasi atau email!.</h4>
+                        <h4 className="desc">Ketahui apabila ada invoice baru, tenggang waktu dan yang lainnya melalui aplikasi atau email!.</h4>
                     </div>
                 </div>
             </div>
