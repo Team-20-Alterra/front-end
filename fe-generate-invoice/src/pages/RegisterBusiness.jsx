@@ -10,31 +10,35 @@ import { axiosInstance } from '../config/axiosInstance';
 const RegisterBusiness = () => {
   const navigate = useNavigate()
   const [values, setValues] = useState({
-    name: "",
-    address: "",
-    no_telp: "",
-    type: "",
-    logo: "",
-    owner: "",
-    account_number: ""
+    Name: "",
+    Address: "",
+    No_Telp: "",
+    Type: "",
+    Logo: "",
+    Owner: "",
+    Account_Number: ""
     
   })
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm();
-  const onSubmit = () => {
+
+  const handleChange = (event) => {
+    setValues({
+        ...values,
+        [event.target.name] : event.target.value
+    })
+  }
+  
+  const onSubmit = (e) => {
+    e.preventDefault()
     const registerFormData = new FormData()
-    registerFormData.append("name", values.name)
-    registerFormData.append("address", values.address)
-    registerFormData.append("no_telp", values.no_telp)
-    registerFormData.append("type", values.type)
-    registerFormData.append("logo", values.logo)
-    registerFormData.append("account_number", values.account_number)
-    registerFormData.append("owner", values.owner)
+    registerFormData.append("Name", values.Name)
+    registerFormData.append("Address", values.Address)
+    registerFormData.append("No_Telp", values.No_Telp)
+    registerFormData.append("Type", values.Type)
+    registerFormData.append("Logo", values.Logo)
+    registerFormData.append("Account_Number", values.Account_Number)
+    registerFormData.append("Owner", values.Owner)
     
     const config = {
       headers: {
@@ -80,28 +84,26 @@ const RegisterBusiness = () => {
           <div className='d-flex justify-content-center w-100' style={{ marginBottom: "32px" }}>
             <img src={RegisterBusinessImage} alt="RegisterBusinessImage" />
           </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" placeholder="Nama Bisnis" className='input' name='name'
-              {...register("name", { required: true })}
-
+          <form onSubmit={onSubmit} className='register-business__form'>
+            <input type="text" placeholder="Nama Bisnis" className='input' name='Name'
+  
+            onChange={handleChange}
             />
-            <div className='input_error'>
-              {errors?.name?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            </div>
-            <input type="text" placeholder="Alamat Bisnis" className='input mt-7' name='address'
-              {...register("address", { required: true })}
+            
+            <input type="text" placeholder="Alamat Bisnis" className='input mt-7' name='Address'
+              
+              onChange={handleChange}
             />
-            <div className='input_error'>
-              {errors?.address?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            </div>
-            <input type="text" placeholder="Nomor Telepon" className='input mt-7' name='no_telp'
-              {...register("no_telp", { required: true })}
+            
+            <input type="text" placeholder="Nomor Telepon" className='input mt-7' name='No_Telp'
+              
+              onChange={handleChange}
             />
-            <div className='input_error'>
-              {errors?.no_telp?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            </div>
-            <select name="type" id="" placeholder="Jenis Bisnis" className='input mt-7' 
-              {...register("type", { required: true })}>
+            
+            <select name="Type" id="" placeholder="Jenis Bisnis" className='input mt-7'
+              
+              onChange={handleChange}
+            >
               <option value="" disabled selected hidden>
                 Jenis Bisnis
               </option>
@@ -111,27 +113,22 @@ const RegisterBusiness = () => {
               <option value="Fashion">Fashion</option>
               <option value="Finance">Finance</option>
             </select>
-            <div className='input_error'>
-              {errors?.type?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            </div>
-            <input type="text" placeholder="Owner" className='input mt-7' name='owner'
-              {...register("owner", { required: true })}
+            
+            <input type="text" placeholder="Owner" className='input mt-7' name='Owner'
+              
+              onChange={handleChange}
             />
-            <div className='input_error'>
-              {errors?.account_number?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            </div>
-            <input type="text" placeholder="Rekening Bank" className='input mt-7' name='account_number'
-              {...register("account_number", { required: true })}
+            
+            <input type="text" placeholder="Rekening Bank" className='input mt-7' name='Account_Number'
+             
+              onChange={handleChange}
             />
-            <div className='input_error'>
-              {errors?.account_number?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            </div>
-            <input type="text" placeholder="Kode Bank" className='input mt-7' name='code'
-              {...register("code", { required: true })}
+           
+            <input type="text" placeholder="Kode Bank" className='input mt-7' name='Code'
+              
+              onChange={handleChange}
             />
-            <div className='input_error'>
-              {errors?.code?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            </div>
+           
             <div className="register-business_input-image">
               <div className="label-input_image">
                 <label htmlFor="file">Tambah Logo</label>
@@ -139,13 +136,12 @@ const RegisterBusiness = () => {
                   <HiOutlinePlus />
                 </span>
               </div>
-              <input type="file" accept="image/*" className="image-input" onClick={onSelectFile} {...register("logo", { required: false })} name="logo"
+              <input type="file" accept="image/*" className="image-input" onClick={onSelectFile} name="Logo"
+                onChange={handleChange}
               />
             </div>
             {selectedFile && <img src={preview} alt={preview} style={{ width: "250px", height: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginTop: "5px" }} />}
-            <div className='input_error'>
-              {errors?.logo?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            </div>
+           
             <button className="btn-primary" type="submit" id="ButtonMulai" style={{ marginTop: "26px" }}>
               Mulai
             </button>

@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import RegisterImage from '../assets/image/Auth/Login-Register.png'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux'
-import { registerAdminFirstStep } from '../store/RegisterFirstStep';
-import { useEffect } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
+import { axiosInstance } from '../config/axiosInstance';
+import { toast } from 'react-toastify';
 
 
 const RegisterPage = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  
+  const [values, setValues] = useState({
+    Name: "",
+    Email: "",
+    Password: "",
+  })
 
-  const {loading, error, success} = useSelector((state) => state.first)
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -22,14 +25,34 @@ const RegisterPage = () => {
     formState: { errors }
   } = useForm();
 
-  useEffect(() => {
-    if (success) {
-      navigate('/login')
-    }
-  }, [navigate, success])
+  const handleChange = (event) => {
+    setValues({
+        ...values,
+        [event.target.name] : event.target.value
+    })
+}
 
-  const onSubmit = (data) => {
-    dispatch(registerAdminFirstStep(data))
+  const onSubmit = () => {
+    try {
+      axiosInstance.post('/register/admin', {
+        Name: values.Name,
+        Email: values.Email,
+        Password: values.Password
+      }
+      ).then((response) => {
+        toast.success(response.data.message, {
+          position: "top-right",
+          autoClose: 3000,
+        })
+        navigate("/register-business")
+      })
+  }
+  catch (error){
+      toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 3000,
+      })
+  }
   };
   return (
     <div className="Wrap">
@@ -44,6 +67,7 @@ const RegisterPage = () => {
             className='input'
             placeholder="Nama Lengkap"
             {...register("Name", { required: true, maxLength: 20, pattern: /^[A-Z a-z]+$/i })}
+            onChange={handleChange}
           />
           <div className='input_error'>
             {errors?.Name?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
@@ -57,6 +81,7 @@ const RegisterPage = () => {
             className='input mt-7'
             placeholder="Email"
             {...register("Email", { required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ })}
+            onChange={handleChange}
           />
           <div className='input_error'>
             {errors?.Email?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
@@ -68,13 +93,14 @@ const RegisterPage = () => {
               type={showPassword ? "text" : "password"}
               placeholder="Kata Sandi"
               className="input mt-7"
-              {...register("password", { required: true, minLength: 8, pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]/i })}
+              {...register("Password", { required: true, minLength: 8, pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]/i })}
+              onChange={handleChange}
             />
           </div>
           <div className='input_error mb-1'>
-            {errors?.password?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            {errors?.password?.type === "minLength" && <p><i className="bi bi-exclamation-circle"></i> Harus minimal 8 karakter</p>}
-            {errors?.password?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Gunakan huruf kapital, huruf kecil dan angka numerik</p>}
+            {errors?.Password?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
+            {errors?.Password?.type === "minLength" && <p><i className="bi bi-exclamation-circle"></i> Harus minimal 8 karakter</p>}
+            {errors?.Password?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Gunakan huruf kapital, huruf kecil dan angka numerik</p>}
           </div>
           <h1 className='textDetailSandi m-0'>Kata sandi minimal 8 karakter. Gunakan huruf kapital, huruf kecil dan angka numerik.</h1>
           <button className='btn-primary mt-3' type='submit' id='ButtonBerikutnya'>Berikutnya</button>

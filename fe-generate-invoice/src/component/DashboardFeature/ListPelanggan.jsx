@@ -3,8 +3,9 @@ import { initialName } from '../../utils/initialName'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { sliceAlamat } from '../../utils/sliceAlamat'
 import { randomColor } from '../../utils/randomColor'
+import { axiosInstance } from '../../config/axiosInstance'
 
-const ListPelanggan = () => {
+const ListPelanggan = ({ pelanggan, handleDeleteUser }) => {
 
   return (
     <table className='table-list text-center' cellPadding="15px">
@@ -17,18 +18,22 @@ const ListPelanggan = () => {
           <th>Hapus</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td className='d-flex align-items-center'>
-            <div className='box' style={{ background: `#${randomColor()}` }}>{initialName('john doe')}</div>John Doe
-          </td>
-          <td>#0000001</td>
-          <td>{sliceAlamat('Jl. Pangeran Diponegoro No.58, RT.1/RW.2, Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10320, Indonesia')}...</td>
-          <td> 083123310081118</td>
-          <td> <HiOutlineTrash /></td>
-        </tr>
-      </tbody>
-    </table>
+
+      {pelanggan.map((user) => (
+        < tbody key={user.ID}>
+          <tr>
+            <td className='d-flex align-items-center'>
+              <div className='box' style={{ background: `#${randomColor()}` }}>{initialName(`{ user.User.name }`)}</div>{user.User.name}
+            </td>
+            <td># {user.User.ID}</td>
+            <td>{sliceAlamat((user.User.address))}...</td>
+            <td>{user.User.phone}</td>
+            <td><HiOutlineTrash className='icon-delete' size={24} value={user.ID} onClick={(e) => handleDeleteUser(e)} /></td>
+          </tr>
+        </tbody>
+      )
+      )}
+    </table >
   )
 }
 

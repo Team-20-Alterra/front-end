@@ -26,20 +26,20 @@ const ButtonFilter = () => {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body date-picker__filter">
-                          <h6>Tanggal</h6>
-                          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='date-picker'/>
-                      </div>
+              <h6>Tanggal</h6>
+              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='date-picker' />
+            </div>
             <div class="modal-body min-max__filter">
-                          <h6>Harga</h6>
-                          <div className="min-max">
-                          <input type="text" placeholder="RP Jumlah Minimum" />
-                          <input type="text" placeholder="RP Jumlah Maksimum"/>
-                          </div>
-        </div>
-        <div className="btn-modal filtering-button__container">
-                <button type="button" className="btn filtering-button__batal" data-bs-dismiss="modal">Batal</button>
-                <button className='btn-primary' type="submit">Simpan</button>
-        </div>       
+              <h6>Harga</h6>
+              <div className="min-max">
+                <input type="text" placeholder="RP Jumlah Minimum" />
+                <input type="text" placeholder="RP Jumlah Maksimum" />
+              </div>
+            </div>
+            <div className="btn-modal filtering-button__container">
+              <button type="button" className="btn filtering-button__batal" data-bs-dismiss="modal">Batal</button>
+              <button className='btn-primary' type="submit">Simpan</button>
+            </div>
           </div>
         </div>
       </div>

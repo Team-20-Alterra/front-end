@@ -2,28 +2,27 @@
 import React from 'react'
 import { HiOutlineHome, HiOutlinePencil, HiOutlineUser, HiClock } from 'react-icons/hi'
 import { HiOutlineCog6Tooth } from 'react-icons/hi2'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
 import { axiosInstance } from '../config/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import InvoicePage from '../pages/Dashboard/InvoicePage';
 import PengaturanPage from '../pages/Dashboard/Pengaturan';
+import Cookies from 'js-cookie';
 
 const sidebar = () => {
     const navigate = useNavigate()
     const handleAddInvoice = () => {
         const config = {
             headers: {
-                'Content-Type' : 'application/json'
-            }
+            Authorization: `Bearer ${Cookies.get("cookiename")}`
         }
+    }
         axiosInstance.post('/invoices', config)
             .then((response) => {
-            console.log(response)
+                console.log(response.data)
+                // return <InvoicePage />
             })
-            .catch((error) => {
-            console.log(error)
-        })
     }
     return (
         <div className="d-flex flex-column align-items-center sticky-top containerSidebar" >
@@ -40,11 +39,11 @@ const sidebar = () => {
                     </div>
                 </NavLink>
                 <NavLink
+                    onClick={handleAddInvoice}
                     className={({ isActive }) =>
                         isActive ?
                             'nav-link active' : 'nav-link'
                     }
-                    onClick={handleAddInvoice}
                 >
                     <div className="containerMenu d-flex align-items-center">
                         <HiOutlinePencil className='iconMenu' /> <span>Invoice</span>

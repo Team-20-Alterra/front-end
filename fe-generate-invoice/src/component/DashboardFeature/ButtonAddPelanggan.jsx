@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { HiPlus } from 'react-icons/hi'
 import { axiosInstance } from '../../config/axiosInstance';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 
 
 const ButtonAddPelanggan = () => {
     const [APIData, setAPIData] = useState([])
-    const [searchInput, setSearchInput] = useState('');
-    const [filteredResults, setFilteredResults] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedID, setSelectedID] = useState("")
+    const [searchResults, setSearchResults] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(() => {
         axiosInstance.get('/role/user')
@@ -14,23 +18,48 @@ const ButtonAddPelanggan = () => {
                 setAPIData(response.data.data);
             })
     }, [])
+
     const searchItems = (e) => {
-        setSearchInput(e)
-        if (searchInput !== '') {
-            const filteredData = APIData.filter((item) => {
-                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+        setSearchTerm(e);
+    }
+
+    useEffect(() => {
+        const results = APIData.filter(data =>
+            data.ID.toString().concat(data.name).toLowerCase().includes(searchTerm)
+        );
+        setSearchResults(results);
+    }, [searchTerm, APIData]);
+
+    const handleSelected = (e) => {
+        setSearchTerm(e.target.innerText)
+        setSelectedID(e.target.value)
+    }
+
+    const handleTambahPelanggan = (e) => {
+        e.preventDefault()
+        console.log(selectedID)
+        axiosInstance.post('/add-customer', {
+            user_id: selectedID
+        }).then((response) => {
+            if (response.status === 201) {
+                toast.success(response.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                })
+            } else {
+                toast.error(response.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                })
+            }
+        }).catch((error) => {
+            toast.error(error.response.data.message, {
+                position: "top-right",
+                autoClose: 3000,
             })
-            setFilteredResults(filteredData)
-        }
-        else {
-            setFilteredResults(APIData)
-        }
+        })
     }
-    console.log(filteredResults)
 
-    const handleTambahPelanggan = () => {
-
-    }
 
     return (
         <>
@@ -44,21 +73,17 @@ const ButtonAddPelanggan = () => {
                         <div className="modal-body">
                             <h6>User ID</h6>
                             <form onSubmit={handleTambahPelanggan}>
-                                <input type="text" className='inputModal' placeholder="User ID" onChange={(e) => searchItems(e.target.value)} />
-                                {searchInput.length >= 1 ? (
-                                    filteredResults.map((item) => {
-                                        return (
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    {item.ID}
-                                                    {item.name}
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                
-                                ) : ""
-                                }
+                                <input type="text" className='inputModal' placeholder="User ID" value={searchTerm} onChange={(e) => searchItems(e.target.value)} />
+                                {searchTerm ? (
+                                    <div className="card" >
+                                        <ul className="list-group list-group-flush">
+                                            {searchResults.map((data) => (
+                                                <li className="list-group-item" value={data.ID} onClick={(e) => handleSelected(e)} key={data.ID}>{data.name} ( #{data.ID} )</li>
+                                            ))
+                                            }
+                                        </ul>
+                                    </div>
+                                ) : null}
                                 <div className="btn-modal">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button className='btn-primary' type="submit">Tambahkan</button>
