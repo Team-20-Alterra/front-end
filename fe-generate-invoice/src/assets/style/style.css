@@ -562,3 +562,46 @@ li.head {
   margin-bottom: 23px !important;
   color: #ffffff;
 }
+
+/* Notfound */
+.container-notfound {
+  background-color: #d4e2df;
+  height: 100vh;
+}
+.notfoundpage {
+  display: grid;
+  grid-template-columns: 1 1 1;
+  justify-content: center;
+  gap: 50px;
+  width: 100%;
+}
+.notfoundpage-main {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-top: 15%;
+  box-shadow: -1px 0px 5px 7px rgba(0, 0, 0, 0.74);
+  -webkit-box-shadow: -1px 0px 23px 7px rgba(0, 0, 0, 0.74);
+  -moz-box-shadow: -1px 0px 23px 7px rgba(0, 0, 0, 0.74);
+  align-items: center;
+  border-radius: 10px;
+}
+.notfoundpage-main h3 {
+  margin-top: 20px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.notfoundpage-main button {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: var(--primary-color);
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.notfoundpage-main button:hover {
+  opacity: 0.9;
+}

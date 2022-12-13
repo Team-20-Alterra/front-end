@@ -248,20 +248,28 @@ nav {
 }
 
 .rekening-content img {
-  width: 80px;
-  height: 80px;
-  background-color: grey;
+  width: 40px;
+  height: 25px;
 }
 
-.rekening-data p {
-  opacity: 0.6;
+.rekening-data {
+  font-weight: 400;
+  font-size: 14px;
 }
-
-.add-rekening {
+.rekening-data .head {
+  font-weight: 600;
+}
+button.add-rekening {
   cursor: pointer;
-  font-weight: bold;
-  color: rgba(41, 112, 97, 1);
-  font-size: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primary-color);
+  background: white;
+  border: none;
+  padding: 0;
+}
+button.add-rekening:hover {
+  opacity: 0.8;
 }
 
 .p-profil {
@@ -705,7 +713,7 @@ nav {
   padding: 8px;
   margin-left: 8px;
 }
-.button-pengaturan__simpan{
+.button-pengaturan__simpan {
   border: none;
   background-color: #297061;
   padding: 12px;
@@ -715,4 +723,23 @@ nav {
 }
 .register-business__form input {
   margin-bottom: 16px;
+}
+label.judul {
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.form-content .input {
+  box-shadow: none;
+  border: 1px solid #ced4da;
+  color: #252525;
+}
+textarea#alamat {
+  padding: 5px 10px;
+}
+textarea#alamat:focus {
+  outline: #297061 auto 2px;
+}
+.btn-simpan {
+  width: 10%;
 }

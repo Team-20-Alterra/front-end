@@ -10,7 +10,7 @@ import SentLinkPage from '../pages/SentLinkPage';
 import SetNewPasswordPage from '../pages/SetNewPasswordPage';
 import SuccessChangePasswordPage from '../pages/SuccessChangePasswordPage';
 import { PrivateRoute } from './PrivateRoute.js';
-import InvoicePage from '../pages/Dashboard/InvoicePage';
+import NotFound from '../pages/NotFound';
 
 function Router() {
     return (
@@ -28,7 +28,7 @@ function Router() {
                 <Route path='/admin/*' element={<PrivateRoute>
                     <Layout />
                 </PrivateRoute>} />
-
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </BrowserRouter >
     )

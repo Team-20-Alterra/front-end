@@ -4,9 +4,11 @@ import { BiPencil } from "react-icons/bi"
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
 import { toast } from "react-toastify";
+import ButtonAddBank from "../../component/DashboardFeature/ButtonAddBank";
 
 export default function PengaturanPage() {
     const [values, setValues] = useState([])
+    const [banks, setBanks] = useState([])
 
     useEffect(() => {
         axiosInstance.get('/business/user')
@@ -15,6 +17,12 @@ export default function PengaturanPage() {
             })
     }, [])
 
+    useEffect(() => {
+        axiosInstance.get('/list-bank/businness')
+            .then((response) => {
+                setBanks(response.data.data)
+            })
+    }, [])
 
     const handleChange = (event) => {
         setValues({
@@ -22,7 +30,6 @@ export default function PengaturanPage() {
             [event.target.name]: event.target.value
         })
     }
-
 
     const handleEdittingPengaturan = (e) => {
         e.preventDefault()
@@ -64,120 +71,122 @@ export default function PengaturanPage() {
                 <HeaderDashboard name="Pengaturan Bisnis" />
                 <form className="mb-4" onSubmit={handleEdittingPengaturan}>
                     <div className="d-flex flex-row form-content">
-                        <div className="form d-flex flex-column">
-                            <label className="d-flex flex-column fs-5">
+                        <div className="form d-flex flex-column mt-2">
+                            <label className="d-flex flex-column judul">
                                 Nama Bisnis
-                                <input
-                                    className="fs-6 p-2 rounded"
-                                    type="text"
-                                    name="name"
-                                    placeholder="Nama Bisnis"
-                                    id="namabisnis"
-                                    value={values.name}
-                                    onChange={handleChange}
-                                />
                             </label>
+                            <input
+                                className="input"
+                                type="text"
+                                name="name"
+                                placeholder="Nama Bisnis"
+                                id="namabisnis"
+                                value={values.name}
+                                onChange={handleChange}
+                            />
                             <div className="mt-4 d-flex flex-row form-part">
                                 <div className="form-part-left">
-                                    <label className="d-flex flex-column mb-4 fs-5">
+                                    <label className="d-flex flex-column judul">
                                         Email Bisnis
-                                        <input
-                                            className="fs-6 p-2 rounded"
-                                            type="text"
-                                            name="email"
-                                            placeholder="Email Bisnis"
-                                            id="emailBisnis"
-                                            value={values.email}
-                                            onChange={handleChange}
-                                        />
                                     </label>
-                                    <label className="d-flex flex-column mb-4 fs-5">
+                                    <input
+                                        className="input"
+                                        type="text"
+                                        name="email"
+                                        placeholder="Email Bisnis"
+                                        id="emailBisnis"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                    />
+                                    <label className="d-flex flex-column mt-4 judul">
                                         No.Telp Bisnis
-                                        <input
-                                            className="fs-6 p-2 rounded"
-                                            type="number"
-                                            name="no_telp"
-                                            placeholder="Nomor Telp"
-                                            id="nomorBisnis"
-                                            value={values.no_telp}
-                                            onChange={handleChange}
-                                        />
                                     </label>
-                                    <label className="d-flex flex-column mb-4 fs-5">
+                                    <input
+                                        className="input "
+                                        type="number"
+                                        name="no_telp"
+                                        placeholder="Nomor Telp"
+                                        id="nomorBisnis"
+                                        value={values.no_telp}
+                                        onChange={handleChange}
+                                    />
+                                    <label className="d-flex flex-column mt-4 judul">
                                         Jenis Bisnis
-                                        <select
-                                            name="type"
-                                            id="type"
-                                            value={values.type}
-                                            onChange={handleChange}
-                                            className="fs-6 p-2 rounded"
-                                        >
-                                            <option value="" disabled hidden selected>Jenis Bisnis</option>
-                                            <option value="Makanan">Makanan</option>
-                                            <option value="Minuman">Minuman</option>
-                                            <option value="Elektronik">Elektronik</option>
-                                            <option value="Finance">Finance</option>
-                                        </select>
                                     </label>
-                                    <label className="d-flex flex-column mb-4 fs-5">
+                                    <select
+                                        name="type"
+                                        id="type"
+                                        value={values.type}
+                                        onChange={handleChange}
+                                        className="input"
+                                    >
+                                        <option value="" disabled hidden selected>Jenis Bisnis</option>
+                                        <option value="Makanan">Makanan</option>
+                                        <option value="Minuman">Minuman</option>
+                                        <option value="Elektronik">Elektronik</option>
+                                        <option value="Finance">Finance</option>
+                                    </select>
+                                    <label className="d-flex flex-column mt-4 judul">
                                         Alamat
-                                        <textarea
-                                            name="address"
-                                            id="alamat"
-                                            rows="6"
-                                            className="rounded"
-                                            value={values.address}
-                                            onChange={handleChange}
-                                        >
-                                        </textarea>
                                     </label>
+                                    <textarea
+                                        name="address"
+                                        id="alamat"
+                                        rows="4"
+                                        className="rounded w-100"
+                                        value={values.address}
+                                        onChange={handleChange}
+                                    >
+                                    </textarea>
                                 </div>
                                 <div className="form-part-right">
-                                    <label className="d-flex flex-column mb-4 fs-5">
+                                    <label className="d-flex flex-column judul">
                                         Pengingat Otomatis
-                                        <select
-                                            name="reminder"
-                                            id="reminder"
-                                            value={values.reminder}
-                                            onChange={handleChange}
-                                            className="fs-6 p-2 rounded"
-                                        >
-                                            <option value="" disabled hidden selected>Pengingat Otomatis</option>
-                                            <option value="1 Hari">1 Hari</option>
-                                            <option value="5 Hari">5 Hari</option>
-                                            <option value="10 Hari">10 Hari</option>
-                                            <option value="20 Hari">20 Hari</option>
-                                            <option value="30 Hari">30 Hari</option>
-                                        </select>
                                     </label>
-                                    <label className="d-flex flex-column mb-4 fs-5">
+                                    <select
+                                        name="reminder"
+                                        id="reminder"
+                                        value={values.reminder}
+                                        onChange={handleChange}
+                                        className="input"
+                                    >
+                                        <option value="" disabled hidden selected>Pengingat Otomatis</option>
+                                        <option value="1 Hari">1 Hari</option>
+                                        <option value="5 Hari">5 Hari</option>
+                                        <option value="10 Hari">10 Hari</option>
+                                        <option value="20 Hari">20 Hari</option>
+                                        <option value="30 Hari">30 Hari</option>
+                                    </select>
+                                    <label className="d-flex flex-column mt-4 judul">
                                         Jatuh Tempo
-                                        <select
-                                            name="due_date"
-                                            id="tempo"
-                                            value={values.due_date}
-                                            onChange={handleChange}
-                                            className="fs-6 p-2 rounded"
-                                        >
-                                            <option value="" disabled hidden selected>Jatuh Tempo</option>
-                                            <option value="1 Hari">1 Hari</option>
-                                            <option value="7 Hari">7 Hari</option>
-                                            <option value="14 Hari">14 Hari</option>
-                                            <option value="21 Hari">21 Hari</option>
-                                            <option value="30 Hari">30 Hari</option>
-                                        </select>
                                     </label>
-                                    <label className="d-flex flex-column mb-4 fs-5">
+                                    <select
+                                        name="due_date"
+                                        id="tempo"
+                                        value={values.due_date}
+                                        onChange={handleChange}
+                                        className="input"
+                                    >
+                                        <option value="" disabled hidden selected>Jatuh Tempo</option>
+                                        <option value="1 Hari">1 Hari</option>
+                                        <option value="7 Hari">7 Hari</option>
+                                        <option value="14 Hari">14 Hari</option>
+                                        <option value="21 Hari">21 Hari</option>
+                                        <option value="30 Hari">30 Hari</option>
+                                    </select>
+                                    <label className="d-flex flex-column mt-4 judul">
                                         Rekening Terdaftar
                                     </label>
-                                    <div className="rekening-content d-flex flex-rows mb-4">
-                                        <img src="" alt="" />
-                                        <div className="rekening-data d-flex flex-column">
-                                            <p>Nama Pemilik Rekening</p>
-                                            <p>091181515</p>
+                                    {banks.map((bank) => (
+                                        <div className="rekening-content d-flex flex-rows align-items-center mb-4" key={bank.Bank.ID}>
+                                            <img src={bank.Bank.logo} alt="" className="img-rekening" />
+                                            <div className="rekening-data d-flex flex-column">
+                                                <div className="head">{bank.Bank.name}</div>
+                                                <div>{bank.account_number}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="add-rekening"><AiOutlinePlus className="me-2" />Daftar Rekening</div>
+                                    ))}
+                                    <ButtonAddBank values={values} />
                                 </div>
                             </div>
                         </div>
@@ -185,8 +194,8 @@ export default function PengaturanPage() {
                             <input type="file" accept="image/*" className="image-input" onChange={handleChange} name="logo" />
                         </div>
                     </div>
-                    <div className="container mb-4">
-                        <button type="submit" className="button-pengaturan__simpan"><AiOutlineCheck className="me-2" />Simpan</button>
+                    <div className="btn-simpan">
+                        <button type="submit" className="btn-primary mt-4"><AiOutlineCheck className="me-2" />Simpan</button>
                     </div>
                 </form>
             </div>
