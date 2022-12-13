@@ -23,6 +23,7 @@ const Layout = () => {
                         <Route path='pelanggan' element={<PelangganPage />} />
                         <Route path='pengaturan' element={<PengaturanPage />} />
                         <Route path='riwayat' element={<RiwayatPage />} />
+                        <Route path='invoices/:ID' element={<InvoicePage />} />
                     </Routes>
                 </div>
             </div>

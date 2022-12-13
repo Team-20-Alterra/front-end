@@ -36,37 +36,6 @@ const RegisterPage = () => {
 }
 
   const onSubmit = () => {
-  //   const registerData = new FormData()
-  //       registerData.append("Owner", values.Owner)
-  //       registerData.append("Email", values.Email)
-  //       registerData.append("Password", values.Password)
-    
-  //   const config = {
-  //     headers: {
-  //       'Content-Type' : 'multipart/form-data'
-  //     }
-  //   }
-  //   try {
-  //     axiosInstance.post('/register/busines', {
-  //       Owner: values.Owner,
-  //       Email: values.Email,
-  //       Password: values.Password
-  //     },
-  //       config
-  //     ).then((response) => {
-  //       toast.success(response.data.message, {
-  //         position: "top-right",
-  //         autoClose: 3000,
-  //       })
-  //       navigate("/register-business")
-  //     })
-  // }
-  // catch (error){
-  //     toast.error(error.response.data.message, {
-  //         position: "top-right",
-  //         autoClose: 3000,
-  //     })
-  // }
     dispatch(addAdmin(values))
     navigate('/register-business')
   };

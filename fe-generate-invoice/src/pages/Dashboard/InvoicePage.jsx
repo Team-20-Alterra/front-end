@@ -4,8 +4,41 @@ import logoPerusahaan from '../../assets/image/Admin/Logo-Perusahaan.png'
 import ListItem from '../../component/DashboardFeature/ListItem'
 import { HiPlus } from 'react-icons/hi'
 import ButtonAddItem from '../../component/DashboardFeature/ButtonAddItem'
+import { useState } from 'react'
+import { axiosInstance } from '../../config/axiosInstance'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import Cookies from 'js-cookie'
 const InvoicePage = () => {
+    const {ID} = useParams()
 
+    const [businessData, setBusinessData] = useState()
+    const [customerData, setCustomerData] = useState()
+
+    const getBusinessData = () => {
+        axiosInstance.get(`/invoices/${ID}`)
+            .then((response) => {
+            setBusinessData(response.data)
+            })
+            .catch((error) => {
+            console.log(error)
+        })
+    }
+
+    useEffect(() => {
+        getBusinessData()
+    }, [])
+    
+    const getTodayDate = () => {
+            let today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+
+            return today = mm + '/' + dd + '/' + yyyy
+    }
+
+    console.log(businessData)
     return (
         <div className="container-content mb-5-content">
             <HeaderDashboard name="Buat Invoice" />
@@ -13,7 +46,7 @@ const InvoicePage = () => {
                 <img src={logoPerusahaan} alt="Logo" />
                 <div className='flex-column text-end'>
                     <h1 className='textHeader'>Invoice</h1>
-                    <h2 className='textSubHeader'>#0111110</h2>
+                    <h2 className='textSubHeader'>#{businessData?.data?.ID}</h2>
                 </div>
             </div>
             <div className="detailHeader d-flex">
@@ -24,19 +57,19 @@ const InvoicePage = () => {
                             <tbody>
                                 <tr>
                                     <td>Penjual</td>
-                                    <td className='data'>: Nama Perusahaan</td>
+                                    <td className='data'>:{businessData?.data?.Businnes?.name}</td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td className='data'>: Email@Perusahaan.com</td>
+                                    <td className='data'>:{businessData?.data?.Businnes?.email}</td>
                                 </tr>
                                 <tr>
                                     <td>No.Telepon</td>
-                                    <td className='data'>: 082837646464</td>
+                                    <td className='data'>:{businessData?.data?.Businnes?.no_telp}</td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal</td>
-                                    <td className='data'>: 22/11/2022</td>
+                                    <td className='data'>: {getTodayDate()}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -49,19 +82,19 @@ const InvoicePage = () => {
                             <tbody>
                                 <tr>
                                     <td>User ID</td>
-                                    <td className='data'>: 10192838</td>
+                                    <td className='data'>: {businessData?.data?.User?.ID}</td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td className='data'>: Email Perusahaan</td>
+                                    <td className='data'>: {businessData?.data?.User?.email}</td>
                                 </tr>
                                 <tr>
                                     <td>No.Telepon</td>
-                                    <td className='data'>: 082837646464</td>
+                                    <td className='data'>: {businessData?.data?.User?.phone}</td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal</td>
-                                    <td className='data'>: 22/11/2022</td>
+                                    <td className='data'>: {getTodayDate()}</td>
                                 </tr>
                             </tbody>
                         </table>

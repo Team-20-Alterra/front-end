@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 import { HiOutlinePlus } from 'react-icons/hi'
 import Auth from '../utils/Auth/Auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { axiosInstance } from '../config/axiosInstance';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -19,7 +19,7 @@ const RegisterBusiness = () => {
     Type: "",
     Logo: "",
     Account_Number: "",
-    Bank_id: "",
+    bank_id : ""
   })
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
@@ -59,7 +59,7 @@ const RegisterBusiness = () => {
     registerFormData.append("Owner", data?.newData.Owner)
     registerFormData.append("Email", data?.newData.Email)
     registerFormData.append("Password",data?.newData.Password)
-    registerFormData.append("Bank_id", bankData.map((item) => item.ID))
+    registerFormData.append("bank_id", values.bank_id)
     
     const config = {
       headers: {
@@ -76,14 +76,13 @@ const RegisterBusiness = () => {
         autoClose: 3000
       })
       Auth.storeUserInfoToCookie(response.data.token)
+      navigate("/admin")
     })
       .catch((error) => {
       console.log(error)
     })
-
-    
   };
-  console.log(bankData)
+
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined)
@@ -138,15 +137,15 @@ const RegisterBusiness = () => {
               <option value="Finance">Finance</option>
             </select>
 
-            <select name="Bank_id" id="" placeholder="Jenis Bisnis" className='input mt-7'
-              
+            <select name="bank_id" id="" className='input mt-7'
+
               onChange={handleChange}
             >
               <option value="" disabled selected hidden>
                 Bank
               </option>
               {bankData?.map((item) => (
-                <option value={item.name} key={item.ID}>{item.code} - {item.name}</option>
+                <option value={item.ID} key={item.ID}>{item.code} - {item.name}</option>
               ))}
             </select>
             
