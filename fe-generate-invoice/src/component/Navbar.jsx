@@ -9,7 +9,7 @@ import Auth from '../utils/Auth/Auth'
 
 const Navbar = () => {
     const navigate = useNavigate()
-    const [profile, setProfile] = useState('')
+    const [profile, setProfile] = useState()
 
 
     const getAdminData = () => {
@@ -31,7 +31,6 @@ const Navbar = () => {
         Auth.isLoggedOut()
         navigate("/")
     }
-    console.log(profile)
     return (
         <>
             {}

@@ -9,6 +9,7 @@ import { useState } from 'react';
 import InvoicePage from '../pages/Dashboard/InvoicePage';
 import PengaturanPage from '../pages/Dashboard/Pengaturan';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 const sidebar = () => {
     const navigate = useNavigate()
@@ -23,6 +24,12 @@ const sidebar = () => {
                 navigate(`invoice/${response.data.data.ID}`)
                 return <InvoicePage />
             })
+            .catch((error) => {
+                toast.error(error.response.data.message, {
+                    position: "top-right",
+                    autoClose: "3000"
+            })
+        })
     }
     return (
         <div className="d-flex flex-column align-items-center sticky-top containerSidebar" >
