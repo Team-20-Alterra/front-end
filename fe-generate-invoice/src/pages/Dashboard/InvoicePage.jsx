@@ -8,12 +8,10 @@ import { useState } from 'react'
 import { axiosInstance } from '../../config/axiosInstance'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Cookies from 'js-cookie'
 const InvoicePage = () => {
     const {ID} = useParams()
 
     const [businessData, setBusinessData] = useState()
-    const [customerData, setCustomerData] = useState()
 
     const getBusinessData = () => {
         axiosInstance.get(`/invoices/${ID}`)

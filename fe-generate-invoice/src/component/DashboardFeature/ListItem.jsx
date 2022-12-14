@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { axiosInstance } from '../../config/axiosInstance'
-import Loading from '../Loading'
 
 const ListItem = () => {
   const {ID} = useParams()
