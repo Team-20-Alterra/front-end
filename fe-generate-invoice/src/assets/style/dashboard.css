@@ -331,9 +331,8 @@ button.add-rekening:hover {
   font-weight: bolder;
 }
 .riwayat-page__searchbar {
-  margin-top: 34px;
+  margin: 34px 0;
   display: flex;
-  margin-bottom: 24px;
   display: flex;
 }
 .riwayat-page__searchbar input {
@@ -397,10 +396,33 @@ button.add-rekening:hover {
   margin: 0;
   margin-top: 30px;
 }
-.table-list {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+.head {
+  gap: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  padding-left: 14px;
+}
+.head .list {
+  width: 13.5%;
+}
+.container-list {
+  gap: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 23px;
+  padding: 8px 0px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding-left: 10px;
+}
+.head-pelanggan .list {
+  width: 23%;
+}
+.container-list .datas {
+  width: 13.5%;
+}
+.container-list .pelanggan {
+  width: 19%;
 }
 .table-list tbody tr {
   background: #fafafa;
@@ -596,6 +618,10 @@ button.add-rekening:hover {
 .headerInvoice {
   margin-top: 32px;
 }
+.headerInvoice img {
+  height: 100px;
+  width: 100px;
+}
 .textSubHeader {
   font-weight: 400;
   font-size: 16px;
@@ -624,7 +650,6 @@ button.add-rekening:hover {
 }
 .invoice-item__container {
   margin: 0;
-  margin-top: 30px;
 }
 .table-invoice {
   margin-left: auto;
@@ -637,12 +662,12 @@ button.add-rekening:hover {
   color: #fafafa;
 }
 .table-invoice tr th:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 .table-invoice tr th:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 .add-item_button {
   border: none;
@@ -658,10 +683,10 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: row;
   gap: 200px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 5px;
-  border-radius: 5px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 16px;
 }
 .invoice-item__subtotal h6 {
   font-weight: bolder;
@@ -671,11 +696,12 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 5px;
-  border-radius: 5px;
+  padding: 12px 16px;
+  border-radius: 4px;
   color: white;
+}
+.invoice-item__diskon {
+  padding: 8px 16px;
 }
 .invoice-item__pricing button {
   border: none;
@@ -685,6 +711,101 @@ button.add-rekening:hover {
   border-radius: 5px;
   width: 80%;
   align-self: flex-end;
+}
+.invoice-item__note {
+  font-weight: 600;
+  font-size: 16px;
+}
+.btn-review {
+  border: none;
+  background: #06509b;
+  padding: 10px 16px;
+  color: white;
+  border-radius: 4px;
+  width: 80%;
+  align-self: flex-end;
+}
+.btn-lunas {
+  border: none;
+  background: #297061;
+  padding: 10px 16px;
+  color: white;
+  border-radius: 4px;
+  width: 80%;
+  align-self: flex-end;
+}
+.btn-gagal {
+  border: 1px solid #952e19;
+  padding: 10px 16px;
+  color: #952e19;
+  background-color: white;
+  border-radius: 4px;
+  width: 80%;
+  align-self: flex-end;
+}
+.badge-berhasil {
+  font-weight: 600;
+  font-size: 14px;
+  background: #7ad182;
+  border-radius: 16px;
+  padding: 4px 8px;
+  text-align: center;
+  width: 50%;
+}
+.badge-gagal {
+  font-weight: 600;
+  font-size: 14px;
+  background: #e5644a;
+  border-radius: 16px;
+  padding: 4px 8px;
+  width: 40%;
+  text-align: center;
+}
+.badge-tunggu {
+  font-weight: 600;
+  font-size: 13px;
+  background: #eec555;
+  border-radius: 16px;
+  padding: 6px 8px;
+  width: 98%;
+  text-align: center;
+}
+.badge-proses {
+  font-weight: 600;
+  font-size: 14px;
+  background: #84bbf3;
+  border-radius: 16px;
+  padding: 4px 8px;
+  width: 70%;
+  text-align: center;
+}
+/* detail Invoice */
+.text-kembali {
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+.text-kembali:hover {
+  opacity: 0.9;
+  color: #0e2520;
+}
+.head-invoice {
+  display: flex;
+  flex-direction: column;
+}
+.head-invoice .judul {
+}
+.w-40 {
+  width: 40%;
+}
+.w-55 {
+  width: 55%;
+}
+.w-3 {
+  width: 3%;
+}
+.row-detail {
+  height: 199px;
 }
 /* Invoice */
 .item-modal__container input {

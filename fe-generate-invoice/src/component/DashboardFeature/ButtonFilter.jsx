@@ -9,27 +9,26 @@ const ButtonFilter = () => {
     <>
       <button
         type="button"
-        className="btn btn-primary"
+        className='filter-icon'
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
-        style={{ width: "7%" }}
       >
-        <HiFilter className="filter-icon" /> Filter
+        <HiFilter size={24} /> Filter
       </button>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
                 Filtering
               </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body date-picker__filter">
+            <div className="modal-body date-picker__filter">
               <h6>Tanggal</h6>
               <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='date-picker' />
             </div>
-            <div class="modal-body min-max__filter">
+            <div className="modal-body min-max__filter">
               <h6>Harga</h6>
               <div className="min-max">
                 <input type="text" placeholder="RP Jumlah Minimum" />

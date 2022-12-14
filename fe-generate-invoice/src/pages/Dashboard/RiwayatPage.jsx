@@ -1,41 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import RiwayatEmpty from '../../component/DashboardFeature/RiwayatEmpty'
 import HeaderDashboard from '../../component/DashboardFeature/HeaderDashboard'
 import ListRiwayat from '../../component/DashboardFeature/ListRiwayat'
-import { useState } from 'react'
-import ButtonFilter from '../../component/DashboardFeature/ButtonFilter'
-
+import { axiosInstance } from '../../config/axiosInstance'
 
 const RiwayatPage = () => {
+    const [empty, setEmpty] = useState(false)
+    const [riwayats, setRiwayats] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        axiosInstance.get('/invoices/status')
+            .then((response) => {
+                if (response.data.data.length === 0) {
+                    setEmpty(true)
+                } else {
+                    setRiwayats(response.data.data)
+                }
+            })
+    }, [loading])
+
     return (
         <div className='container-content'>
             <HeaderDashboard name="Riwayat" />
-            <div className='riwayat-page__navbar'>
-                <ul>
-                    <li>
-                        <a href="/">Semua</a>
-                    </li>
-                    <li>
-                        <a href="/">Selesai</a>
-                    </li>
-                    <li>
-                        <a href="/">On Proses</a>
-                    </li>
-                    <li>
-                        <a href="/">Pending</a>
-                    </li>
-                    <li>
-                        <a href="/">Gagal</a>
-                    </li>
-                </ul>
-            </div>
-            <div className='riwayat-page__searchbar'>
-                <input type="text" placeholder='Cari' />
-                <ButtonFilter/>
-                </div>
-            <div className='riwayat-list__container'>
-                <ListRiwayat />
-            </div>
+            {
+                empty ? (
+                    <RiwayatEmpty />
+                ) : (
+                    <div className='riwayat-list__container'>
+                        <ListRiwayat riwayats={riwayats} />
+                    </div>
+                )
+            }
         </div>
     )
 }

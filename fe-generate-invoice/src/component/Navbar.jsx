@@ -36,7 +36,7 @@ const Navbar = () => {
             { }
             <nav className="dashboard-navbar navbar sticky-top">
                 <a className="navbar-brand d-flex align-items-center justify-content-center">
-                    <img src={DefaultProfile} alt="Logo" className="imgNavbar d-inline-block align-text-top" />
+                    <img src={profile?.data?.logo} alt="Logo" className="imgNavbar d-inline-block align-text-top rounded-circle" />
                     <p className='TextNavbar m-0'>{profile?.data?.name}</p>
                 </a>
                 <div className="d-flex">

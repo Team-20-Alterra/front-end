@@ -8,32 +8,35 @@ import { axiosInstance } from '../../config/axiosInstance'
 const ListPelanggan = ({ pelanggan, handleDeleteUser }) => {
 
   return (
-    <table className='table-list text-center' cellPadding="15px">
-      <thead>
-        <tr>
-          <th className='text-start'>Nama</th>
-          <th>User ID</th>
-          <th>Alamat</th>
-          <th>No. Telp</th>
-          <th>Hapus</th>
-        </tr>
-      </thead>
-
+    <div className='d-flex flex-column'>
+      <div className="head-pelanggan d-flex flex-row" >
+        <div className='list'>Nama</div>
+        <div className='list'>User ID</div>
+        <div className='list'>Alamat</div>
+        <div className='list'>No. Telp</div>
+        <div >Hapus</div>
+      </div>
       {pelanggan.map((user) => (
-        < tbody key={user.ID}>
-          <tr>
-            <td className='d-flex align-items-center'>
-              <div className='box' style={{ background: `#${randomColor()}` }}>{initialName(`{ user.User.name }`)}</div>{user.User.name}
-            </td>
-            <td># {user.User.ID}</td>
-            <td>{sliceAlamat((user.User.address))}...</td>
-            <td>{user.User.phone}</td>
-            <td><HiOutlineTrash className='icon-delete' size={24} value={user.ID} onClick={(e) => handleDeleteUser(e)} /></td>
-          </tr>
-        </tbody>
-      )
-      )}
-    </table >
+        <div className="container-list d-flex flex-row align-items-center" key={user.ID} >
+          <div className='pelanggan d-flex align-items-center'>
+            <div className='box' style={{ background: `#${randomColor()}` }}>
+              {initialName((user?.customer?.name))}
+            </div>
+            {user?.customer?.name}
+          </div>
+          <div className='pelanggan'># {user?.customer?.ID}</div>
+          <div className='pelanggan'>{sliceAlamat((user?.customer?.address))}</div>
+          <div className='pelanggan'>{user?.customer?.phone}</div>
+          <div className='pelanggan-hapus'>
+            <HiOutlineTrash
+              className='icon-delete'
+              size={24}
+              value={user.ID}
+              onClick={(e) => handleDeleteUser(e)} />
+          </div>
+        </div>
+      ))}
+    </div>
   )
 }
 
