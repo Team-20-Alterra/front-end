@@ -26,7 +26,7 @@ const ForgetPasswordPage = () => {
                             position: "top-right",
                             autoClose: 3000,
                         })
-                        navigate("/sent-link")
+                        navigate("/sent-link", { state: { email: data.email } })
                     } else {
                         toast.error(res.data.message, {
                             position: "top-right",
@@ -63,7 +63,7 @@ const ForgetPasswordPage = () => {
                     <input
                         type="email"
                         placeholder="Konfirmasi Email"
-                        className="input mt-1"
+                        className="input mt-7"
                         {...register("confirmEmail", { required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ })}
                     />
                     <div className='input_error'>

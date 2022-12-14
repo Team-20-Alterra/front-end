@@ -7,7 +7,7 @@ import { BsFillTagFill } from "react-icons/bs";
 const BerandaPage = () => {
     return (
         <>
-            <div className="container">
+            <div className="container-content">
                 <HeaderDashboard name="Dashboard" />
                 <div className='dashboard-all'>
                     <div className='dashboard-satu'>

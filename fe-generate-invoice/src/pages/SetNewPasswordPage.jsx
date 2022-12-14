@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import forgetPasswordImage from '../assets/image/Auth/forget-password.png';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import axios from 'axios'
 
@@ -12,6 +12,7 @@ const SetNewPasswordPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const { register, handleSubmit, setError, formState: { errors } } = useForm();
+    const { resetToken } = useParams()
 
     const onSubmit = (data) => {
         if (data.password !== data.passwordConfirm) {
@@ -20,7 +21,7 @@ const SetNewPasswordPage = () => {
                 message: "Password Tidak Sama"
             });
         } else {
-            axios.patch("http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1//resetPassword/:resetToken", {
+            axios.patch(`resetPassword/${resetToken}`, {
                 password: data.password,
                 passwordConfirm: data.passwordConfirm,
             })

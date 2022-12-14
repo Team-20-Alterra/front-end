@@ -2,29 +2,41 @@ import React from 'react'
 import { initialName } from '../../utils/initialName'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { sliceAlamat } from '../../utils/sliceAlamat'
+import { randomColor } from '../../utils/randomColor'
+import { axiosInstance } from '../../config/axiosInstance'
 
-const ListPelanggan = () => {
+const ListPelanggan = ({ pelanggan, handleDeleteUser }) => {
+
   return (
-    <table className='table-list text-center' cellPadding="15px">
-      <thead>
-        <tr>
-          <th className='text-start'>Nama</th>
-          <th>User ID</th>
-          <th>Alamat</th>
-          <th>No. Telp</th>
-          <th>Hapus</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className='d-flex align-items-center'><div className='box'>{initialName('john doe')}</div>John Doe</td>
-          <td>#0000001</td>
-          <td>{sliceAlamat('Jl. Pangeran Diponegoro No.58, RT.1/RW.2, Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10320, Indonesia')}...</td>
-          <td> 083123310081118</td>
-          <td> <HiOutlineTrash /></td>
-        </tr>
-      </tbody>
-    </table>
+    <div className='d-flex flex-column'>
+      <div className="head-pelanggan d-flex flex-row" >
+        <div className='list'>Nama</div>
+        <div className='list'>User ID</div>
+        <div className='list'>Alamat</div>
+        <div className='list'>No. Telp</div>
+        <div >Hapus</div>
+      </div>
+      {pelanggan.map((user) => (
+        <div className="container-list d-flex flex-row align-items-center" key={user.ID} >
+          <div className='pelanggan d-flex align-items-center'>
+            <div className='box' style={{ background: `#${randomColor()}` }}>
+              {initialName((user?.customer?.name))}
+            </div>
+            {user?.customer?.name}
+          </div>
+          <div className='pelanggan'># {user?.customer?.ID}</div>
+          <div className='pelanggan'>{sliceAlamat((user?.customer?.address))}</div>
+          <div className='pelanggan'>{user?.customer?.phone}</div>
+          <div className='pelanggan-hapus'>
+            <HiOutlineTrash
+              className='icon-delete'
+              size={24}
+              value={user.ID}
+              onClick={(e) => handleDeleteUser(e)} />
+          </div>
+        </div>
+      ))}
+    </div>
   )
 }
 

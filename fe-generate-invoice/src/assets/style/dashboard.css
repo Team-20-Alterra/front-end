@@ -7,7 +7,13 @@ body {
   font-family: "Poppins";
   margin: 0;
 }
-
+.icon-delete:hover {
+  color: red;
+  cursor: pointer;
+}
+.dashboard-navbar {
+  padding: 11px 24px;
+}
 .adminLogo {
   font-weight: 700;
   font-size: 32px;
@@ -18,7 +24,7 @@ body {
 
 .containerSidebar {
   font-family: Poppins;
-  max-width: 250px;
+  width: 240px;
   height: 100vh;
   color: white;
   background-color: var(--primary-color);
@@ -28,6 +34,11 @@ body {
   font-size: 14px !important;
   padding-left: 16px !important;
   color: white !important;
+}
+.nav-link:hover {
+  background-color: #0e2520 !important;
+
+  border-radius: 0 !important;
 }
 .nav-link.active {
   background-color: #0e2520 !important;
@@ -46,13 +57,7 @@ body {
   height: 24px;
   margin-right: 14px;
 }
-
-.pengaturan {
-  margin-top: 350px;
-}
-
 nav {
-  height: 72px;
   background-color: var(--primary-color) !important;
 }
 
@@ -85,6 +90,7 @@ nav {
 }
 .navProfile {
   width: 174px !important;
+  margin-top: 16px !important;
 }
 .navProfile .dropdown-item {
   font-weight: 600;
@@ -106,6 +112,7 @@ nav {
 }
 .navNotif {
   width: 400px !important;
+  margin-top: 16px !important;
 }
 .dropdown-menu.navNotif {
   left: -190px !important;
@@ -124,8 +131,8 @@ nav {
   font-size: 12px;
   color: #9a9a9a;
 }
-.containerHeader {
-  margin-top: 16px;
+.container-content {
+  padding: 24px 32px;
 }
 
 /* Pelanggan */
@@ -157,6 +164,7 @@ nav {
 .inputModal {
   width: 100%;
   height: 40px;
+  padding: 0 15px;
   border: 1px solid #ced4da;
   border-radius: 4px;
 }
@@ -174,9 +182,11 @@ nav {
   padding: 10px 16px;
   width: 132px;
   border-radius: 4px;
-  background-color: #94b7b0;
   font-weight: 600;
   font-size: 16px;
+}
+.btn-modal .btn-primary:hover {
+  background-color: #297061;
 }
 .btn-modal .btn-secondary {
   color: #297061;
@@ -184,6 +194,23 @@ nav {
   font-size: 16px;
   width: 75px;
   border-radius: 4px;
+}
+.pelanggan-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  margin: 32px 0;
+}
+.pelanggan-empty span {
+  font-weight: 600;
+  font-size: 16px;
+}
+.btn-modal .btn-secondary:hover {
+  background-color: white;
+  color: var(--primary-color);
 }
 /* Pelanggan */
 
@@ -221,20 +248,28 @@ nav {
 }
 
 .rekening-content img {
-  width: 80px;
-  height: 80px;
-  background-color: grey;
+  width: 40px;
+  height: 25px;
 }
 
-.rekening-data p {
-  opacity: 0.6;
+.rekening-data {
+  font-weight: 400;
+  font-size: 14px;
 }
-
-.add-rekening {
+.rekening-data .head {
+  font-weight: 600;
+}
+button.add-rekening {
   cursor: pointer;
-  font-weight: bold;
-  color: rgba(41, 112, 97, 1);
-  font-size: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primary-color);
+  background: white;
+  border: none;
+  padding: 0;
+}
+button.add-rekening:hover {
+  opacity: 0.8;
 }
 
 .p-profil {
@@ -296,25 +331,39 @@ nav {
   font-weight: bolder;
 }
 .riwayat-page__searchbar {
-  margin-top: 40px;
+  margin: 34px 0;
+  display: flex;
+  display: flex;
 }
 .riwayat-page__searchbar input {
-  padding: 10px;
-  width: 25%;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 8px 16px;
+  width: 35%;
   margin-right: 20px;
-  background-color: #dadada;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+.riwayat-page__searchbar input:disabled {
+  background: #dadada;
 }
 .riwayat-page__searchbar button {
-  padding: 10px;
   color: #fafafa;
-  background-color: #70a096;
+  background: var(--primary-color);
+  padding: 10px 16px;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
+}
+.riwayat-page__searchbar button:disabled {
+  background: #70a096;
 }
 .riwayat-page__searchbar .filter-icon {
-  font-size: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  font-weight: 600;
+  font-size: 16px;
+  gap: 8px;
 }
 .riwayat-kosong__container {
   margin-top: 5%;
@@ -329,25 +378,51 @@ nav {
   font-weight: bold;
 }
 .riwayat-kosong__container button {
-  padding: 8px;
-  width: 9%;
+  padding: 10px 16px;
   color: #fafafa;
   background-color: #297061;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 .riwayat-kosong__container .invoice-icon {
-  font-size: 28px;
-  margin-right: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  font-weight: 600;
+  font-size: 16px;
+  gap: 8px;
 }
 .riwayat-list__container {
   margin: 0;
   margin-top: 30px;
 }
-.table-list {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+.head {
+  gap: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  padding-left: 14px;
+}
+.head .list {
+  width: 13.5%;
+}
+.container-list {
+  gap: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 23px;
+  padding: 8px 0px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding-left: 10px;
+}
+.head-pelanggan .list {
+  width: 23%;
+}
+.container-list .datas {
+  width: 13.5%;
+}
+.container-list .pelanggan {
+  width: 19%;
 }
 .table-list tbody tr {
   background: #fafafa;
@@ -361,6 +436,7 @@ nav {
   width: 53px;
   margin-right: 5px;
   color: white;
+  text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.6);
   font-weight: 400;
   font-size: 20px;
   display: flex;
@@ -542,6 +618,10 @@ nav {
 .headerInvoice {
   margin-top: 32px;
 }
+.headerInvoice img {
+  height: 100px;
+  width: 100px;
+}
 .textSubHeader {
   font-weight: 400;
   font-size: 16px;
@@ -568,4 +648,255 @@ nav {
 .to {
   margin-left: 20vw;
 }
+.invoice-item__container {
+  margin: 0;
+}
+.table-invoice {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-invoice tr th {
+  background-color: #081613;
+  color: #fafafa;
+}
+.table-invoice tr th:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.table-invoice tr th:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.add-item_button {
+  border: none;
+  background-color: #297061;
+  color: #fafafa;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 5px;
+}
+.invoice-item__subtotal {
+  background-color: #d4e2df;
+  display: flex;
+  flex-direction: row;
+  gap: 200px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 16px;
+}
+.invoice-item__subtotal h6 {
+  font-weight: bolder;
+}
+.invoice-item__total {
+  background-color: #081613;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 4px;
+  color: white;
+}
+.invoice-item__diskon {
+  padding: 8px 16px;
+}
+.invoice-item__pricing button {
+  border: none;
+  background-color: #297061;
+  padding: 8px;
+  color: white;
+  border-radius: 5px;
+  width: 80%;
+  align-self: flex-end;
+}
+.invoice-item__note {
+  font-weight: 600;
+  font-size: 16px;
+}
+.btn-review {
+  border: none;
+  background: #06509b;
+  padding: 10px 16px;
+  color: white;
+  border-radius: 4px;
+  width: 80%;
+  align-self: flex-end;
+}
+.btn-lunas {
+  border: none;
+  background: #297061;
+  padding: 10px 16px;
+  color: white;
+  border-radius: 4px;
+  width: 80%;
+  align-self: flex-end;
+}
+.btn-gagal {
+  border: 1px solid #952e19;
+  padding: 10px 16px;
+  color: #952e19;
+  background-color: white;
+  border-radius: 4px;
+  width: 80%;
+  align-self: flex-end;
+}
+.badge-berhasil {
+  font-weight: 600;
+  font-size: 14px;
+  background: #7ad182;
+  border-radius: 16px;
+  padding: 4px 8px;
+  text-align: center;
+  width: 50%;
+}
+.badge-gagal {
+  font-weight: 600;
+  font-size: 14px;
+  background: #e5644a;
+  border-radius: 16px;
+  padding: 4px 8px;
+  width: 40%;
+  text-align: center;
+}
+.badge-tunggu {
+  font-weight: 600;
+  font-size: 13px;
+  background: #eec555;
+  border-radius: 16px;
+  padding: 6px 8px;
+  width: 98%;
+  text-align: center;
+}
+.badge-proses {
+  font-weight: 600;
+  font-size: 14px;
+  background: #84bbf3;
+  border-radius: 16px;
+  padding: 4px 8px;
+  width: 70%;
+  text-align: center;
+}
+/* detail Invoice */
+.text-kembali {
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+.text-kembali:hover {
+  opacity: 0.9;
+  color: #0e2520;
+}
+.head-invoice {
+  display: flex;
+  flex-direction: column;
+}
+.head-invoice .judul {
+}
+.w-40 {
+  width: 40%;
+}
+.w-55 {
+  width: 55%;
+}
+.w-3 {
+  width: 3%;
+}
+.row-detail {
+  height: 199px;
+}
 /* Invoice */
+.item-modal__container input {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: none;
+  padding: 6px;
+}
+.date-picker__filter .date-picker {
+  display: flex;
+  margin: 0 auto;
+  padding: 14px;
+}
+.date-picker__filter h6 {
+  font-weight: bolder;
+}
+.min-max__filter .min-max {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.min-max__filter .min-max input {
+  width: 100%;
+}
+.filtering-button__container {
+  padding: 8px;
+  margin-left: 8px;
+}
+.button-pengaturan__simpan {
+  border: none;
+  background-color: #297061;
+  padding: 12px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 700;
+}
+.register-business__form input {
+  margin-bottom: 16px;
+}
+label.judul {
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.form-content .input {
+  box-shadow: none;
+  border: 1px solid #ced4da;
+  color: #252525;
+}
+textarea#alamat {
+  padding: 5px 10px;
+}
+textarea#alamat:focus {
+  outline: #297061 auto 2px;
+}
+.btn-simpan {
+  width: 10%;
+}
+.delete-icon__item {
+  position: relative;
+  font-size: 24px;
+  display: inline-block;
+  overflow: hidden;
+}
+.delete-icon__item:hover {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

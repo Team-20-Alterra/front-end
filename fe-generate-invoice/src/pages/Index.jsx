@@ -1,47 +1,44 @@
 import Header from "../component/Header"
 import { useState } from "react"
 import { Link } from "react-router-dom";
-
+import heroImg from '../assets/image/hero.png'
 import Admin from "../component/Admin";
 import Client from "../component/Client";
+import Footer from "../component/Footer";
 
 export default function Home() {
     const tipeUser = ["klien", "admin"];
-    const [myShow, setShow] = useState('')
+    const [myShow, setShow] = useState('klien')
     return (
         <>
             <Header name="Ginap" />
             <div className="hero container d-flex flex-row justify-content-between">
                 <div className="hero-left">
-                    <h1 className="mb-4">Heading 1</h1>
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. (Heading 3)</h3>
-                    <div className="hero-button d-flex flex-row mt-4">
-                        <div className="border border-dark daftar"><Link to="/register"><p>Daftar</p></Link></div>
-                        {/* <div className="border border-dark dapatkan"><p>Dapatkan Aplikasi</p></div> */}
+                    <h1 className="mb-4">Get Invoice Get Ginap</h1>
+                    <div className="hero-subjudul">
+                        <h3>Ginap ada untuk memudahkan anda menuliskan tagihan kepada pelanggan.</h3>
+                        <div className="hero-detail">Tuliskan Tagihanmu, sehatkan keuangan bisnismu</div>
+                    </div>
+                    <div className="hero-button d-flex flex-row ">
+                        <Link to="/register"><div className="navLink signup">Daftar</div></Link>
+                        <Link to="/getapp"><div className="navLink login">Dapatkan Aplikasi</div></Link>
                     </div>
                 </div>
-                <div className="hero-right">
-
-                </div>
+                <img src={heroImg} alt="hero" />
             </div>
-            <div className="main">
-                <div className="container-fluid coba">
-                    <h2 className="title-main text-center mb-4 container">Ginap</h2>
-                    <h4 className="desc-title-main text-center container" id="fitur">(Tentang Aplikasi)Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.</h4>
-                    {/* <div className="options-tab">
-                    <div className="client-side text-center">
-                        <p>Client</p>
+            <div className="main" id="fitur">
+                <div className="container-fluid bg-fitur text-center">
+                    <div className="title-main">Ginap</div>
+                    <div className="desc-title-main container">
+                        {myShow === "admin" && "Bagi para kamu admin, aplikasi ini memberikan kemudahan bagi kamu untuk menuliskan tagihan kepada para pelanggan kamu. Hanya dengan memasukkan nomer ID pelanggan, kamu sudah mendapatkan data dari para pelangganmu... Gampang kan..."}
+                        {myShow === "klien" && "Bagi kamu para pengguna aplikasi pinjaman online, Aplikasi ini akan memberikan kamu metode pembayaran baru sesuai tanggal tanpa harus terlilit hutang, jadi kamu bisa beli barang apapun yang kamu mau tanpa harus nunggu gajian dan tanpa terlilit hutang."}
                     </div>
-                    <div className="admin-side text-center">
-                        <p>Admin</p>
-                    </div>
-                </div> */}
                     <div className="options-tab container">
                         {tipeUser.map(tipeUser => (
                             <button
                                 type="button"
                                 key={tipeUser}
-                                className={"client-admin text-center"}
+                                className={tipeUser === myShow ? "client-admin active" : "client-admin"}
                                 onClick={() => setShow(tipeUser)}
                             >
                                 {tipeUser.toLocaleUpperCase()}
@@ -54,6 +51,7 @@ export default function Home() {
                     {myShow === "klien" && (<Client />)}
                 </div>
             </div>
+            <Footer />
         </>
     )
 }
