@@ -27,6 +27,7 @@ const Navbar = () => {
         getAdminData()
     }, [])
 
+    console.log(profile)
     const handleLogOut = () => {
         Auth.isLoggedOut()
         navigate("/")
@@ -64,7 +65,7 @@ const Navbar = () => {
                     <div className="me-3">
                         <a className=" text-white text-decoration-none">
                             <img src={DefaultProfile} alt="Profile" className="imgNavbar rounded-circle me-1" />
-                            <strong className='TextNavbar me-2'>{profile?.data?.User?.name}</strong>
+                            <strong className='TextNavbar me-2'>{profile?.data?.admin?.name}</strong>
                         </a>
                         <HiArrowRightOnRectangle size={24} style={{ color: "white", cursor: "pointer", marginLeft: "16px" }} onClick={handleLogOut} />
                     </div>
