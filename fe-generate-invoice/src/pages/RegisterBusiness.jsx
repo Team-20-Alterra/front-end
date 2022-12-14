@@ -1,10 +1,9 @@
 import React from 'react'
 import RegisterBusinessImage from '../assets/image/Auth/Bisnis-Register.png'
-import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 import { HiOutlinePlus } from 'react-icons/hi'
 import Auth from '../utils/Auth/Auth';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../config/axiosInstance';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
