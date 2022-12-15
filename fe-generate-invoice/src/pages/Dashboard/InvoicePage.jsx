@@ -101,7 +101,7 @@ const InvoicePage = () => {
             </div>
             <div className='invoice-item__container'>
                 <ListItem />
-                <ButtonAddItem />
+                {/* <ButtonAddItem /> */}
             </div>
 
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>

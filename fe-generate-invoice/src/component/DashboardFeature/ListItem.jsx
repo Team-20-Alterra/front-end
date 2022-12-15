@@ -3,11 +3,24 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { axiosInstance } from '../../config/axiosInstance'
-
+import { HiPlus } from 'react-icons/hi'
+import ButtonAddItem from './ButtonAddItem'
 const ListItem = () => {
   const {ID} = useParams()
   const [itemData, setItemData] = useState()
-  const [loading, setLoading] = useState(false)
+  const [values, setValues] = useState({
+    name: "",
+    amount: "",
+    unit_price: "",
+    total_price: "",
+    invoice_id: ""
+  })
+  const handleChange = (event) => {
+    setValues({
+        ...values,
+        [event.target.name] : event.target.value
+    })
+}
 
 
   const getItemData = () => {
@@ -23,14 +36,13 @@ const ListItem = () => {
   const deleteItem = (e) => {
     e.preventDefault()
     const id = e.target.getAttribute('value')
-    console.log(e.target.value)
     axiosInstance.delete(`item/${id}`)
       .then((response) => {
         toast.success(response.data.message, {
           position: "top-right",
           autoClose: 1000
         })
-        setLoading(true)
+        getItemData()
       })
       .catch((error) => {
         toast.error(error.response.data.message, {
@@ -40,14 +52,39 @@ const ListItem = () => {
     })
   }
 
+  const onAddItem = (e) => {
+    e.preventDefault()
+    axiosInstance.post('/item', {
+        name: values.name,
+        amount: +values.amount,
+        unit_price: +values.unit_price,
+        total_price: +values.total_price,
+        invoice_id: +ID
+    })
+        .then((response) => {
+            toast.success(response.data.message, {
+                position: "top-right",
+                autoClose: 3000
+            })
+          getItemData()
+        })
+        .catch((error) => {
+            toast.error(error.response.data.message, {
+                position: "top-right",
+                autoClose: 3000
+        })
+    })
+}
+
 useEffect(() => {
     getItemData()
-}, [loading])
+}, [])
   
   return (
     <>
     {
-      itemData?.data?.Item.length > 0 ? (
+        itemData?.data?.Item.length > 0 ? (
+          <>
         <table className='table-invoice text-center' cellPadding="15px">
         <thead>
           <tr>
@@ -67,10 +104,15 @@ useEffect(() => {
               <i className="bi bi-trash3-fill delete-icon__item" onClick={deleteItem} value={item.ID} style={{color:"red", fontSize:"24px"}}></i>
             </tr>
           ))}
-        </tbody>
-      </table>
-      ) : (
-        <p style={{textAlign: "center"}}>Please Add Your Item!</p>  
+            </tbody>
+          </table>
+          <ButtonAddItem getItemData={getItemData}/>
+            </>
+        ) : (
+            <>
+            <p style={{ textAlign: "center" }}>Please Add Your Item!</p>  
+            <ButtonAddItem getItemData={getItemData}/>
+            </>
         )}
       </>
   )

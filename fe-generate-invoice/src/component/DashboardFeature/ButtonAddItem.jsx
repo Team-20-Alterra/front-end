@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { axiosInstance } from '../../config/axiosInstance'
 import InvoicePage from '../../pages/Dashboard/InvoicePage'
 
-const ButtonAddItem = () => {
+const ButtonAddItem = ({getItemData}) => {
     const { ID } = useParams()
     const [invoiceID, setInvoiceID] = useState()
     const [loading, setLoading] = useState(false)
@@ -46,13 +46,14 @@ const ButtonAddItem = () => {
             amount: +values.amount,
             unit_price: +values.unit_price,
             total_price: +values.total_price,
-            invoice_id: +values.invoice_id
+            invoice_id: +ID
         })
             .then((response) => {
                 toast.success(response.data.message, {
                     position: "top-right",
                     autoClose: 3000
                 })
+                getItemData()
             })
             .catch((error) => {
                 toast.error(error.response.data.message, {
@@ -78,7 +79,6 @@ const ButtonAddItem = () => {
                               <input type="number" placeholder='Jumlah' name='amount'onChange={handleChange}/>
                               <input type="text" placeholder='Harga Satuan' name='unit_price'onChange={handleChange}/>
                               <input type="text" placeholder='Total Harga' name='total_price' onChange={handleChange} />
-                                    <input type="number" placeholder='Invoice ID' name='invoice_id' onChange={handleChange} />
                               </div>
                                 <div className="btn-modal d-flex justify-content-center">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

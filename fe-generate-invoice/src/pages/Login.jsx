@@ -23,17 +23,17 @@ const Login = () => {
             password: data.password
         })
             .then((response) => {
-                Auth.storeUserInfoToCookie(response.data.data.token)
-                navigate('/admin')
+                    Auth.storeUserInfoToCookie(response.data.data.token)
+                    navigate('/admin') 
             })
             .catch((error) => {
-                toast.error(error.response.data.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                })
+                    toast.error(error.response.data.message, {
+                        position: "top-right",
+                        autoClose: 3000,
+                    })
+                
             })
         }
-
     return (
         <div className="Wrap">
             <div className="containerLogin d-flex flex-column justify-content-center">
@@ -46,10 +46,11 @@ const Login = () => {
                         type="email"
                         placeholder="Email"
                         className="input"
+                        name='email'
                         {...register("email", { required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ })}
                     />
                     <div className='input_error'>
-                        {errors?.email?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
+                        {errors?.email?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> No Empty Email Required!</p>}
                         {errors?.email?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Alamat Email Tidak Valid!</p>}
                     </div>
                     <div className="inputChangePassword">
@@ -58,13 +59,13 @@ const Login = () => {
                         </span>
                         <input
                             type={showPassword ? "text" : "password"}
-                            placeholder="Kata Sandi Baru"
+                            placeholder="Password"
                             className="register mt-7"
                             {...register("password", { required: true })}
                         />
                     </div>
                     <div className='input_error mb-2'>
-                        {errors?.password?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
+                        {errors?.password?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> No Empty Password Required!</p>}
                     </div>
                     <a href='/forget-password' className='forgetPassword mt-1' >Lupa kata sandi?</a>
                     <button type="submit" className="btn-primary" id='ButtonMasuk'>Masuk</button>
