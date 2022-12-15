@@ -20,7 +20,7 @@ const DetailsInvoicePage = () => {
     const handleGoBack = () => {
         navigate(-1)
     }
-    console.log(invoices)
+
     return (
         <div className="container-content mb-5-content">
             <div className='text-kembali' onClick={handleGoBack}><HiChevronLeft size={24} /> Kembali</div>

@@ -24,15 +24,16 @@ const ListPelanggan = ({ pelanggan, handleDeleteUser }) => {
             </div>
             {user?.customer?.name}
           </div>
-          <div className='pelanggan'># {user?.customer?.ID}</div>
+          <div className='pelanggan'># {user?.user_id}</div>
           <div className='pelanggan'>{sliceAlamat((user?.customer?.address))}</div>
           <div className='pelanggan'>{user?.customer?.phone}</div>
           <div className='pelanggan-hapus'>
-            <HiOutlineTrash
-              className='icon-delete'
+            <i
+              className='bi bi-trash3-fill delete-icon__item'
+              style={{ color: "red", fontSize: "24px" }}
               size={24}
               value={user.ID}
-              onClick={(e) => handleDeleteUser(e)} />
+              onClick={(e) => handleDeleteUser(e)}></i>
           </div>
         </div>
       ))}

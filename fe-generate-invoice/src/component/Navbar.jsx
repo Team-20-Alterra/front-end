@@ -27,7 +27,6 @@ const Navbar = () => {
         getAdminData()
     }, [])
 
-    console.log(profile)
     const handleLogOut = () => {
         Auth.isLoggedOut()
         navigate("/")

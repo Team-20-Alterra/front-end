@@ -6,21 +6,21 @@ import { axiosInstance } from '../../config/axiosInstance'
 import Loading from '../Loading'
 
 const ListItem = () => {
-  const {ID} = useParams()
+  const { ID } = useParams()
   const [itemData, setItemData] = useState()
   const [loading, setLoading] = useState(false)
 
 
   const getItemData = () => {
     axiosInstance.get(`/invoices/${ID}`)
-        .then((response) => {
+      .then((response) => {
         setItemData(response.data)
-        })
-        .catch((error) => {
+      })
+      .catch((error) => {
         console.log(error)
-    })
+      })
   }
-  
+
   const deleteItem = (e) => {
     e.preventDefault()
     const id = e.target.getAttribute('value')
@@ -37,43 +37,44 @@ const ListItem = () => {
         toast.error(error.response.data.message, {
           position: 'top-right',
           autoClose: 1000
+        })
       })
-    })
   }
 
-useEffect(() => {
+  useEffect(() => {
     getItemData()
-}, [loading])
-  
+  }, [loading])
+
   return (
     <>
-    {
-      itemData?.data?.Item.length > 0 ? (
-        <table className='table-invoice text-center' cellPadding="15px">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Jumlah</th>
-            <th>Harga Satuan</th>
-            <th>Total Harga</th>
-          </tr>
-        </thead>
-        <tbody>
-          {itemData?.data.Item.map((item) => (
-            <tr key={item.ID}>
-              <td>{item.name}</td>
-              <td>{item.amount}</td>
-              <td>{item.unit_price.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})}</td>
-              <td>{item.total_price.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})}</td>
-              <i className="bi bi-trash3-fill delete-icon__item" onClick={deleteItem} value={item.ID} style={{color:"red", fontSize:"24px"}}></i>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      ) : (
-        <p style={{textAlign: "center"}}>Please Add Your Item!</p>  
+      {
+        itemData?.data?.Item.length > 0 ? (
+          <table className='table-invoice text-center' cellPadding="15px">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Jumlah</th>
+                <th>Harga Satuan</th>
+                <th>Total Harga</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {itemData?.data.Item.map((item) => (
+                <tr key={item.ID}>
+                  <td>{item.name}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.unit_price.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</td>
+                  <td>{item.total_price.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</td>
+                  <i className="bi bi-trash3-fill delete-icon__item" onClick={deleteItem} value={item.ID} style={{ color: "red", fontSize: "24px" }}></i>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p style={{ textAlign: "center" }}>Please Add Your Item!</p>
         )}
-      </>
+    </>
   )
 }
 
