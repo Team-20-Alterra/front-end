@@ -3,8 +3,6 @@ import RegisterImage from '../assets/image/Auth/Login-Register.png'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
-import { axiosInstance } from '../config/axiosInstance';
-import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { addAdmin } from '../store/registerAdmin';
 
@@ -24,7 +22,6 @@ const RegisterPage = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors }
   } = useForm();
 
