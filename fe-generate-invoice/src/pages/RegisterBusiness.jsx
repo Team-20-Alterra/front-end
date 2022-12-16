@@ -34,8 +34,9 @@ const RegisterBusiness = () => {
   const getBankData = () => {
     axiosInstance.get('/banks')
       .then((response) => {
-       const dataBank = response.data.bank
+       const dataBank = response.data.data
        setBankData(dataBank)
+
       })
       .catch((error) => {
       console.log(error)
@@ -102,6 +103,7 @@ const RegisterBusiness = () => {
     }
     setSelectedFile(e.target.files[0])
   }
+
   return (
     <>
       <div className="Wrap">

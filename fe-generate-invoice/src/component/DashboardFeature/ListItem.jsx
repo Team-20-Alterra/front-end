@@ -21,6 +21,12 @@ const ListItem = () => {
       })
   }, [ID])
 
+  const getSubTotal = () => {
+    const gettingSubTotal = itemData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
+    return gettingSubTotal
+}
+
+
   const deleteItem = (e) => {
     e.preventDefault()
     const id = e.target.getAttribute('value')
@@ -31,6 +37,7 @@ const ListItem = () => {
           autoClose: 1000
         })
         getItemData()
+        getSubTotal()
       })
       .catch((error) => {
         toast.error(error.response.data.message, {

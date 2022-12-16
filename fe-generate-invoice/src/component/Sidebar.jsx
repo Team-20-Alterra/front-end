@@ -10,6 +10,7 @@ import InvoicePage from '../pages/Dashboard/InvoicePage';
 import PengaturanPage from '../pages/Dashboard/Pengaturan';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const sidebar = () => {
     const navigate = useNavigate()
@@ -22,7 +23,8 @@ const sidebar = () => {
         axiosInstance.post('/invoices', config)
             .then((response) => {
                 navigate(`invoice/${response.data.IdInvoice}`)
-                return <InvoicePage />
+                window.location.reload()
+                return <InvoicePage/>
             })
             .catch((error) => {
                 toast.error(error.response.data.message, {

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { axiosInstance } from '../../config/axiosInstance'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const InvoicePage = () => {
     const { ID } = useParams()
@@ -15,6 +16,20 @@ const InvoicePage = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [selected, setSelected] = useState("")
     const [searchResults, setSearchResults] = useState([]);
+    const [subTotal, setSubTotal] = useState()
+    const [discount, setDiscount] = useState(0)
+    const [total, setTotal] = useState()
+
+    const convertDiscount = Object.values(discount)
+    const convert = convertDiscount[0]
+
+    const values = {
+        user_id: searchTerm,
+        discount: convert,
+        total: total,
+        sub_total: subTotal
+    }
+
 
     useEffect(() => {
         axiosInstance.get('/add-customer/businness')
@@ -39,6 +54,13 @@ const InvoicePage = () => {
         const filterSelectedData = APIData.filter(data => data.customer.id === e.target.value)
         setSelected(filterSelectedData[0].customer)
     }
+    
+    const handleDiscount = (e) => {
+        setDiscount({
+            ...discount,
+               [e.target.name] : +e.target.value
+        })
+    }
 
     const getBusinessData = () => {
         axiosInstance.get(`/invoices/${ID}`)
@@ -46,7 +68,10 @@ const InvoicePage = () => {
                 setBusinessData(response.data)
             })
             .catch((error) => {
-                console.log(error)
+                toast.error((error.response.data.message),{
+                    position: "top-right",
+                    autoClose: 1000
+                })
             })
     }
 
@@ -63,14 +88,41 @@ const InvoicePage = () => {
         return today = mm + '/' + dd + '/' + yyyy
     }
 
-    const getSubTotal = useCallback(() => {
-        const subTotal = businessData?.data?.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
-        return subTotal
-    }, [businessData?.data?.Item])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getSubTotal = () => {
+        const gettingSubTotal = businessData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
+        setSubTotal(gettingSubTotal)
+    }
+    const getTotal = () => {
+        const converting = Object.values(discount)
+      const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
+        console.log(gettingTotal)
+        setTotal(gettingTotal)
+    }
+
 
     useEffect(() => {
         getSubTotal()
+    }, [getSubTotal])
+    useEffect(() => {
+        getTotal()
     }, [])
+
+    const updateInvoice = () => {
+        
+        axiosInstance.put(`/invoices/${ID}`, {
+            user_id: values.user_id,
+            discount: values.discount,
+            total: values.total,
+            subTotal: values.sub_total
+        }
+        ).then((response) => {
+            console.log(response.data)
+        })
+            .catch((error) => {
+            console.log(error)
+        })
+    }
 
     return (
         <div className="container-content mb-5-content">
@@ -120,7 +172,7 @@ const InvoicePage = () => {
                             <h6 className='judul mb-2 mt-1'>:</h6>
                         </div>
                         <div className="head-invoice w-50">
-                            <input type="text" className="input-riwayat" placeholder="User Id" value={searchTerm} onChange={(e) => searchItems(e.target.value)} />
+                            <input type="text" className="input-riwayat" placeholder="User Id" value={searchTerm} onChange={(e) => searchItems(e.target.value)} name='userid'/>
                             {searchTerm ? (
                                 <div className="card" >
                                     <ul className="list-group list-group-flush">
@@ -144,7 +196,6 @@ const InvoicePage = () => {
             </div>
             <div className='invoice-item__container'>
                 <ListItem />
-                {/* <ButtonAddItem /> */}
             </div>
 
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
@@ -156,16 +207,16 @@ const InvoicePage = () => {
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>
                     <div className='invoice-item__subtotal'>
                         <h6>Subtotal</h6>
-                        <h6>{getSubTotal()}</h6>
+                        <input onChange={getSubTotal} value={subTotal?.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})} disabled name='subtotal'/>
                     </div>
                     <div className='invoice-item__diskon align-self-end'>
-                        <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6>
+                        <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6><input type="number" name='diskon' onChange={handleDiscount} /><span>%</span>
                     </div>
                     <div className='invoice-item__total'>
                         <h6>Total</h6>
-                        <h6>Rp.XXXXXX</h6>
+                        <input onChange={getTotal} value={discount ? total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) : 0} disabled name='total'/>
                     </div>
-                    <button type='submit' className='justify-content-end'>Kirim Invoice</button>
+                    <button type='submit' className='justify-content-end' onClick={updateInvoice}>Kirim Invoice</button>
                 </div>
             </div>
         </div >
