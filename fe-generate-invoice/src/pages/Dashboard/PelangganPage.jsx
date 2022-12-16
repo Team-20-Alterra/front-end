@@ -15,7 +15,7 @@ const PelangganPage = () => {
   useEffect(() => {
     axiosInstance.get('/add-customer/businness')
       .then((response) => {
-        if (response.data.data.length === 0) {
+        if (response.data.data === null) {
           setEmpty(true)
         } else {
           setPelanggan(response.data.data)

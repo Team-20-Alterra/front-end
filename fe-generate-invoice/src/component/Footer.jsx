@@ -11,7 +11,7 @@ function Footer() {
                         </div>
                         <div className="col-6 col-md-2 me-3">
                             <ul className="nav flex-column">
-                                <li className="nav-item mb-2 head">Perusahaan</li>
+                                <li className="nav-item mb-2 head-footer">Perusahaan</li>
                                 <li className="nav-item mb-2">Tentang Kita</li>
                                 <li className="nav-item mb-2">Hubungi Kita</li>
                             </ul>
@@ -19,7 +19,7 @@ function Footer() {
 
                         <div className="col-6 col-md-2 me-4">
                             <ul className="nav flex-column">
-                                <li className="mb-2 head">Bantuan</li>
+                                <li className="mb-2 head-footer">Bantuan</li>
                                 <li className="nav-item mb-2">FAQ</li>
                                 <li className="nav-item mb-2">Customer Support</li>
                             </ul>
@@ -27,7 +27,7 @@ function Footer() {
 
                         <div className="col-6 col-md-2">
                             <ul className="nav flex-column">
-                                <li className="nav-item mb-2 head">Product</li>
+                                <li className="nav-item mb-2 head-footer">Product</li>
                                 <li className="nav-item mb-2">Daftar Akun</li>
                                 <li className="nav-item mb-2">Dapatkan Aplikasi</li>
                             </ul>

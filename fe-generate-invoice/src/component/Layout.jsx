@@ -19,6 +19,7 @@ const Layout = () => {
                     <Navbar />
                     <Outlet />
                     <Routes>
+                        <Route path="/" element={<BerandaPage />} />
                         <Route path='beranda' element={<BerandaPage />} />
                         <Route path='invoice/:ID' element={<InvoicePage />} />
                         <Route path='pelanggan' element={<PelangganPage />} />

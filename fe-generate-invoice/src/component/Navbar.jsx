@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react'
 import { BiBell } from 'react-icons/bi'
 import { HiArrowRightOnRectangle, HiOutlineClock } from 'react-icons/hi2'
@@ -27,7 +28,6 @@ const Navbar = () => {
         getAdminData()
     }, [])
 
-    console.log(profile)
     const handleLogOut = () => {
         Auth.isLoggedOut()
         navigate("/")

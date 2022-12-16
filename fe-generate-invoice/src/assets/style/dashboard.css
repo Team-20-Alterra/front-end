@@ -793,8 +793,6 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: column;
 }
-.head-invoice .judul {
-}
 .w-40 {
   width: 40%;
 }
@@ -806,6 +804,13 @@ button.add-rekening:hover {
 }
 .row-detail {
   height: 199px;
+}
+.input-riwayat {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-weight: 400;
+  font-size: 16px;
 }
 /* Invoice */
 .item-modal__container input {
