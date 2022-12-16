@@ -24,7 +24,7 @@ const InvoicePage = () => {
     const convert = convertDiscount[0]?.toString()
 
     const values = {
-        user_id: searchTerm,
+        user_id: selected.id,
         discount: convert,
         total: Number(total),
         sub_total: subTotal,
@@ -56,11 +56,11 @@ const InvoicePage = () => {
         const filterSelectedData = APIData.filter(data => data.customer.id === e.target.value)
         setSelected(filterSelectedData[0].customer)
     }
-    
+
     const handleDiscount = (e) => {
         setDiscount({
             ...discount,
-               [e.target.name] : +e.target.value
+            [e.target.name]: +e.target.value
         })
     }
 
@@ -70,7 +70,7 @@ const InvoicePage = () => {
                 setBusinessData(response.data)
             })
             .catch((error) => {
-                toast.error((error.response.data.message),{
+                toast.error((error.response.data.message), {
                     position: "top-right",
                     autoClose: 1000
                 })
@@ -98,7 +98,7 @@ const InvoicePage = () => {
 
     const getTotal = () => {
         const converting = Object.values(discount)
-      const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
+        const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
         console.log(gettingTotal)
         setTotal(gettingTotal)
     }
@@ -113,7 +113,7 @@ const InvoicePage = () => {
     }, [])
 
     const updateInvoice = () => {
-        
+
         axiosInstance.put(`/invoices/${ID}`, {
             user_id: +values.user_id,
             discount: values.discount,
@@ -129,15 +129,16 @@ const InvoicePage = () => {
             })
         })
             .catch((error) => {
-            console.log(error)
-        })
+                console.log(error)
+            })
     }
 
+    console.log(businessData)
     return (
         <div className="container-content mb-5-content">
             <HeaderDashboard name="Buat Invoice" />
             <div className="headerInvoice d-flex align-items-center justify-content-between">
-                <img src={logoPerusahaan} alt="Logo" />
+                <img src={businessData?.data?.Businnes.logo} alt="Logo" />
                 <div className='flex-column text-end'>
                     <h1 className='textHeader'>Invoice</h1>
                     <h2 className='textSubHeader'>#{businessData?.data?.ID}</h2>
@@ -181,7 +182,7 @@ const InvoicePage = () => {
                             <h6 className='judul mb-2 mt-1'>:</h6>
                         </div>
                         <div className="head-invoice w-50">
-                            <input type="text" className="input-riwayat" placeholder="User Id" value={searchTerm} onChange={(e) => searchItems(e.target.value)} name='userid'/>
+                            <input type="text" className="input-riwayat" placeholder="User Id" value={searchTerm} onChange={(e) => searchItems(e.target.value)} name='userid' />
                             {searchTerm ? (
                                 <div className="card" >
                                     <ul className="list-group list-group-flush">
@@ -190,8 +191,7 @@ const InvoicePage = () => {
                                                 value={data.customer.id}
                                                 onClick={(e) => handleSelected(e)}
                                                 key={data.customer.id}>
-                                                {data.customer.id}
-                                            </li>
+                                                {data.customer.name} (#{data.customer.id} )                                            </li>
                                         ))
                                         }
                                     </ul>

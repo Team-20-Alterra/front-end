@@ -64,7 +64,7 @@ const Navbar = () => {
                     </div>
                     <div className="me-3">
                         <a className=" text-white text-decoration-none">
-                            <img src={DefaultProfile} alt="Profile" className="imgNavbar rounded-circle me-1" />
+                            <img src={profile?.data?.admin?.photo} alt="Profile" className="imgNavbar rounded-circle me-1" />
                             <strong className='TextNavbar me-2'>{profile?.data?.admin?.name}</strong>
                         </a>
                         <HiArrowRightOnRectangle size={24} style={{ color: "white", cursor: "pointer", marginLeft: "16px" }} onClick={handleLogOut} />

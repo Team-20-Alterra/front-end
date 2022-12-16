@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { axiosInstance } from '../../config/axiosInstance'
 import { HiChevronLeft } from 'react-icons/hi'
-import { hargaFormat } from '../../utils/hargaFormat'
+import { toast } from 'react-toastify'
 
 const DetailsInvoicePage = () => {
     const { id } = useParams()
     const [invoices, setInvoices] = useState([])
     const [loading, setLoading] = useState(true)
+    const [handleDisabled, setHandleDisabled] = useState(true)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -21,7 +22,26 @@ const DetailsInvoicePage = () => {
         navigate(-1)
     }
 
-    console.log(invoices)
+    const handleStatus = async (e) => {
+        if (e.target.value === 'Review') {
+            setHandleDisabled(false)
+        } else {
+            await axiosInstance.put(`/invoices/update-status/${id}`, {
+                status: e.target.value
+            })
+                .then((response) => {
+                    toast.success(response.data.message, {
+                        position: "top-right",
+                        autoClose: 1000
+                    })
+                    setHandleDisabled(true)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+
+    }
 
     return (
         <div className="container-content mb-5-content">
@@ -112,15 +132,15 @@ const DetailsInvoicePage = () => {
                     </div>
                     <div className='invoice-item__diskon d-flex justify-content-between'>
                         <div>Diskon</div>
-                        <div>{invoices.discount} %</div>
+                        <div>{invoices.discount}</div>
                     </div>
                     <div className='invoice-item__total'>
                         <div>Total</div>
                         <div>Rp. {invoices.total}</div>
                     </div>
-                    <button type='submit' className='btn-review'>Review</button>
-                    <button type='submit' className='btn-lunas'>Lunas</button>
-                    <button type='submit' className='btn-gagal'>Gagal</button>
+                    <button type='button' value={'Review'} className='btn-review' onClick={handleStatus}>Review</button>
+                    <button type='button' value={'Berhasil'} className='btn-lunas' onClick={handleStatus} disabled={handleDisabled}>Lunas</button>
+                    <button type='button' value={'Gagal'} className='btn-gagal' onClick={handleStatus} disabled={handleDisabled}>Gagal</button>
                 </div>
             </div>
         </div>
