@@ -63,6 +63,14 @@ const InvoicePage = () => {
         return today = mm + '/' + dd + '/' + yyyy
     }
 
+    const getSubTotal = useCallback(() => {
+        const subTotal = businessData?.data?.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
+        return subTotal
+    }, [businessData?.data?.Item])
+
+    useEffect(() => {
+        getSubTotal()
+    }, [])
 
     return (
         <div className="container-content mb-5-content">
@@ -148,7 +156,7 @@ const InvoicePage = () => {
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>
                     <div className='invoice-item__subtotal'>
                         <h6>Subtotal</h6>
-                        <h6>{businessData?.data?.Item.map((item) => item.total_price).reduce((a,b) => a + b, 0)}</h6>
+                        <h6>{getSubTotal()}</h6>
                     </div>
                     <div className='invoice-item__diskon align-self-end'>
                         <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6>

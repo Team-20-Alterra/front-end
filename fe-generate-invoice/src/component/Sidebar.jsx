@@ -21,7 +21,7 @@ const sidebar = () => {
     }
         axiosInstance.post('/invoices', config)
             .then((response) => {
-                navigate(`invoice/${response.data.data.ID}`)
+                navigate(`invoice/${response.data.IdInvoice}`)
                 return <InvoicePage />
             })
             .catch((error) => {
