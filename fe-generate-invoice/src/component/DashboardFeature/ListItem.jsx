@@ -6,7 +6,7 @@ import { axiosInstance } from '../../config/axiosInstance'
 import { HiPlus } from 'react-icons/hi'
 import ButtonAddItem from './ButtonAddItem'
 import { useCallback } from 'react'
-const ListItem = () => {
+const ListItem = ({getSubTotal}) => {
   const { ID } = useParams()
   const [itemData, setItemData] = useState()
 
@@ -21,11 +21,6 @@ const ListItem = () => {
       })
   }, [ID])
 
-  const getSubTotal = () => {
-    const gettingSubTotal = itemData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
-    return gettingSubTotal
-}
-
 
   const deleteItem = (e) => {
     e.preventDefault()
@@ -36,8 +31,9 @@ const ListItem = () => {
           position: "top-right",
           autoClose: 1000
         })
-        getItemData()
         getSubTotal()
+        window.location.reload()
+        getItemData()
       })
       .catch((error) => {
         toast.error(error.response.data.message, {
@@ -76,14 +72,13 @@ const ListItem = () => {
           ))}
             </tbody>
           </table>
-          <ButtonAddItem getItemData={getItemData}/>
             </>
         ) : (
             <>
             <p style={{ textAlign: "center" }}>Please Add Your Item!</p>  
-            <ButtonAddItem getItemData={getItemData}/>
             </>
         )}
+      <ButtonAddItem getItemData={getItemData} />
     </>
   )
 }

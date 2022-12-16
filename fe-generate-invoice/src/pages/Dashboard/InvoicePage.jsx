@@ -91,10 +91,11 @@ const InvoicePage = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const getSubTotal = () => {
+    const getSubTotal = useCallback(() => {
         const gettingSubTotal = businessData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
         setSubTotal(gettingSubTotal)
-    }
+    }, [businessData?.data.Item])
+
     const getTotal = () => {
         const converting = Object.values(discount)
       const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
@@ -106,6 +107,7 @@ const InvoicePage = () => {
     useEffect(() => {
         getSubTotal()
     }, [getSubTotal])
+    
     useEffect(() => {
         getTotal()
     }, [])
@@ -202,7 +204,7 @@ const InvoicePage = () => {
                 </div>
             </div>
             <div className='invoice-item__container'>
-                <ListItem />
+                <ListItem getSubTotal={() => getSubTotal}/>
             </div>
 
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
@@ -214,14 +216,14 @@ const InvoicePage = () => {
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>
                     <div className='invoice-item__subtotal'>
                         <h6>Subtotal</h6>
-                        <input onChange={getSubTotal} value={subTotal?.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})} disabled name='sub_total'/>
+                        <input value={subTotal?.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})} disabled name='sub_total'/>
                     </div>
                     <div className='invoice-item__diskon align-self-end'>
                         <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6><input type="number" name='diskon' onChange={handleDiscount} /><span>%</span>
                     </div>
                     <div className='invoice-item__total'>
                         <h6>Total</h6>
-                        <input onChange={getTotal} value={discount ? total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) : 0} disabled name='total'/>
+                        <input value={discount ? total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) : 0} disabled name='total'/>
                     </div>
                     <button type='submit' className='justify-content-end' onClick={updateInvoice}>Kirim Invoice</button>
                 </div>

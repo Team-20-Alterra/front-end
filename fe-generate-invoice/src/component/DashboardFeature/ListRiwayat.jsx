@@ -13,7 +13,7 @@ const ListRiwayat = ({ riwayats }) => {
       <div className='riwayat-page__navbar'>
         <ul>
           <li>
-            <a href="" >Semua</a>
+            <a href="/" >Semua</a>
           </li>
           <li>
             <a href="/">Selesai</a>
