@@ -24,7 +24,7 @@ const ListItem = () => {
   const getSubTotal = () => {
     const gettingSubTotal = itemData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
     return gettingSubTotal
-}
+  }
 
 
   const deleteItem = (e) => {
@@ -49,40 +49,40 @@ const ListItem = () => {
   useEffect(() => {
     getItemData()
   }, [])
-  
+
   return (
     <>
-    {
+      {
         itemData?.data?.Item.length > 0 ? (
           <>
-        <table className='table-invoice text-center' cellPadding="15px">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Jumlah</th>
-            <th>Harga Satuan</th>
-            <th>Total Harga</th>
-          </tr>
-        </thead>
-        <tbody>
-          {itemData?.data.Item.map((item) => (
-            <tr key={item.ID}>
-              <td>{item.name}</td>
-              <td>{item.amount}</td>
-              <td>{item.unit_price.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})}</td>
-              <td>{item.total_price.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})}</td>
-              <i className="bi bi-trash3-fill delete-icon__item" onClick={deleteItem} value={item.ID} style={{color:"red", fontSize:"24px"}}></i>
-            </tr>
-          ))}
-            </tbody>
-          </table>
-          <ButtonAddItem getItemData={getItemData}/>
-            </>
+            <table className='table-invoice text-center' cellPadding="15px">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Jumlah</th>
+                  <th>Harga Satuan</th>
+                  <th>Total Harga</th>
+                </tr>
+              </thead>
+              <tbody>
+                {itemData?.data.Item.map((item) => (
+                  <tr key={item.ID}>
+                    <td>{item.name}</td>
+                    <td>{item.amount}</td>
+                    <td>{item.unit_price.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</td>
+                    <td>{item.total_price.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</td>
+                    <i className="bi bi-trash3-fill delete-icon__item" onClick={deleteItem} value={item.ID} style={{ color: "red", fontSize: "24px" }}></i>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <ButtonAddItem getItemData={getItemData} />
+          </>
         ) : (
-            <>
-            <p style={{ textAlign: "center" }}>Please Add Your Item!</p>  
-            <ButtonAddItem getItemData={getItemData}/>
-            </>
+          <>
+            <p style={{ textAlign: "center" }}>Please Add Your Item!</p>
+            <ButtonAddItem getItemData={getItemData} />
+          </>
         )}
     </>
   )

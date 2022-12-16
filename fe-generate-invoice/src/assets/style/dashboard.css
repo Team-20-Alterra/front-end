@@ -687,6 +687,10 @@ button.add-rekening:hover {
   width: 80%;
   align-self: flex-end;
 }
+.btn-review:hover:enabled {
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  transform: translateY(-1px);
+}
 .btn-lunas {
   border: none;
   background: #297061;
@@ -696,6 +700,13 @@ button.add-rekening:hover {
   width: 80%;
   align-self: flex-end;
 }
+.btn-lunas:disabled {
+  background: #94b8b0;
+}
+.btn-lunas:hover:enabled {
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  transform: translateY(-1px);
+}
 .btn-gagal {
   border: 1px solid #952e19;
   padding: 10px 16px;
@@ -704,6 +715,14 @@ button.add-rekening:hover {
   border-radius: 4px;
   width: 80%;
   align-self: flex-end;
+}
+.btn-gagal:disabled {
+  border: 1px solid #f5c1b7;
+  color: #f5c1b7;
+}
+.btn-gagal:hover:enabled {
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  transform: translateY(-1px);
 }
 .badge-berhasil {
   font-weight: 600;

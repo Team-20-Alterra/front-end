@@ -24,7 +24,7 @@ const InvoicePage = () => {
     const convert = convertDiscount[0]?.toString()
 
     const values = {
-        user_id: searchTerm,
+        user_id: selected.id,
         discount: convert,
         total: Number(total),
         sub_total: subTotal,
@@ -56,11 +56,11 @@ const InvoicePage = () => {
         const filterSelectedData = APIData.filter(data => data.customer.id === e.target.value)
         setSelected(filterSelectedData[0].customer)
     }
-    
+
     const handleDiscount = (e) => {
         setDiscount({
             ...discount,
-               [e.target.name] : +e.target.value
+            [e.target.name]: +e.target.value
         })
     }
 
@@ -70,7 +70,7 @@ const InvoicePage = () => {
                 setBusinessData(response.data)
             })
             .catch((error) => {
-                toast.error((error.response.data.message),{
+                toast.error((error.response.data.message), {
                     position: "top-right",
                     autoClose: 1000
                 })
@@ -97,7 +97,7 @@ const InvoicePage = () => {
     }
     const getTotal = () => {
         const converting = Object.values(discount)
-      const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
+        const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
         console.log(gettingTotal)
         setTotal(gettingTotal)
     }
@@ -111,7 +111,7 @@ const InvoicePage = () => {
     }, [])
 
     const updateInvoice = () => {
-        
+
         axiosInstance.put(`/invoices/${ID}`, {
             user_id: +values.user_id,
             discount: values.discount,
@@ -127,8 +127,8 @@ const InvoicePage = () => {
             })
         })
             .catch((error) => {
-            console.log(error)
-        })
+                console.log(error)
+            })
     }
 
     return (
@@ -179,7 +179,7 @@ const InvoicePage = () => {
                             <h6 className='judul mb-2 mt-1'>:</h6>
                         </div>
                         <div className="head-invoice w-50">
-                            <input type="text" className="input-riwayat" placeholder="User Id" value={searchTerm} onChange={(e) => searchItems(e.target.value)} name='userid'/>
+                            <input type="text" className="input-riwayat" placeholder="User Id" value={searchTerm} onChange={(e) => searchItems(e.target.value)} name='userid' />
                             {searchTerm ? (
                                 <div className="card" >
                                     <ul className="list-group list-group-flush">
@@ -188,8 +188,7 @@ const InvoicePage = () => {
                                                 value={data.customer.id}
                                                 onClick={(e) => handleSelected(e)}
                                                 key={data.customer.id}>
-                                                {data.customer.id}
-                                            </li>
+                                                {data.customer.name} (#{data.customer.id} )                                            </li>
                                         ))
                                         }
                                     </ul>
@@ -214,14 +213,14 @@ const InvoicePage = () => {
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>
                     <div className='invoice-item__subtotal'>
                         <h6>Subtotal</h6>
-                        <input onChange={getSubTotal} value={subTotal?.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})} disabled name='sub_total'/>
+                        <input onChange={getSubTotal} value={subTotal?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })} disabled name='sub_total' />
                     </div>
                     <div className='invoice-item__diskon align-self-end'>
                         <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6><input type="number" name='diskon' onChange={handleDiscount} /><span>%</span>
                     </div>
                     <div className='invoice-item__total'>
                         <h6>Total</h6>
-                        <input onChange={getTotal} value={discount ? total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) : 0} disabled name='total'/>
+                        <input onChange={getTotal} value={discount ? total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) : 0} disabled name='total' />
                     </div>
                     <button type='submit' className='justify-content-end' onClick={updateInvoice}>Kirim Invoice</button>
                 </div>
