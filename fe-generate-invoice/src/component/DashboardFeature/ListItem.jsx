@@ -6,9 +6,9 @@ import { axiosInstance } from '../../config/axiosInstance'
 import { HiPlus } from 'react-icons/hi'
 import ButtonAddItem from './ButtonAddItem'
 import { useCallback } from 'react'
-const ListItem = () => {
+const ListItem = ({itemData,setItemData}) => {
   const { ID } = useParams()
-  const [itemData, setItemData] = useState()
+  // const [itemData, setItemData] = useState()
 
 
   const getItemData = useCallback(() => {

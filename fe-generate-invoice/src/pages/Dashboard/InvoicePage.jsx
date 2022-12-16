@@ -19,6 +19,7 @@ const InvoicePage = () => {
     const [subTotal, setSubTotal] = useState()
     const [discount, setDiscount] = useState(0)
     const [total, setTotal] = useState()
+    const [itemData, setItemData] = useState()
 
     const convertDiscount = Object.values(discount)
     const convert = convertDiscount[0]?.toString()
@@ -79,7 +80,7 @@ const InvoicePage = () => {
 
     useEffect(() => {
         getBusinessData()
-    }, [])
+    }, [itemData])
 
     const getTodayDate = () => {
         let today = new Date();
@@ -105,7 +106,8 @@ const InvoicePage = () => {
 
     useEffect(() => {
         getSubTotal()
-    }, [getSubTotal])
+    }, [getSubTotal, itemData])
+    
     useEffect(() => {
         getTotal()
     }, [])
@@ -201,7 +203,7 @@ const InvoicePage = () => {
                 </div>
             </div>
             <div className='invoice-item__container'>
-                <ListItem />
+                <ListItem itemData={itemData} setItemData={setItemData}/>
             </div>
 
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
