@@ -21,13 +21,15 @@ const InvoicePage = () => {
     const [total, setTotal] = useState()
 
     const convertDiscount = Object.values(discount)
-    const convert = convertDiscount[0]
+    const convert = convertDiscount[0]?.toString()
 
     const values = {
         user_id: searchTerm,
         discount: convert,
-        total: total,
-        sub_total: subTotal
+        total: Number(total),
+        sub_total: subTotal,
+        title: "Judul Notifikasi",
+        body: "Body Notifikasi"
     }
 
 
@@ -111,13 +113,18 @@ const InvoicePage = () => {
     const updateInvoice = () => {
         
         axiosInstance.put(`/invoices/${ID}`, {
-            user_id: values.user_id,
+            user_id: +values.user_id,
             discount: values.discount,
             total: values.total,
-            subTotal: values.sub_total
+            sub_total: values.sub_total,
+            title: values.title,
+            body: values.body
         }
         ).then((response) => {
-            console.log(response.data)
+            toast.success(response.data.message, {
+                position: "top-right",
+                autoClose: 1000
+            })
         })
             .catch((error) => {
             console.log(error)
@@ -181,7 +188,7 @@ const InvoicePage = () => {
                                                 value={data.customer.id}
                                                 onClick={(e) => handleSelected(e)}
                                                 key={data.customer.id}>
-                                                {data.customer.name} (#{data.customer.id} )
+                                                {data.customer.id}
                                             </li>
                                         ))
                                         }
@@ -207,7 +214,7 @@ const InvoicePage = () => {
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>
                     <div className='invoice-item__subtotal'>
                         <h6>Subtotal</h6>
-                        <input onChange={getSubTotal} value={subTotal?.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})} disabled name='subtotal'/>
+                        <input onChange={getSubTotal} value={subTotal?.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})} disabled name='sub_total'/>
                     </div>
                     <div className='invoice-item__diskon align-self-end'>
                         <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6><input type="number" name='diskon' onChange={handleDiscount} /><span>%</span>
