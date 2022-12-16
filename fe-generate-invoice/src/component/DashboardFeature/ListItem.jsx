@@ -62,6 +62,7 @@ const ListItem = () => {
                   <th>Jumlah</th>
                   <th>Harga Satuan</th>
                   <th>Total Harga</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
