@@ -1,4 +1,4 @@
-import {  AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck } from "react-icons/ai";
 import HeaderDashboard from "../../component/DashboardFeature/HeaderDashboard";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
@@ -15,7 +15,7 @@ export default function PengaturanPage() {
                 setValues(response.data.data)
             })
     }, [])
-
+    console.log(values)
     useEffect(() => {
         axiosInstance.get('/list-bank/businness')
             .then((response) => {
@@ -37,8 +37,6 @@ export default function PengaturanPage() {
         editFormData.append("email", values.email)
         editFormData.append("no_telp", values.no_telp)
         editFormData.append("address", values.address)
-        editFormData.append("reminder", values.reminder)
-        editFormData.append("due_date", values.due_date)
         editFormData.append("type", values.type)
         editFormData.append("logo", values.logo)
         const config = {
@@ -139,40 +137,6 @@ export default function PengaturanPage() {
                                     </textarea>
                                 </div>
                                 <div className="form-part-right">
-                                    <label className="d-flex flex-column judul">
-                                        Pengingat Otomatis
-                                    </label>
-                                    <select
-                                        name="reminder"
-                                        id="reminder"
-                                        value={values.reminder}
-                                        onChange={handleChange}
-                                        className="input"
-                                    >
-                                        <option value="" disabled hidden selected>Pengingat Otomatis</option>
-                                        <option value="1 Hari">1 Hari</option>
-                                        <option value="5 Hari">5 Hari</option>
-                                        <option value="10 Hari">10 Hari</option>
-                                        <option value="20 Hari">20 Hari</option>
-                                        <option value="30 Hari">30 Hari</option>
-                                    </select>
-                                    <label className="d-flex flex-column mt-4 judul">
-                                        Jatuh Tempo
-                                    </label>
-                                    <select
-                                        name="due_date"
-                                        id="tempo"
-                                        value={values.due_date}
-                                        onChange={handleChange}
-                                        className="input"
-                                    >
-                                        <option value="" disabled hidden selected>Jatuh Tempo</option>
-                                        <option value="1 Hari">1 Hari</option>
-                                        <option value="7 Hari">7 Hari</option>
-                                        <option value="14 Hari">14 Hari</option>
-                                        <option value="21 Hari">21 Hari</option>
-                                        <option value="30 Hari">30 Hari</option>
-                                    </select>
                                     <label className="d-flex flex-column mt-4 judul">
                                         Rekening Terdaftar
                                     </label>
@@ -180,7 +144,7 @@ export default function PengaturanPage() {
                                         <div className="rekening-content d-flex flex-rows align-items-center mb-4" key={bank.Bank.ID}>
                                             <img src={bank.Bank.logo} alt="" className="img-rekening" />
                                             <div className="rekening-data d-flex flex-column">
-                                                <div className="head">{bank.Bank.name}</div>
+                                                <div className="fw-bold">{bank.Bank.name}</div>
                                                 <div>{bank.account_number}</div>
                                             </div>
                                         </div>

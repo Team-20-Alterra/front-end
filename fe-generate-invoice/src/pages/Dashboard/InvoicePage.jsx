@@ -38,7 +38,6 @@ const InvoicePage = () => {
         setSearchTerm(e.target.innerText)
         const filterSelectedData = APIData.filter(data => data.customer.id === e.target.value)
         setSelected(filterSelectedData[0].customer)
-        console.log(selected)
     }
 
     const getBusinessData = () => {
@@ -130,7 +129,7 @@ const InvoicePage = () => {
                                 </div>
                             ) : null}
                             <input type="text" className="input-riwayat mt-2" value={selected.phone || ''} placeholder="No.Telepon" disabled />
-                            <textarea class="input-riwayat mt-2 mb-3" rows="3" value={selected.address || ''} disabled></textarea>
+                            <textarea className="input-riwayat mt-2 mb-3" rows="3" value={selected.address || ''} disabled></textarea>
                         </div>
                     </div>
                 </div>
