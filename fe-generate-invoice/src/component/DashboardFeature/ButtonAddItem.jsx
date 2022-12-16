@@ -64,7 +64,7 @@ const ButtonAddItem = () => {
 
     return (
         <>
-            <button className='add-item_button d-flex' type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ width: "10%" }}><HiPlus style={{ fontSize: "24px", marginRight: "4px", color: "#E4EDEB" }} />Item</button>
+            <button className='btn btn-primary d-flex' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ width: "10%" }}><HiPlus style={{ fontSize: "24px", marginRight: "4px", color: "#E4EDEB" }} />Item</button>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel">
                 <div className="modal-dialog">
                     <div className="modal-content">

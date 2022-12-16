@@ -69,9 +69,9 @@ const DetailsInvoicePage = () => {
                             <h6 className='judul'>:</h6>
                         </div>
                         <div className="head-invoice w-50">
-                            <h6 className='judul'>{invoices?.User?.name} (# {invoices?.User?.ID})</h6>
-                            <h6 className='judul'>{invoices?.User?.phone}</h6>
-                            <h6 className='judul h-100'>{invoices?.User?.address}</h6>
+                            <h6 className='judul'>{invoices?.customer?.name} (# {invoices?.customer?.ID})</h6>
+                            <h6 className='judul'>{invoices?.customer?.phone}</h6>
+                            <h6 className='judul h-100'>{invoices?.customer?.address}</h6>
                         </div>
                     </div>
                 </div>

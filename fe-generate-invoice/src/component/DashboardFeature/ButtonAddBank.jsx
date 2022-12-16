@@ -13,7 +13,7 @@ const ButtonAddBank = ({ values }) => {
     useEffect(() => {
         axiosInstance.get('/banks')
             .then((response) => {
-                setAPIData(response.data.bank);
+                setAPIData(response.data.data);
             })
     }, [])
 

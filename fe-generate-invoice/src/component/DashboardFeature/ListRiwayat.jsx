@@ -4,38 +4,9 @@ import { initialName } from '../../utils/initialName'
 import { hargaFormat } from '../../utils/hargaFormat'
 import { randomColor } from '../../utils/randomColor'
 import { Link } from "react-router-dom";
+import { statusBadge } from './StatusBadge'
 
 const ListRiwayat = ({ riwayats }) => {
-  const statusBadge = (props) => {
-    switch (props) {
-      case 'Berhasil':
-        return (
-          <div className='badge-berhasil'>
-            {props}
-          </div>
-        );
-      case 'Menunggu Konfirmasi':
-        return (
-          <div className='badge-tunggu'>
-            {props}
-          </div>
-        );
-      case 'Gagal':
-        return (
-          <div className='badge-gagal'>
-            {props}
-          </div>
-        );
-      case 'Dalam Proses':
-        return (
-          <div className='badge-proses'>
-            {props}
-          </div>
-        );
-      default:
-        return null;
-    }
-  }
 
   return (
     <>
@@ -72,21 +43,24 @@ const ListRiwayat = ({ riwayats }) => {
           <div className='list d-flex justify-content-center'>Status</div>
         </div>
         {riwayats.map((riwayat) => (
-          <Link to={`${riwayat.ID}`}>
-            <div className="container-list d-flex flex-row align-items-center" key={riwayat.ID} >
-              <div className='datas d-flex align-items-center'>
-                <div className='box' style={{ background: `#${randomColor()}` }}>
-                  {initialName((riwayat.User.name))}
+          <div key={riwayat.ID} >
+            <Link to={`${riwayat.ID}`}>
+              <div className="container-list d-flex flex-row align-items-center">
+                <div className='datas d-flex align-items-center'>
+                  <div className='box' style={{ background: `#${randomColor()}` }}>
+                    {initialName((riwayat.customer.name))}
+                  </div>
+                  {riwayat.customer.name}
                 </div>
-                {riwayat.User.name}
+                {console.log(riwayat)}
+                <div className='datas'># {riwayat.ID}</div>
+                <div className='datas'>{riwayat?.billing_date?.slice(0, 19)}</div>
+                <div className='datas'>{riwayat?.Checkout.length === 0 ? "-" : riwayat.billing_date}</div>
+                <div className='datas'>Rp. {hargaFormat((riwayat.total))}</div>
+                <div className='datas d-flex justify-content-center'>{statusBadge(riwayat.status)}</div>
               </div>
-              <div className='datas'># {riwayat.ID}</div>
-              <div className='datas'>{riwayat?.billing_date?.slice(0, 19)}</div>
-              <div className='datas'>{riwayat.date_pay === "" ? "-" : riwayat.date_pay}</div>
-              <div className='datas'>Rp. {hargaFormat((riwayat.total))}</div>
-              <div className='datas d-flex justify-content-center'>{statusBadge(riwayat.status)}</div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
     </>

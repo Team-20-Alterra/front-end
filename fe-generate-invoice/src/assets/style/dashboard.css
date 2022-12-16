@@ -454,20 +454,11 @@ button.add-rekening:hover {
 .dashboard-satu {
   display: flex;
   flex-direction: column;
+  width: 50%;
 }
 .total-balance {
   display: flex;
   flex-direction: column;
-}
-.box-total-balance-satu {
-  display: flex;
-  flex-direction: column;
-  background-color: #d9d9d9;
-  width: 370px;
-  height: 133px;
-  margin-right: 40px;
-  margin-bottom: 16px;
-  border-radius: 5px;
 }
 .total-balance-top {
   display: flex;
@@ -476,7 +467,6 @@ button.add-rekening:hover {
 .total-balance-bottom {
   display: flex;
   flex-direction: row;
-  margin-right: 40px;
   margin-bottom: 16px;
   border-radius: 5px;
 }
@@ -484,38 +474,27 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: column;
   background-color: #f5c1b7;
-  width: 333px;
-  height: 99px;
+  padding: 16px 24px;
+  width: 50%;
   margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 5px;
-}
-.box-total-balance-bottom-1 p.invoice-total {
-  padding-left: 24px;
-  padding-top: 16px;
-  font-size: 14px;
 }
 .box-total-balance-bottom-2 {
   display: flex;
   flex-direction: column;
+  padding: 16px 24px;
   background-color: #bce8c1;
-  width: 333px;
-  height: 99px;
+  width: 50%;
   margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 5px;
-}
-.box-total-balance-bottom-2 p.invoice-total {
-  padding-left: 24px;
-  padding-top: 16px;
-  font-size: 14px;
 }
 .box-total-balance-top {
   display: flex;
   flex-direction: column;
   background-color: #d4e2df;
-  width: 682px;
-  height: 99px;
+  padding: 16px 24px;
   margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 5px;
@@ -524,23 +503,14 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 16px;
 }
-.tagihan-total button {
-  background: none;
-  margin-right: 24px;
-  color: #297061;
-  border: none;
-  margin-bottom: 40px;
-  size: 19px;
-}
-.tagihan-total p {
-  font-weight: bold;
+.tagihan-count {
+  font-weight: 600;
   font-size: 20px;
-  padding-left: 24px;
 }
-.box-total-balance-top p.tagihan-judul {
-  padding-left: 24px;
-  padding-top: 16px;
+.tagihan-judul {
+  font-weight: 400;
   font-size: 14px;
 }
 
@@ -548,8 +518,8 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: column;
   background-color: #d4e2df;
-  width: 682px;
-  height: 512px;
+  padding: 16px 24px;
+  margin-right: 16px;
   border-radius: 5px;
 }
 .box-balance-2 p {
@@ -566,51 +536,52 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: column;
   background-color: #d4e2df;
-  width: 439px;
-  height: 758px;
+  height: 100%;
   border-radius: 5px;
+  padding: 12px 16px;
 }
 .history-ket {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 24px;
-  margin-right: 24px;
 }
-.history-ket p {
+.history-list {
+  font-weight: bold;
   font-size: 12px;
+  width: 25%;
+  margin: 16px 0;
+  text-align: center;
 }
 .history-ket-isi {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 16px;
-  margin-right: 16px;
-  background-color: white;
-  padding: 13px;
-  align-items: center;
-  border-radius: 15px;
-}
-.history-ket-isi-nama {
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
   justify-content: center;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  font-weight: 400;
+  font-size: 11px;
+  padding: 8px 0;
+  margin-bottom: 15px;
 }
-.history-ket-isi-nama p {
-  margin: -16px;
-  margin-right: 16px;
+.history-detail {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.history-ket-status p {
-  background-color: #eec555;
+.text-history-status {
   border-radius: 15px;
   font-weight: bold;
+  padding: 4px 8px;
 }
-.box-history-inv p {
-  font-size: 14px;
-  font-weight: bold;
-  padding: 16px;
-  color: #000;
+.history-ket-status {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-beranda {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 8px 0px;
 }
 /* Dashboard */
 
@@ -668,15 +639,6 @@ button.add-rekening:hover {
 .table-invoice tr th:last-child {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-}
-.add-item_button {
-  border: none;
-  background-color: #297061;
-  color: #fafafa;
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 5px;
 }
 .invoice-item__subtotal {
   background-color: #d4e2df;
