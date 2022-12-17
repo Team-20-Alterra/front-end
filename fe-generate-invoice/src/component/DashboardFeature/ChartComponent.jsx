@@ -1,36 +1,27 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
-import { useState } from 'react'
 
-const Grafik = () => {
-    const [category, setCategory] = useState([1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999])
-    const [data, setData] = useState([30, 40, 45, 50, 49, 60, 70, 91])
-
+const Grafik = ({berhasil,gagal}) => {
     return (
-        <div className='box-balance-2'>
-            <div className='fw-bold'>Total Invoice & Balance</div>
-            <div className='chart-to-bal mt-3'>
-                <Chart options={{
+        <div className="chart-container" style={{marginLeft: 'auto', marginRight: 'auto'}}>
+          <h2 className="text-centert mb-4">Total Invoice & Balance</h2>
+          <Chart
+            type="pie"
+            width={600}
+            height={250}
+            series = {[berhasil, gagal]}
+            options = {
+                {
                     chart: {
-                        id: 'apexchart-example'
+                        type: 'pie'
                     },
-                    xaxis: {
-                        categories: category
-                    },
-                    stroke: {
-                        curve: 'smooth'
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                }}
-                    series={[{
-                        name: 'series-1',
-                        data: data
-                    }]} type="area" />
-            </div>
+                    labels: ['Sudah Bayar', 'Belum Bayar'],
+                    colors:['#ADE792', '#F06292']
+                }
+            }
+          />
         </div>
-    )
+      )
 }
 
 export default Grafik

@@ -65,7 +65,7 @@ const InvoicePage = () => {
         })
     }
 
-    const getBusinessData = () => {
+    const getBusinessData = useCallback(() => {
         axiosInstance.get(`/invoices/${ID}`)
             .then((response) => {
                 setBusinessData(response.data)
@@ -76,11 +76,11 @@ const InvoicePage = () => {
                     autoClose: 1000
                 })
             })
-    }
+    },[ID])
 
     useEffect(() => {
         getBusinessData()
-    }, [itemData])
+    }, [getBusinessData, itemData])
 
     const getTodayDate = () => {
         let today = new Date();
@@ -96,21 +96,21 @@ const InvoicePage = () => {
         const gettingSubTotal = businessData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
         setSubTotal(gettingSubTotal)
     }
-    const getTotal = () => {
+    const getTotal = useCallback(() => {
         const converting = Object.values(discount)
         const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
         console.log(gettingTotal)
         setTotal(gettingTotal)
-    }
+    },[subTotal, discount])
 
 
     useEffect(() => {
         getSubTotal()
-    }, [getSubTotal, itemData])
+    }, [getSubTotal])
     
     useEffect(() => {
         getTotal()
-    }, [])
+    }, [getTotal])
 
     const updateInvoice = () => {
 

@@ -5,28 +5,54 @@ import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../config/axiosInstance';
 import ButtonAddPelanggan from '../../component/DashboardFeature/ButtonAddPelanggan';
 import ChartComponent from '../../component/DashboardFeature/ChartComponent';
+import { 
+    getInvoiceBerhasil, 
+    selectInvoiceDataSuccess, 
+    getInvoiceStatusSuccess 
+} from '../../store/chartInvoiceSuccess';
+import {
+    getInvoiceGagal,
+    selectInvoiceDataFailed,
+    getInvoiceStatusFailed
+} from "../../store/chartInvoiceFailed"
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const BerandaPage = () => {
+    const dispatch = useDispatch()
     const [total, setTotal] = useState(0)
-    const [berhasil, setBerhasil] = useState(0)
-    const [gagal, setGagal] = useState(0)
+    // const [berhasil, setBerhasil] = useState(0)
+    // const [gagal, setGagal] = useState(0)
     const [invoiceAktif, setInvoiceAktif] = useState([])
 
+    //chart redux invoice success
+    const invoiceDataSuccess = useSelector(selectInvoiceDataSuccess)
+    const invoiceStatusSuccess = useSelector(getInvoiceStatusSuccess)
+
+    //chart redux invoice failed
+    const invoiceDataFailed = useSelector(selectInvoiceDataFailed)
+    const invoiceStatusFailed = useSelector(getInvoiceStatusFailed)
+    
+    console.log(invoiceDataFailed)
 
     useEffect(() => {
-        axiosInstance.get('/invoices/count/berhasil')
-            .then((response) => {
-                setBerhasil(response.data.data)
-            })
-    }, [])
+        dispatch(getInvoiceBerhasil())
+        dispatch(getInvoiceGagal())
+    },[dispatch])
 
-    useEffect(() => {
-        axiosInstance.get('/invoices/count/gagal')
-            .then((response) => {
-                setGagal(response.data.data)
-            })
-    }, [])
+    // useEffect(() => {
+    //     axiosInstance.get('/invoices/count/berhasil')
+    //         .then((response) => {
+    //             setBerhasil(response.data.data)
+    //         })
+    // }, [])
+
+    // useEffect(() => {
+    //     axiosInstance.get('/invoices/count/gagal')
+    //         .then((response) => {
+    //             setGagal(response.data.data)
+    //         })
+    // }, [])
 
     useEffect(() => {
         axiosInstance.get('/invoices/count')
@@ -66,18 +92,20 @@ const BerandaPage = () => {
                                 <div className='box-total-balance-bottom-1'>
                                     <div className='tagihan-judul'>Gagal Terbayar</div>
                                     <div className='tagihan-total'>
-                                        <div className='tagihan-count'>{gagal.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
+                                        <div className='tagihan-count'>{invoiceDataFailed.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                                     </div>
                                 </div>
                                 <div className='box-total-balance-bottom-2'>
                                     <div className='tagihan-judul'>Sudah Terbayar</div>
                                     <div className='tagihan-total'>
-                                        <div className='tagihan-count'>{berhasil.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
+                                        <div className='tagihan-count'>{invoiceDataSuccess.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <ChartComponent />
+                        {invoiceStatusSuccess === "success" && invoiceStatusFailed === "success"
+                            ? <ChartComponent berhasil={invoiceDataSuccess} gagal={invoiceDataFailed}/> : "null"
+                        }
                     </div>
                     <div className='history-inv w-50'>
                         <div className='box-history-inv'>
