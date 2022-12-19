@@ -6,9 +6,9 @@ import { axiosInstance } from '../../config/axiosInstance'
 import { HiPlus } from 'react-icons/hi'
 import ButtonAddItem from './ButtonAddItem'
 import { useCallback } from 'react'
-const ListItem = () => {
+const ListItem = ({itemData,setItemData}) => {
   const { ID } = useParams()
-  const [itemData, setItemData] = useState()
+  // const [itemData, setItemData] = useState()
 
 
   const getItemData = useCallback(() => {
@@ -19,12 +19,12 @@ const ListItem = () => {
       .catch((error) => {
         console.log(error)
       })
-  }, [ID])
+  }, [ID, setItemData])
 
-  const getSubTotal = () => {
-    const gettingSubTotal = itemData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
-    return gettingSubTotal
-  }
+  // const getSubTotal = () => {
+  //   const gettingSubTotal = itemData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
+  //   return gettingSubTotal
+  // }
 
 
   const deleteItem = (e) => {
@@ -37,7 +37,7 @@ const ListItem = () => {
           autoClose: 1000
         })
         getItemData()
-        getSubTotal()
+        // getSubTotal()
       })
       .catch((error) => {
         toast.error(error.response.data.message, {

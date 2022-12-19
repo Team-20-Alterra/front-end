@@ -19,6 +19,7 @@ const InvoicePage = () => {
     const [subTotal, setSubTotal] = useState()
     const [discount, setDiscount] = useState(0)
     const [total, setTotal] = useState()
+    const [itemData, setItemData] = useState()
 
     const convertDiscount = Object.values(discount)
     const convert = convertDiscount[0]?.toString()
@@ -64,7 +65,7 @@ const InvoicePage = () => {
         })
     }
 
-    const getBusinessData = () => {
+    const getBusinessData = useCallback(() => {
         axiosInstance.get(`/invoices/${ID}`)
             .then((response) => {
                 setBusinessData(response.data)
@@ -75,11 +76,11 @@ const InvoicePage = () => {
                     autoClose: 1000
                 })
             })
-    }
+    },[ID])
 
     useEffect(() => {
         getBusinessData()
-    }, [])
+    }, [getBusinessData, itemData])
 
     const getTodayDate = () => {
         let today = new Date();
@@ -95,20 +96,21 @@ const InvoicePage = () => {
         const gettingSubTotal = businessData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
         setSubTotal(gettingSubTotal)
     }
-    const getTotal = () => {
+    const getTotal = useCallback(() => {
         const converting = Object.values(discount)
         const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
         console.log(gettingTotal)
         setTotal(gettingTotal)
-    }
+    },[subTotal, discount])
 
 
     useEffect(() => {
         getSubTotal()
     }, [getSubTotal])
+    
     useEffect(() => {
         getTotal()
-    }, [])
+    }, [getTotal])
 
     const updateInvoice = () => {
 
@@ -201,7 +203,7 @@ const InvoicePage = () => {
                 </div>
             </div>
             <div className='invoice-item__container'>
-                <ListItem />
+                <ListItem itemData={itemData} setItemData={setItemData}/>
             </div>
 
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>

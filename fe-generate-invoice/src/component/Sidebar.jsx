@@ -50,7 +50,7 @@ const sidebar = () => {
                 <NavLink
                     onClick={handleAddInvoice}
                     className={({ isActive }) =>
-                        isActive ?
+                        isActive === false?
                             'nav-link active' : 'nav-link'
                     }
                 >

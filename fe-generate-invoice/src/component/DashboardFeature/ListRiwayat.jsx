@@ -1,12 +1,42 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import ButtonFilter from '../../component/DashboardFeature/ButtonFilter'
 import { initialName } from '../../utils/initialName'
 import { hargaFormat } from '../../utils/hargaFormat'
 import { randomColor } from '../../utils/randomColor'
 import { Link } from "react-router-dom";
 import { statusBadge } from './StatusBadge'
+import { Pagination } from '../../utils/Pagination'
 
-const ListRiwayat = ({ riwayats }) => {
+const ListRiwayat = ({ riwayats, status }) => {
+
+  const [riwayatSlice, setRiwayatSlice] = useState([])
+
+  const [paginationState, setPaginationState] = useState({
+    pageCount: 0,
+    currentPage: 0,
+    pageSize: 5,
+  });
+
+  const onPageChange = (page) => {
+    const currentPage = page.selected;
+    setPaginationState({
+      pageCount: paginationState.pageCount,
+      currentPage: currentPage,
+      pageSize: 5,
+    });
+  };
+
+  useEffect(() => {
+    if(status === "success"){
+      const startIndex = paginationState.currentPage * paginationState.pageSize
+
+      const lastIndex = startIndex + paginationState.pageSize > riwayats.length ? 
+        startIndex + (startIndex + paginationState.pageSize - riwayats.length) :
+        startIndex + paginationState.pageSize
+
+      setRiwayatSlice(riwayats.slice(startIndex, lastIndex))
+    }
+  },[paginationState.pageSize, paginationState.currentPage, riwayats, status])
 
   return (
     <>
@@ -42,7 +72,7 @@ const ListRiwayat = ({ riwayats }) => {
           <div className='list'>Jumlah</div>
           <div className='list d-flex justify-content-center'>Status</div>
         </div>
-        {riwayats.map((riwayat) => (
+        {riwayatSlice.map((riwayat) => (
           <div key={riwayat.ID} >
             <Link to={`${riwayat.ID}`}>
               <div className="container-list d-flex flex-row align-items-center">
@@ -61,6 +91,10 @@ const ListRiwayat = ({ riwayats }) => {
             </Link>
           </div>
         ))}
+      </div>
+      <div className='d-flex mt-5 justify-content-center'>
+              <Pagination currentPage={paginationState.currentPage} onPageChange={onPageChange}
+                          pageCount={Math.ceil(riwayats.length/ paginationState.pageSize)}/>
       </div>
     </>
   )
