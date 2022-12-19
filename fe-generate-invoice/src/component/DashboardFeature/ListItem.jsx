@@ -6,9 +6,8 @@ import { axiosInstance } from '../../config/axiosInstance'
 import { HiPlus } from 'react-icons/hi'
 import ButtonAddItem from './ButtonAddItem'
 import { useCallback } from 'react'
-const ListItem = ({getSubTotal}) => {
+const ListItem = ({itemData,setItemData}) => {
   const { ID } = useParams()
-  const [itemData, setItemData] = useState()
 
 
   const getItemData = useCallback(() => {
@@ -31,8 +30,6 @@ const ListItem = ({getSubTotal}) => {
           position: "top-right",
           autoClose: 1000
         })
-        getSubTotal()
-        window.location.reload()
         getItemData()
       })
       .catch((error) => {

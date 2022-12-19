@@ -55,7 +55,7 @@ const ListRiwayat = ({ riwayats }) => {
                 {console.log(riwayat)}
                 <div className='datas'># {riwayat.ID}</div>
                 <div className='datas'>{riwayat?.billing_date?.slice(0, 19)}</div>
-                <div className='datas'>{riwayat?.Checkout.length === 0 ? "-" : riwayat.billing_date}</div>
+                <div className='datas'>{riwayat?.Checkout.length === 0 ? "-" : riwayat.Checkout[0].billing_date.slice(0, 10)}</div>
                 <div className='datas'>Rp. {hargaFormat((riwayat.total))}</div>
                 <div className='datas d-flex justify-content-center'>{statusBadge(riwayat.status)}</div>
               </div>

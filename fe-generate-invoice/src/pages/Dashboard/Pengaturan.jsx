@@ -8,6 +8,8 @@ import ButtonAddBank from "../../component/DashboardFeature/ButtonAddBank";
 export default function PengaturanPage() {
     const [values, setValues] = useState([])
     const [banks, setBanks] = useState([])
+    const [selectedFile, setSelectedFile] = useState()
+    const [preview, setPreview] = useState()
 
     useEffect(() => {
         axiosInstance.get('/business/user')
@@ -21,7 +23,7 @@ export default function PengaturanPage() {
             .then((response) => {
                 setBanks(response.data.data)
             })
-    }, [])
+    }, [values])
 
     const handleChange = (event) => {
         setValues({
@@ -29,6 +31,23 @@ export default function PengaturanPage() {
             [event.target.name]: event.target.value
         })
     }
+    useEffect(() => {
+        if (!selectedFile) {
+          setPreview(undefined)
+          return
+        }
+        const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
+        return () => URL.revokeObjectURL(objectUrl)
+      }, [selectedFile])
+    
+      const onSelectFile = e => {
+        if (!e.target.files || e.target.files.length === 0) {
+          setSelectedFile(undefined)
+          return
+        }
+        setSelectedFile(e.target.files[0])
+      }
 
     const handleEdittingPengaturan = (e) => {
         e.preventDefault()
@@ -38,7 +57,7 @@ export default function PengaturanPage() {
         editFormData.append("no_telp", values.no_telp)
         editFormData.append("address", values.address)
         editFormData.append("type", values.type)
-        editFormData.append("logo", values.logo)
+        editFormData.append("logo", new Blob([selectedFile], { type: 'image/png' }))
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -62,6 +81,7 @@ export default function PengaturanPage() {
             })
         }
     }
+    console.log(values)
     return (
         <>
             <div className="container-content">
@@ -154,8 +174,9 @@ export default function PengaturanPage() {
                             </div>
                         </div>
                         <div className="d-flex flex-column my-4">
-                            <input type="file" accept="image/*" className="image-input" onChange={handleChange} name="logo" />
+                            <input type="file" accept="image/*" className="image-input" onChange={onSelectFile} name="logo" />
                         </div>
+                        {selectedFile && <img src={preview} alt={preview} style={{ width: "250px", height: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginTop: "5px" }} />}
                     </div>
                     <div className="btn-simpan">
                         <button type="submit" className="btn-primary mt-4"><AiOutlineCheck className="me-2" />Simpan</button>

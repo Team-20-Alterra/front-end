@@ -19,6 +19,7 @@ const InvoicePage = () => {
     const [subTotal, setSubTotal] = useState()
     const [discount, setDiscount] = useState(0)
     const [total, setTotal] = useState()
+    const [itemData, setItemData] = useState()
 
     const convertDiscount = Object.values(discount)
     const convert = convertDiscount[0]?.toString()
@@ -79,7 +80,7 @@ const InvoicePage = () => {
 
     useEffect(() => {
         getBusinessData()
-    }, [])
+    }, [itemData])
 
     const getTodayDate = () => {
         let today = new Date();
@@ -96,21 +97,22 @@ const InvoicePage = () => {
         setSubTotal(gettingSubTotal)
     }, [businessData?.data.Item])
 
-    const getTotal = () => {
+    const getTotal = useCallback(() => {
         const converting = Object.values(discount)
         const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
         console.log(gettingTotal)
         setTotal(gettingTotal)
-    }
+    }, [discount, subTotal])
 
 
     useEffect(() => {
         getSubTotal()
-    }, [getSubTotal])
+    }, [getSubTotal, itemData])
+    
     
     useEffect(() => {
         getTotal()
-    }, [])
+    }, [getTotal, itemData])
 
     const updateInvoice = () => {
 
@@ -204,7 +206,7 @@ const InvoicePage = () => {
                 </div>
             </div>
             <div className='invoice-item__container'>
-                <ListItem getSubTotal={() => getSubTotal}/>
+                <ListItem itemData={itemData} setItemData={setItemData}/>
             </div>
 
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
