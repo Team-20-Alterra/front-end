@@ -52,7 +52,6 @@ const ListRiwayat = ({ riwayats }) => {
                   </div>
                   {riwayat.customer.name}
                 </div>
-                {console.log(riwayat)}
                 <div className='datas'># {riwayat.ID}</div>
                 <div className='datas'>{riwayat?.billing_date?.slice(0, 19)}</div>
                 <div className='datas'>{riwayat?.Checkout.length === 0 ? "-" : riwayat.billing_date}</div>
