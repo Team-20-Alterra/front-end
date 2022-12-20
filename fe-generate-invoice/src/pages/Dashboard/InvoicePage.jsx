@@ -17,8 +17,8 @@ const InvoicePage = () => {
     const [selected, setSelected] = useState("")
     const [searchResults, setSearchResults] = useState([]);
     const [subTotal, setSubTotal] = useState()
-    const [discount, setDiscount] = useState(0)
-    const [total, setTotal] = useState()
+    const [discount, setDiscount] = useState({discount: 0})
+    const [total, setTotal] = useState(0)
     const [itemData, setItemData] = useState()
     const [noteAndNotif, setNoteAndNotif] = useState({
         note: "",
@@ -33,8 +33,7 @@ const InvoicePage = () => {
         user_id: selected.id,
         discount: convert,
         total: Number(total),
-        sub_total: subTotal,
-        note: noteAndNotif.note,
+        snote: noteAndNotif.note,
         title: noteAndNotif.title,
         body: noteAndNotif.body
     }
@@ -43,8 +42,7 @@ const InvoicePage = () => {
     useEffect(() => {
         axiosInstance.get('/add-customer/businness')
             .then((response) => {
-                // setAPIData(response.data.data);
-                console.log(response)
+                setAPIData(response.data.data);
             })
     }, [])
 
@@ -67,10 +65,10 @@ const InvoicePage = () => {
 
     const handleDiscount = (e) => {
         setDiscount({
-            ...discount,
             [e.target.name]: +e.target.value
         })
     }
+
     const handleNoteAndNotif = (e) => {
         setNoteAndNotif({
             ...noteAndNotif,
@@ -105,27 +103,25 @@ const InvoicePage = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const getSubTotal = useCallback(() => {
+    const getSubTotal = () => {
         const gettingSubTotal = businessData?.data.Item.map((item) => item.total_price).reduce((a, b) => a + b, 0)
         setSubTotal(gettingSubTotal)
-    }, [businessData?.data.Item])
-
+    }
     const getTotal = useCallback(() => {
         const converting = Object.values(discount)
         const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
         console.log(gettingTotal)
         setTotal(gettingTotal)
-    }, [discount, subTotal])
+    },[subTotal, discount])
 
 
     useEffect(() => {
         getSubTotal()
     }, [getSubTotal])
     
-    
     useEffect(() => {
         getTotal()
-    }, [getTotal])
+    }, [getTotal, discount])
 
     const updateInvoice = () => {
 
@@ -134,7 +130,6 @@ const InvoicePage = () => {
             discount: values.discount,
             total: values.total,
             sub_total: values.sub_total,
-            note: values.note,
             title: values.title,
             body: values.body
         }
@@ -149,12 +144,11 @@ const InvoicePage = () => {
             })
     }
 
-    console.log(APIData)
     return (
         <div className="container-content mb-5-content">
             <HeaderDashboard name="Buat Invoice" />
             <div className="headerInvoice d-flex align-items-center justify-content-between">
-                <img src={businessData?.data?.Businnes.logo} alt="Logo" />
+                <img src={logoPerusahaan} alt="Logo" />
                 <div className='flex-column text-end'>
                     <h1 className='textHeader'>Invoice</h1>
                     <h2 className='textSubHeader'>#{businessData?.data?.ID}</h2>
@@ -202,7 +196,7 @@ const InvoicePage = () => {
                             {searchTerm ? (
                                 <div className="card" >
                                     <ul className="list-group list-group-flush">
-                                        {searchResults?.map((data) => (
+                                        {searchResults.map((data) => (
                                             <li className="list-group-item"
                                                 value={data.customer.id}
                                                 onClick={(e) => handleSelected(e)}
@@ -223,10 +217,10 @@ const InvoicePage = () => {
                 <ListItem itemData={itemData} setItemData={setItemData}/>
             </div>
 
-            <div className='invoice-item__summary mt-5 d-flex justify-content-between gap-5'>
+            <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
                 <div className='invoice-item__note'>
                     <h5>Catatan:</h5>
-                    <textarea name="note" id="" cols="35" rows="5" onChange={handleNoteAndNotif}></textarea>
+                    <textarea name="catatan" id="" cols="55" rows="5" onChange={handleNoteAndNotif}></textarea>
                 </div>
 
                 <div className='invoice-item__notif d-flex justify-content-center flex-column gap-1'>
@@ -243,14 +237,14 @@ const InvoicePage = () => {
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>
                     <div className='invoice-item__subtotal'>
                         <h6>Subtotal</h6>
-                        <input value={subTotal?.toLocaleString('id-ID', {currency: 'IDR', style: 'currency'})} disabled name='sub_total'/>
+                        <input onChange={getSubTotal} value={subTotal?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })} disabled name='sub_total' />
                     </div>
                     <div className='invoice-item__diskon align-self-end'>
-                        <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6><input type="number" name='diskon' onChange={handleDiscount} /><span>%</span>
+                        <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6><input type="number" name='diskon' onChange={handleDiscount}/><span>%</span>
                     </div>
                     <div className='invoice-item__total'>
                         <h6>Total</h6>
-                        <input value={discount ? total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) : 0} disabled name='total'/>
+                        <input onChange={getTotal} value={discount ? total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) : 0} disabled name='total' />
                     </div>
                     <button type='submit' className='justify-content-end' onClick={updateInvoice}>Kirim Invoice</button>
                 </div>
