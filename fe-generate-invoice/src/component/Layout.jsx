@@ -8,15 +8,21 @@ import { Outlet, Route, Routes } from 'react-router-dom'
 import RiwayatPage from '../pages/Dashboard/RiwayatPage';
 import InvoicePage from '../pages/Dashboard/InvoicePage';
 import DetailsInvoicePage from '../pages/Dashboard/DetailsInvoicePage';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import { axiosInstance } from '../config/axiosInstance';
+import { useEffect } from 'react';
 
 const Layout = () => {
+    const [profile, setProfile] = useState()
+    
 
     return (
         <div className="container-fluid p-0">
             <div className="d-flex">
                 <Sidebar />
                 <div className="flex-column w-100">
-                    <Navbar />
+                    <Navbar profile={profile} setProfile={setProfile} />
                     <Outlet />
                     <Routes>
                         <Route path="/" element={<BerandaPage />} />

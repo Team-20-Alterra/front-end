@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { axiosInstance } from '../../config/axiosInstance'
 import { HiChevronLeft } from 'react-icons/hi'
 import { toast } from 'react-toastify'
+import emailjs from '@emailjs/browser';
 
 const DetailsInvoicePage = () => {
     const { id } = useParams()
@@ -42,6 +43,18 @@ const DetailsInvoicePage = () => {
         }
 
     }
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_5kk2tek', 'template_39ozxp2', e.target, '1GBjYQKzmcCzyWl_X')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+    }
+
 
     return (
         <div className="container-content mb-5-content">
@@ -143,6 +156,16 @@ const DetailsInvoicePage = () => {
                     <button type='button' value={'Gagal'} className='btn-gagal' onClick={handleStatus} disabled={handleDisabled}>Gagal</button>
                 </div>
             </div>
+            <div className='send-email__button'>
+                    <form onSubmit={sendEmail}>
+                        <input type="email" name="admin_email" value={invoices?.Businnes?.email} hidden/>
+                        <input type="text" name="from_name" hidden value={invoices?.Businnes?.name}/>
+                        <input type="email" name="email" hidden value={invoices?.customer?.email}/>
+                        <input type="text" name="to_name" hidden value={invoices?.customer?.name}/>
+                        <div name="message" value={'TESTING'} hidden></div>
+                        <button type='submit' id='kirimEmail'>Kirim Email!</button>
+                    </form>
+                </div>
         </div>
     )
 }

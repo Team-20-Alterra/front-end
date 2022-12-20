@@ -8,9 +8,11 @@ import { axiosInstance } from '../config/axiosInstance'
 import Auth from '../utils/Auth/Auth'
 
 
-const Navbar = () => {
+const Navbar = ({}) => {
     const navigate = useNavigate()
     const [profile, setProfile] = useState()
+    const [countNotif, setCountNotif] = useState(0)
+    const [notifikasi, setNotifikasi] = useState([])
 
 
     const getAdminData = () => {
@@ -28,13 +30,31 @@ const Navbar = () => {
         getAdminData()
     }, [])
 
+    useEffect(() => {
+        axiosInstance.get('/notif/busines')
+            .then((response) => {
+                setNotifikasi(response.data.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
+    useEffect(() => {
+        axiosInstance.get('/notif/count-admin')
+            .then((response) => {
+                setCountNotif(response.data.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
+
     const handleLogOut = () => {
         Auth.isLoggedOut()
         navigate("/")
     }
     return (
         <>
-            { }
             <nav className="dashboard-navbar navbar sticky-top">
                 <a className="navbar-brand d-flex align-items-center justify-content-center">
                     <img src={profile?.data?.logo} alt="Logo" className="imgNavbar d-inline-block align-text-top rounded-circle" />
@@ -44,22 +64,22 @@ const Navbar = () => {
                     <div className="dropdown me-3">
                         <a className="text-white m-0" id="dropdownUser1" data-bs-toggle="dropdown">
                             <BiBell className="IconNotif" />
-                            <span className="badge rounded-pill badge-notification bg-danger">1</span>
+                            <span className="badge rounded-pill badge-notification bg-danger">{countNotif}</span>
                         </a>
                         <ul className="dropdown-menu dropdown-menu-light shadow navNotif">
                             <li className="headerNotif">Notifikasi</li>
                             <li><hr className="dropdown-divider" /></li>
-                            <li><a className="dropdown-item">
-                                <p className='unreadNotif m-0'>Ada tagihan yang perlu direview! (Unread)</p>
-                                <p className='bodyNotif text-wrap'>Tagihan dari Nama Pengguna dengan No. Invoice telah melakukan pembayaran. Segera lakukan review!</p>
-                                <p className='footerNotif m-0'><HiOutlineClock /> 24 Feb 2022, 13.20 WIB</p>
-                            </a></li>
-                            <li><hr className="dropdown-divider" /></li>
-                            <li><a className="dropdown-item">
-                                <p className='unreadNotif m-0'>Ada tagihan yang perlu direview! (Unread)</p>
-                                <p className='bodyNotif text-wrap'>Tagihan dari Nama Pengguna dengan No. Invoice telah melakukan pembayaran. Segera lakukan review!</p>
-                                <p className='footerNotif m-0'><HiOutlineClock /> 24 Feb 2022, 13.20 WIB</p>
-                            </a></li>
+                            <div className="wrap-notif">
+                                {notifikasi.map((notif) => (
+                                    <li key={notif.ID}>
+                                        <a className="dropdown-item">
+                                            <p className='unreadNotif m-0'>{notif.title}</p>
+                                            <p className='bodyNotif text-wrap'>{notif.body}</p>
+                                            <p className='footerNotif m-0'><HiOutlineClock /> {notif.UpdatedAt}</p>
+                                        </a>
+                                    </li>
+                                ))}
+                            </div>
                         </ul>
                     </div>
                     <div className="me-3">
@@ -67,7 +87,7 @@ const Navbar = () => {
                             <img src={profile?.data?.admin?.photo} alt="Profile" className="imgNavbar rounded-circle me-1" />
                             <strong className='TextNavbar me-2'>{profile?.data?.admin?.name}</strong>
                         </a>
-                        <HiArrowRightOnRectangle size={24} style={{ color: "white", cursor: "pointer", marginLeft: "16px" }} onClick={handleLogOut} />
+                        <a><HiArrowRightOnRectangle size={24} style={{ color: "white", cursor: "pointer", marginLeft: "16px" }} onClick={handleLogOut} /></a>
                     </div>
                 </div>
             </nav>

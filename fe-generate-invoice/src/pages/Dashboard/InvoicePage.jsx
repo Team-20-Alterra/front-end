@@ -20,6 +20,11 @@ const InvoicePage = () => {
     const [discount, setDiscount] = useState(0)
     const [total, setTotal] = useState()
     const [itemData, setItemData] = useState()
+    const [noteAndNotif, setNoteAndNotif] = useState({
+        note: "",
+        title: "",
+        body: ""
+    })
 
     const convertDiscount = Object.values(discount)
     const convert = convertDiscount[0]?.toString()
@@ -29,15 +34,17 @@ const InvoicePage = () => {
         discount: convert,
         total: Number(total),
         sub_total: subTotal,
-        title: "Judul Notifikasi",
-        body: "Body Notifikasi"
+        note: noteAndNotif.note,
+        title: noteAndNotif.title,
+        body: noteAndNotif.body
     }
 
 
     useEffect(() => {
         axiosInstance.get('/add-customer/businness')
             .then((response) => {
-                setAPIData(response.data.data);
+                // setAPIData(response.data.data);
+                console.log(response)
             })
     }, [])
 
@@ -46,7 +53,7 @@ const InvoicePage = () => {
     }
 
     useEffect(() => {
-        const results = APIData.filter(data =>
+        const results = APIData?.filter(data =>
             data.customer.id.toString().concat(data.customer.name).toLowerCase().includes(searchTerm)
         );
         setSearchResults(results);
@@ -64,8 +71,14 @@ const InvoicePage = () => {
             [e.target.name]: +e.target.value
         })
     }
+    const handleNoteAndNotif = (e) => {
+        setNoteAndNotif({
+            ...noteAndNotif,
+            [e.target.name]: e.target.value
+        })
+    }
 
-    const getBusinessData = () => {
+    const getBusinessData = useCallback(() => {
         axiosInstance.get(`/invoices/${ID}`)
             .then((response) => {
                 setBusinessData(response.data)
@@ -76,11 +89,11 @@ const InvoicePage = () => {
                     autoClose: 1000
                 })
             })
-    }
+    },[ID])
 
     useEffect(() => {
         getBusinessData()
-    }, [itemData])
+    }, [getBusinessData, itemData])
 
     const getTodayDate = () => {
         let today = new Date();
@@ -107,12 +120,12 @@ const InvoicePage = () => {
 
     useEffect(() => {
         getSubTotal()
-    }, [getSubTotal, itemData])
+    }, [getSubTotal])
     
     
     useEffect(() => {
         getTotal()
-    }, [getTotal, itemData])
+    }, [getTotal])
 
     const updateInvoice = () => {
 
@@ -121,6 +134,7 @@ const InvoicePage = () => {
             discount: values.discount,
             total: values.total,
             sub_total: values.sub_total,
+            note: values.note,
             title: values.title,
             body: values.body
         }
@@ -135,7 +149,7 @@ const InvoicePage = () => {
             })
     }
 
-    console.log(businessData)
+    console.log(APIData)
     return (
         <div className="container-content mb-5-content">
             <HeaderDashboard name="Buat Invoice" />
@@ -188,7 +202,7 @@ const InvoicePage = () => {
                             {searchTerm ? (
                                 <div className="card" >
                                     <ul className="list-group list-group-flush">
-                                        {searchResults.map((data) => (
+                                        {searchResults?.map((data) => (
                                             <li className="list-group-item"
                                                 value={data.customer.id}
                                                 onClick={(e) => handleSelected(e)}
@@ -209,10 +223,21 @@ const InvoicePage = () => {
                 <ListItem itemData={itemData} setItemData={setItemData}/>
             </div>
 
-            <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
+            <div className='invoice-item__summary mt-5 d-flex justify-content-between gap-5'>
                 <div className='invoice-item__note'>
                     <h5>Catatan:</h5>
-                    <textarea name="catatan" id="" cols="55" rows="5"></textarea>
+                    <textarea name="note" id="" cols="35" rows="5" onChange={handleNoteAndNotif}></textarea>
+                </div>
+
+                <div className='invoice-item__notif d-flex justify-content-center flex-column gap-1'>
+                    <h5>Notification</h5>
+
+                    <label htmlFor="title">Title : </label>
+                    <input type="text" name='title' onChange={handleNoteAndNotif} />
+
+                    <label htmlFor="body">Body :</label>
+                    <textarea name="body" id="" cols="30" rows="5" onChange={handleNoteAndNotif}></textarea>
+                    
                 </div>
 
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>

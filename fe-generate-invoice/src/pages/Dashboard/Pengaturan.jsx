@@ -176,7 +176,11 @@ export default function PengaturanPage() {
                         <div className="d-flex flex-column my-4">
                             <input type="file" accept="image/*" className="image-input" onChange={onSelectFile} name="logo" />
                         </div>
-                        {selectedFile && <img src={preview} alt={preview} style={{ width: "250px", height: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginTop: "5px" }} />}
+                        {selectedFile &&
+                            <div>
+                                <img src={preview} alt={preview} style={{ width: "250px", height: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginTop: "5px" }} />
+                            </div>
+                        }
                     </div>
                     <div className="btn-simpan">
                         <button type="submit" className="btn-primary mt-4"><AiOutlineCheck className="me-2" />Simpan</button>

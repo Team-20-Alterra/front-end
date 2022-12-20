@@ -149,7 +149,7 @@ const RegisterBusiness = () => {
                 Bank
               </option>
               {bankData?.map((item) => (
-                <option value={item.ID} key={item.ID}>{item.code} - {item.name}</option>
+                <option value={item.id} key={item.id}>{item.code} - {item.name}</option>
               ))}
             </select>
             

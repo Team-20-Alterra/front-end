@@ -17,7 +17,7 @@ export default function Home() {
                     <h1 className="mb-4">Get Invoice Get Ginap</h1>
                     <div className="hero-subjudul">
                         <h3>Ginap ada untuk memudahkan anda menuliskan tagihan kepada pelanggan.</h3>
-                        <div className="hero-detail">Tuliskan Tagihanmu, sehatkan keuangan bisnismu</div>
+                        <div className="hero-detail fw-bold">Tuliskan Tagihanmu, sehatkan keuangan bisnismu</div>
                     </div>
                     <div className="hero-button d-flex flex-row ">
                         <Link to="/register"><div className="navLink signup">Daftar</div></Link>
