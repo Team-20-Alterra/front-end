@@ -6,16 +6,26 @@ import { randomColor } from '../../utils/randomColor'
 import { Link } from "react-router-dom";
 import { statusBadge } from './StatusBadge'
 import { Pagination } from '../../utils/Pagination'
-import { useDispatch } from 'react-redux'
-import { handleBerhasilInvoice } from '../../store/riwayat'
+import { useDispatch, useSelector } from 'react-redux'
+import { handleBerhasilInvoice, handleDalamProsesInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice } from '../../store/riwayat'
 
 const ListRiwayat = ({ riwayats, status }) => {
 
   const [riwayatSlice, setRiwayatSlice] = useState([])
   const dispatch = useDispatch()
 
+
   const handleFilterBerhasil = () => {
     dispatch(handleBerhasilInvoice())
+  }
+  const handleFilterGagal = () => {
+    dispatch(handleGagalInvoice())
+  }
+  const handleFilterMenungguKonfirmasi = () => {
+    dispatch(handleMenungguKonfirmasinvoice())
+  }
+  const handleFilterDalamProses = () => {
+    dispatch(handleDalamProsesInvoice())
   }
 
   const [paginationState, setPaginationState] = useState({
@@ -56,13 +66,13 @@ const ListRiwayat = ({ riwayats, status }) => {
             <button onClick={handleFilterBerhasil}>Selesai</button>
           </li>
           <li>
-            <a href="/">On Proses</a>
+            <button onClick={handleFilterDalamProses}>On Proses</button>
           </li>
           <li>
-            <a href="/">Pending</a>
+            <button onClick={handleFilterMenungguKonfirmasi}>Pending</button>
           </li>
           <li>
-            <a href="/">Gagal</a>
+            <button onClick={handleFilterGagal}>Gagal</button>
           </li>
         </ul>
       </div>

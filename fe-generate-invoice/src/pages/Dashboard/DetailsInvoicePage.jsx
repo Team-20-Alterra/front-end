@@ -4,6 +4,7 @@ import { axiosInstance } from '../../config/axiosInstance'
 import { HiChevronLeft } from 'react-icons/hi'
 import { toast } from 'react-toastify'
 import emailjs from '@emailjs/browser';
+import { statusBadge } from '../../component/DashboardFeature/StatusBadge'
 
 const DetailsInvoicePage = () => {
     const { id } = useParams()
@@ -11,6 +12,7 @@ const DetailsInvoicePage = () => {
     const [loading, setLoading] = useState(true)
     const [handleDisabled, setHandleDisabled] = useState(true)
     const navigate = useNavigate()
+    console.log(invoices)
 
     useEffect(() => {
         axiosInstance.get(`/invoices/${id}`)
@@ -149,7 +151,7 @@ const DetailsInvoicePage = () => {
                 ${invoices?.Item?.map((invoice) => {
                         let tableData = "";
                         tableData += 
-                        <tr>
+                        <tr key={invoice.ID}>
                             <td>{invoice.name}</td>
                             <td>{invoice.unit_price}</td>
                             <td>{invoice.amount}</td>
@@ -173,6 +175,7 @@ const DetailsInvoicePage = () => {
     return (
         <div className="container-content mb-5-content">
             <div className='text-kembali' onClick={handleGoBack}><HiChevronLeft size={24} /> Kembali</div>
+            <div>{statusBadge(invoices.status)}</div>
             <div className="headerInvoice d-flex align-items-center justify-content-between">
                 <img src={invoices?.Businnes?.logo} alt="Logo" />
                 <div className='flex-column text-end'>

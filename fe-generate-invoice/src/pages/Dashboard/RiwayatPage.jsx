@@ -22,7 +22,8 @@ const RiwayatPage = () => {
 
     useEffect(() =>{
         dispatch(getRiwayat())
-    },[dispatch])
+    }, [dispatch])
+    
 
     // console.log(riwayatData)
 
