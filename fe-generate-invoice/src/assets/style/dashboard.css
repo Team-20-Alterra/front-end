@@ -909,3 +909,9 @@ textarea#alamat:focus {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
 }
+
+.head-email{
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+}
