@@ -17,7 +17,7 @@ const ListPelanggan = ({ pelanggan, handleDeleteUser }) => {
         <div >Hapus</div>
       </div>
       {pelanggan.map((user) => (
-        <div className="container-list d-flex flex-row align-items-center" key={user.ID} >
+        <div className="container-list d-flex flex-row align-items-center" key={user.id} >
           <div className='pelanggan d-flex align-items-center'>
             <div className='box' style={{ background: `#${randomColor()}` }}>
               {initialName((user?.customer?.name))}

@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react'
 import HeaderDashboard from '../../component/DashboardFeature/HeaderDashboard'
-import logoPerusahaan from '../../assets/image/Admin/Logo-Perusahaan.png'
 import ListItem from '../../component/DashboardFeature/ListItem'
 import { HiPlus } from 'react-icons/hi'
 import { useState } from 'react'
@@ -17,8 +16,9 @@ const InvoicePage = () => {
     const [selected, setSelected] = useState("")
     const [searchResults, setSearchResults] = useState([]);
     const [subTotal, setSubTotal] = useState()
-    const [discount, setDiscount] = useState({discount: 0})
+    const [discount, setDiscount] = useState({ discount: 0 })
     const [total, setTotal] = useState(0)
+    const [btnDiscount, setbtnDiscount] = useState(true)
     const [itemData, setItemData] = useState()
     const [noteAndNotif, setNoteAndNotif] = useState({
         note: "",
@@ -87,7 +87,7 @@ const InvoicePage = () => {
                     autoClose: 1000
                 })
             })
-    },[ID])
+    }, [ID])
 
     useEffect(() => {
         getBusinessData()
@@ -109,27 +109,24 @@ const InvoicePage = () => {
     }
     const getTotal = useCallback(() => {
         const converting = Object.values(discount)
-        const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal).toFixed(2)
-        console.log(gettingTotal)
+        const gettingTotal = Number(subTotal - (converting[0] / 100) * subTotal)
         setTotal(gettingTotal)
-    },[subTotal, discount])
-
+    }, [subTotal, discount])
 
     useEffect(() => {
         getSubTotal()
     }, [getSubTotal])
-    
+
     useEffect(() => {
         getTotal()
     }, [getTotal, discount])
 
     const updateInvoice = () => {
-
         axiosInstance.put(`/invoices/${ID}`, {
             user_id: +values.user_id,
             discount: values.discount,
             total: values.total,
-            sub_total: values.sub_total,
+            sub_total: subTotal,
             title: values.title,
             body: values.body
         }
@@ -140,15 +137,22 @@ const InvoicePage = () => {
             })
         })
             .catch((error) => {
-                console.log(error)
+                toast.error('Pastikan Semua Input Sudah Terisi', {
+                    position: "top-right",
+                    autoClose: 2000
+                })
             })
+    }
+
+    const handleBtnDiscount = () => {
+        setbtnDiscount(false)
     }
 
     return (
         <div className="container-content mb-5-content">
             <HeaderDashboard name="Buat Invoice" />
             <div className="headerInvoice d-flex align-items-center justify-content-between">
-                <img src={logoPerusahaan} alt="Logo" />
+                <img src={businessData?.data.Businnes.logo} alt="Logo" />
                 <div className='flex-column text-end'>
                     <h1 className='textHeader'>Invoice</h1>
                     <h2 className='textSubHeader'>#{businessData?.data?.ID}</h2>
@@ -192,7 +196,7 @@ const InvoicePage = () => {
                             <h6 className='judul mb-2 mt-1'>:</h6>
                         </div>
                         <div className="head-invoice w-50">
-                            <input type="text" className="input-riwayat" placeholder="User Id" value={searchTerm} onChange={(e) => searchItems(e.target.value)} name='userid' />
+                            <input type="text" className="input-riwayat" placeholder="User Id" value={searchTerm} onChange={(e) => searchItems(e.target.value)} name='userid' required />
                             {searchTerm ? (
                                 <div className="card" >
                                     <ul className="list-group list-group-flush">
@@ -214,39 +218,48 @@ const InvoicePage = () => {
                 </div>
             </div>
             <div className='invoice-item__container'>
-                <ListItem itemData={itemData} setItemData={setItemData}/>
+                <ListItem itemData={itemData} setItemData={setItemData} />
             </div>
 
-            <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
-                <div className='invoice-item__note'>
-                    <h5>Catatan:</h5>
-                    <textarea name="catatan" id="" cols="55" rows="5" onChange={handleNoteAndNotif}></textarea>
+            <div className='invoice-item__summary mt-5 d-flex justify-content-between '>
+                <div className='invoice-item__note d-flex flex-column'>
+                    Catatan :
+                    <textarea name="catatan" className='input-textarea' cols="45" rows="5" onChange={handleNoteAndNotif} required></textarea>
                 </div>
 
-                <div className='invoice-item__notif d-flex justify-content-center flex-column gap-1'>
-                    <h5>Notification</h5>
+                <div className='invoice-item__notif d-flex justify-content-center flex-column gap-2 w-25'>
+                    <h6 className='fw-bold'>Send Notification</h6>
+                    Title :
+                    <input type="text" className='input-riwayat' style={{ fontSize: '13px' }} name='title' onChange={handleNoteAndNotif} />
 
-                    <label htmlFor="title">Title : </label>
-                    <input type="text" name='title' onChange={handleNoteAndNotif} />
+                    Body :
+                    <textarea name="body" className='input-textarea' cols="30" rows="5" onChange={handleNoteAndNotif}></textarea>
 
-                    <label htmlFor="body">Body :</label>
-                    <textarea name="body" id="" cols="30" rows="5" onChange={handleNoteAndNotif}></textarea>
-                    
                 </div>
 
-                <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-3'>
+                <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-2'>
                     <div className='invoice-item__subtotal'>
-                        <h6>Subtotal</h6>
-                        <input onChange={getSubTotal} value={subTotal?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })} disabled name='sub_total' />
+                        <div className='fw-bold'>Subtotal</div>
+                        <div>{subTotal?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) || ''}</div>
                     </div>
-                    <div className='invoice-item__diskon align-self-end'>
-                        <h6 style={{ fontWeight: "bolder", color: "#297061" }}><HiPlus />Diskon</h6><input type="number" name='diskon' onChange={handleDiscount}/><span>%</span>
-                    </div>
+                    {btnDiscount ? (
+                        <div className='invoice-item__diskon align-self-end'>
+                            <button className='btn-diskon w-100' onClick={handleBtnDiscount}><HiPlus /> Diskon</button>
+                        </div>
+                    ) : (
+                        <div className="invoice-input_diskon d-flex justify-content-between align-items-center ms-2 me-2">
+                            <div className='fw-bold'>Diskon</div>
+                            <div class="w-25">
+                                <input type="number" className='input-diskon w-75' name='diskon' onChange={handleDiscount} />
+                                <span className="input-diskon-text w-25">%</span>
+                            </div>
+                        </div>
+                    )}
                     <div className='invoice-item__total'>
-                        <h6>Total</h6>
-                        <input onChange={getTotal} value={discount ? total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) : 0} disabled name='total' />
+                        <div className='fw-bold'>Total</div>
+                        <div>{total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                     </div>
-                    <button type='submit' className='justify-content-end' onClick={updateInvoice}>Kirim Invoice</button>
+                    <button type='submit' className='btn-primary align-self-end w-75 mt-2' onClick={updateInvoice}>Kirim Invoice</button>
                 </div>
             </div>
         </div >

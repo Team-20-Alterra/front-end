@@ -7,10 +7,6 @@ body {
   font-family: "Poppins";
   margin: 0;
 }
-.icon-delete:hover {
-  color: red;
-  cursor: pointer;
-}
 .dashboard-navbar {
   padding: 11px 24px;
 }
@@ -76,8 +72,15 @@ nav {
 .IconNotif {
   height: 27px;
   width: 27px;
-  margin-top: 9px;
 }
+.IconNotif:hover {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
 .dropdown-menu:hover {
   background-color: #d4e2df;
 }
@@ -112,7 +115,7 @@ nav {
 }
 .navNotif {
   width: 400px !important;
-  margin-top: 16px !important;
+  margin-top: 22px !important;
 }
 .wrap-notif {
   height: 400px !important;
@@ -122,17 +125,15 @@ nav {
   left: -190px !important;
 }
 .unreadNotif {
-  font-weight: 600;
   font-size: 14px;
   margin-bottom: 4px;
 }
 .bodyNotif {
-  font-weight: 400;
   font-size: 12px;
   margin-bottom: 0;
 }
 .footerNotif {
-  font-size: 12px;
+  font-size: 11px;
   color: #9a9a9a;
 }
 .container-content {
@@ -587,6 +588,20 @@ button.add-rekening:hover {
   font-size: 16px;
   margin: 8px 0px;
 }
+.chart-container {
+  background-color: #d4e2df;
+  padding: 16px 24px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin-right: 16px;
+  height: 100%;
+}
+.apexcharts-legend {
+  right: 35px !important;
+}
+.wrap-invoice-aktif {
+  height: 500px;
+}
 /* Dashboard */
 
 /* Invoice */
@@ -644,6 +659,24 @@ button.add-rekening:hover {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
+
+.input-diskon {
+  border-radius: 5px;
+  outline: var(--primary-color) !important;
+}
+.input-diskon-text {
+  background-color: white;
+  margin-left: 5px;
+}
+.input-textarea {
+  outline-color: var(--primary-color);
+  border-radius: 5px;
+  border: 1px solid #abb1b7;
+  padding: 10px;
+}
+.invoice-item__notif {
+  font-size: 13px;
+}
 .invoice-item__subtotal {
   background-color: #d4e2df;
   display: flex;
@@ -669,15 +702,22 @@ button.add-rekening:hover {
 .invoice-item__diskon {
   padding: 8px 16px;
 }
-.invoice-item__pricing button {
+.btn-diskon {
   border: none;
-  background-color: #297061;
+  background-color: white;
   padding: 8px;
-  color: white;
+  color: #297061;
   border-radius: 5px;
   width: 80%;
   align-self: flex-end;
+  font-weight: bold;
 }
+
+.invoice-input_diskon {
+  padding: 15px 0;
+  color: var(--primary-color);
+}
+
 .invoice-item__note {
   font-weight: 600;
   font-size: 16px;
@@ -791,7 +831,8 @@ button.add-rekening:hover {
   height: 199px;
 }
 .input-riwayat {
-  border: 1px solid #ced4da;
+  border: 1px solid #abb1b7;
+  outline-color: var(--primary-color);
   border-radius: 4px;
   padding: 6px 12px;
   font-weight: 400;

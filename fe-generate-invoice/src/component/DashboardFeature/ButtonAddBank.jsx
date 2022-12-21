@@ -22,7 +22,6 @@ const ButtonAddBank = ({ values }) => {
             ...searchTerm,
             [event.target.name]: event.target.value
         })
-        // setSearchTerm(e);
     }
 
     useEffect(() => {
@@ -52,8 +51,6 @@ const ButtonAddBank = ({ values }) => {
             console.log(error)
         })
     }
-    console.log(searchResults)
-
 
     return (
         <>
@@ -67,15 +64,15 @@ const ButtonAddBank = ({ values }) => {
                         <div className="modal-body">
                             <h6>Nama Bank</h6>
                             <form>
-                                <input type="text" className='inputModal' name='name' placeholder="Masukkan Nama Bank.." value={searchTerm.name} onChange={searchItems} />
+                                <input type="text" className='inputModal' name='name' placeholder="Masukkan Nama Bank.." value={searchTerm.name || ''} onChange={searchItems} />
                                 {searchTerm ? (
                                     <div className="card" >
-                                        <ul className="list-group list-group-flush">
-                                            {searchResults.map((data) => (
-                                                <button type='button' className="list-group-item" value={data.id} name='name' onClick={handleSelected} key={data.id}>{data.code} -{data.name}</button>
-                                            ))
-                                            }
-                                        </ul>
+                                        {searchResults.map((data) => (
+                                            <ul className="list-group list-group-flush">
+                                                <button type='button' className="list-group-item text-start" value={data.id} name='name' onClick={handleSelected} key={data.id}>{data.code} - {data.name}</button>
+                                            </ul>
+                                        ))
+                                        }
                                     </div>
                                 ) : null}
                                 <h6 className='mt-4'>Nomor Rekening</h6>

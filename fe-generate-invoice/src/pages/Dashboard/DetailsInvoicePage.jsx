@@ -27,11 +27,12 @@ const DetailsInvoicePage = () => {
         if (e.target.value === 'Review') {
             setHandleDisabled(false)
         } else {
+            console.log(e.target.value)
             await axiosInstance.put(`/invoices/update-status/${id}`, {
                 status: e.target.value
             })
                 .then((response) => {
-                    toast.success(response.data.message, {
+                    toast.success('Pembayaran anda ' + e.target.value, {
                         position: "top-right",
                         autoClose: 1000
                     })
@@ -48,10 +49,10 @@ const DetailsInvoicePage = () => {
         e.preventDefault();
 
         const templateParams = {
-            email : 'zhafranafif97@gmail.com',
-            to_name : invoices?.customer?.name,
+            email: 'zhafranafif97@gmail.com',
+            to_name: invoices?.customer?.name,
             admin_email: invoices?.Businnes?.email,
-            from_name : invoices?.Businnes?.name,
+            from_name: invoices?.Businnes?.name,
             my_html: `
             <div className="container-content mb-5-content">
             <div className="headerInvoice d-flex align-items-center justify-content-between">
@@ -118,13 +119,13 @@ const DetailsInvoicePage = () => {
                     </thead>
                     <tbody>
                         ${invoices?.Item?.map((invoice) => (
-                            <tr>
-                                <td>{invoice.name}</td>
-                                <td>{invoice.unit_price}</td>
-                                <td>{invoice.amount}</td>
-                                <td>{invoice.total_price}</td>
-                            </tr>
-                        ))}
+                <tr>
+                    <td>{invoice.name}</td>
+                    <td>{invoice.unit_price}</td>
+                    <td>{invoice.amount}</td>
+                    <td>{invoice.total_price}</td>
+                </tr>
+            ))}
                     </tbody>
                 </table>
             </div>
@@ -160,7 +161,7 @@ const DetailsInvoicePage = () => {
 
 
     return (
-        <div className="container-content mb-5-content">
+        <div className="container-content mb-5-content" >
             <div className='text-kembali' onClick={handleGoBack}><HiChevronLeft size={24} /> Kembali</div>
             <div className="headerInvoice d-flex align-items-center justify-content-between">
                 <img src={invoices?.Businnes?.logo} alt="Logo" />
@@ -225,12 +226,12 @@ const DetailsInvoicePage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {invoices?.Item?.map((invoice) => (
-                            <tr>
-                                <td>{invoice.name}</td>
-                                <td>{invoice.unit_price}</td>
-                                <td>{invoice.amount}</td>
-                                <td>{invoice.total_price}</td>
+                        {invoices?.Item?.map((item) => (
+                            <tr key={item.ID}>
+                                <td>{item.name}</td>
+                                <td>{item.unit_price}</td>
+                                <td>{item.amount}</td>
+                                <td>{item.total_price}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -238,7 +239,8 @@ const DetailsInvoicePage = () => {
             </div>
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
                 <div className='invoice-item__note'>
-                    Catatan:
+                    Catatan :
+                    <div> {invoices.note} </div>
                 </div>
 
                 <div className='d-flex justify-content-end flex-column gap-2'>
@@ -248,7 +250,7 @@ const DetailsInvoicePage = () => {
                     </div>
                     <div className='invoice-item__diskon d-flex justify-content-between'>
                         <div>Diskon</div>
-                        <div>{invoices.discount}</div>
+                        <div>{invoices.discount} %</div>
                     </div>
                     <div className='invoice-item__total'>
                         <div>Total</div>
@@ -260,10 +262,10 @@ const DetailsInvoicePage = () => {
                 </div>
             </div>
             <div className='send-email__button'>
-                    <form onSubmit={sendEmail}>
-                        <button type='submit' id='kirimEmail'>Kirim Email!</button>
-                    </form>
-                </div>
+                <form onSubmit={sendEmail}>
+                    <button type='submit' id='kirimEmail'>Kirim Email!</button>
+                </form>
+            </div>
         </div>
     )
 }

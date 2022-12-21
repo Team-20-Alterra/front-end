@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../config/axiosInstance';
 import ButtonAddPelanggan from '../../component/DashboardFeature/ButtonAddPelanggan';
 import ChartComponent from '../../component/DashboardFeature/ChartComponent';
-import { 
-    getInvoiceBerhasil, 
-    selectInvoiceDataSuccess, 
-    getInvoiceStatusSuccess 
+import {
+    getInvoiceBerhasil,
+    selectInvoiceDataSuccess,
+    getInvoiceStatusSuccess
 } from '../../store/chartInvoiceSuccess';
 import {
     getInvoiceGagal,
@@ -21,8 +21,6 @@ import { useSelector, useDispatch } from 'react-redux';
 const BerandaPage = () => {
     const dispatch = useDispatch()
     const [total, setTotal] = useState(0)
-    // const [berhasil, setBerhasil] = useState(0)
-    // const [gagal, setGagal] = useState(0)
     const [invoiceAktif, setInvoiceAktif] = useState([])
 
     //chart redux invoice success
@@ -32,27 +30,15 @@ const BerandaPage = () => {
     //chart redux invoice failed
     const invoiceDataFailed = useSelector(selectInvoiceDataFailed)
     const invoiceStatusFailed = useSelector(getInvoiceStatusFailed)
-    
-    console.log(invoiceDataFailed)
+
+    const belumBayar = total - (invoiceDataSuccess + invoiceDataFailed)
 
     useEffect(() => {
         dispatch(getInvoiceBerhasil())
         dispatch(getInvoiceGagal())
-    },[dispatch])
+    }, [dispatch])
 
-    // useEffect(() => {
-    //     axiosInstance.get('/invoices/count/berhasil')
-    //         .then((response) => {
-    //             setBerhasil(response.data.data)
-    //         })
-    // }, [])
 
-    // useEffect(() => {
-    //     axiosInstance.get('/invoices/count/gagal')
-    //         .then((response) => {
-    //             setGagal(response.data.data)
-    //         })
-    // }, [])
 
     useEffect(() => {
         axiosInstance.get('/invoices/count')
@@ -66,7 +52,7 @@ const BerandaPage = () => {
             .then((response) => {
                 const dataFilter = response.data.data.filter((invoice) => invoice.status === "Dalam Proses"
                     || invoice.status === "Menunggu Konfirmasi")
-                setInvoiceAktif(dataFilter)
+                setInvoiceAktif(dataFilter.slice(0, 8))
             })
     }, [])
 
@@ -104,7 +90,7 @@ const BerandaPage = () => {
                             </div>
                         </div>
                         {invoiceStatusSuccess === "success" && invoiceStatusFailed === "success"
-                            ? <ChartComponent berhasil={invoiceDataSuccess} gagal={invoiceDataFailed}/> : "null"
+                            ? <ChartComponent berhasil={invoiceDataSuccess} gagal={invoiceDataFailed} belumBayar={belumBayar} /> : "null"
                         }
                     </div>
                     <div className='history-inv w-50'>
@@ -116,26 +102,28 @@ const BerandaPage = () => {
                                 <div className='history-list'>Type</div>
                                 <div className='history-list'>Status</div>
                             </div>
-                            {invoiceAktif.map((invoice) => (
-                                <div className='history-ket-isi' key={invoice.ID}>
-                                    <div className='history-detail flex-column'>
-                                        <div>{invoice?.customer?.name}</div>
-                                        <div># {invoice?.customer?.ID}</div>
-                                    </div>
-                                    <div className='history-detail'>#{invoice?.ID}</div>
-                                    <div className='history-detail'>{invoice.type}</div>
-                                    <div className='history-ket-status'>
-                                        <div className='text-history-status'
-                                            style={invoice.status === 'Dalam Proses' ?
-                                                { backgroundColor: '#84BBF3' }
-                                                :
-                                                { backgroundColor: '#EEC555' }}>
-                                            {invoice.status}
+                            <div className='wrap-invoice-aktif'>
+                                {invoiceAktif.map((invoice) => (
+                                    <div className='history-ket-isi' key={invoice.ID}>
+                                        <div className='history-detail flex-column'>
+                                            <div>{invoice?.customer?.name}</div>
+                                            <div># {invoice?.customer?.ID}</div>
                                         </div>
-                                    </div>
+                                        <div className='history-detail'>#{invoice?.ID}</div>
+                                        <div className='history-detail'>{invoice.type}</div>
+                                        <div className='history-ket-status'>
+                                            <div className='text-history-status'
+                                                style={invoice.status === 'Dalam Proses' ?
+                                                    { backgroundColor: '#84BBF3' }
+                                                    :
+                                                    { backgroundColor: '#EEC555' }}>
+                                                {invoice.status}
+                                            </div>
+                                        </div>
 
-                                </div>
-                            ))}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

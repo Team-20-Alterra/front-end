@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { axiosInstance } from '../../config/axiosInstance'
 import InvoicePage from '../../pages/Dashboard/InvoicePage'
 
-const ButtonAddItem = ({getItemData}) => {
+const ButtonAddItem = ({ getItemData }) => {
     const { ID } = useParams()
     const [invoiceID, setInvoiceID] = useState()
     const [values, setValues] = useState({
@@ -64,7 +64,8 @@ const ButtonAddItem = ({getItemData}) => {
 
     return (
         <>
-            <button className='btn btn-primary d-flex' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ width: "10%" }}><HiPlus style={{ fontSize: "24px", marginRight: "4px", color: "#E4EDEB" }} />Item</button>
+            <button className='btn-primary d-flex' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ width: "8%" }}>
+                <HiPlus style={{ fontSize: "24px", marginRight: "4px", color: "#E4EDEB" }} />Item</button>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -74,7 +75,7 @@ const ButtonAddItem = ({getItemData}) => {
                         <div className="modal-body">
                             <form onSubmit={onAddItem}>
                                 <div className='item-modal__container d-flex flex-column gap-3'>
-                                    <input type="text" placeholder='Item' name='name' onChange={handleChange} />
+                                    <input type="text" placeholder='Nama Item' name='name' onChange={handleChange} />
                                     <input type="number" placeholder='Jumlah' name='amount' onChange={handleChange} />
                                     <input type="text" placeholder='Harga Satuan' name='unit_price' onChange={handleChange} />
                                     <input type="text" placeholder='Total Harga' name='total_price' onChange={handleChange} />

@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react'
 import { BiBell } from 'react-icons/bi'
 import { HiArrowRightOnRectangle, HiOutlineClock } from 'react-icons/hi2'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import DefaultProfile from '../assets/image/defaultProfile.png'
 import { axiosInstance } from '../config/axiosInstance'
 import Auth from '../utils/Auth/Auth'
 
 
-const Navbar = ({}) => {
+const Navbar = ({ }) => {
     const navigate = useNavigate()
     const [profile, setProfile] = useState()
     const [countNotif, setCountNotif] = useState(0)
@@ -39,6 +39,7 @@ const Navbar = ({}) => {
                 console.log(error)
             })
     }, [])
+
     useEffect(() => {
         axiosInstance.get('/notif/count-admin')
             .then((response) => {
@@ -48,6 +49,10 @@ const Navbar = ({}) => {
                 console.log(error)
             })
     }, [])
+
+    const handleClickNotif = (e) => {
+        console.log(e)
+    }
 
     const handleLogOut = () => {
         Auth.isLoggedOut()
@@ -71,13 +76,15 @@ const Navbar = ({}) => {
                             <li><hr className="dropdown-divider" /></li>
                             <div className="wrap-notif">
                                 {notifikasi.map((notif) => (
-                                    <li key={notif.ID}>
-                                        <a className="dropdown-item">
-                                            <p className='unreadNotif m-0'>{notif.title}</p>
-                                            <p className='bodyNotif text-wrap'>{notif.body}</p>
-                                            <p className='footerNotif m-0'><HiOutlineClock /> {notif.UpdatedAt}</p>
-                                        </a>
-                                    </li>
+                                    <div value={notif.invoice_id} onClick={(e) => handleClickNotif(e.target.value)}>
+                                        <li key={notif.ID}>
+                                            <a className="dropdown-item" >
+                                                <p className='unreadNotif m-0' style={notif.is_readAmin ? {} : { fontWeight: '700' }}>{notif.title}</p>
+                                                <p className='bodyNotif text-wrap mb-2'>{notif.body}</p>
+                                                <p className='footerNotif m-0'><HiOutlineClock /> {notif.UpdatedAt}</p>
+                                            </a>
+                                        </li>
+                                    </div>
                                 ))}
                             </div>
                         </ul>
@@ -90,7 +97,7 @@ const Navbar = ({}) => {
                         <a><HiArrowRightOnRectangle size={24} style={{ color: "white", cursor: "pointer", marginLeft: "16px" }} onClick={handleLogOut} /></a>
                     </div>
                 </div>
-            </nav>
+            </nav >
         </>
     )
 }

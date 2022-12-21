@@ -17,7 +17,7 @@ export default function PengaturanPage() {
                 setValues(response.data.data)
             })
     }, [])
-    console.log(values)
+
     useEffect(() => {
         axiosInstance.get('/list-bank/businness')
             .then((response) => {
@@ -33,21 +33,21 @@ export default function PengaturanPage() {
     }
     useEffect(() => {
         if (!selectedFile) {
-          setPreview(undefined)
-          return
+            setPreview(undefined)
+            return
         }
         const objectUrl = URL.createObjectURL(selectedFile)
         setPreview(objectUrl)
         return () => URL.revokeObjectURL(objectUrl)
-      }, [selectedFile])
-    
-      const onSelectFile = e => {
+    }, [selectedFile])
+
+    const onSelectFile = e => {
         if (!e.target.files || e.target.files.length === 0) {
-          setSelectedFile(undefined)
-          return
+            setSelectedFile(undefined)
+            return
         }
         setSelectedFile(e.target.files[0])
-      }
+    }
 
     const handleEdittingPengaturan = (e) => {
         e.preventDefault()
@@ -81,7 +81,7 @@ export default function PengaturanPage() {
             })
         }
     }
-    console.log(values)
+
     return (
         <>
             <div className="container-content">
@@ -98,7 +98,7 @@ export default function PengaturanPage() {
                                 name="name"
                                 placeholder="Nama Bisnis"
                                 id="namabisnis"
-                                value={values.name}
+                                value={values.name || ''}
                                 onChange={handleChange}
                             />
                             <div className="mt-4 d-flex flex-row form-part">
@@ -112,7 +112,7 @@ export default function PengaturanPage() {
                                         name="email"
                                         placeholder="Email Bisnis"
                                         id="emailBisnis"
-                                        value={values.email}
+                                        value={values.email || ''}
                                         onChange={handleChange}
                                     />
                                     <label className="d-flex flex-column mt-4 judul">
@@ -124,7 +124,7 @@ export default function PengaturanPage() {
                                         name="no_telp"
                                         placeholder="Nomor Telp"
                                         id="nomorBisnis"
-                                        value={values.no_telp}
+                                        value={values.no_telp || ''}
                                         onChange={handleChange}
                                     />
                                     <label className="d-flex flex-column mt-4 judul">
@@ -133,11 +133,11 @@ export default function PengaturanPage() {
                                     <select
                                         name="type"
                                         id="type"
-                                        value={values.type}
+                                        value={values.type || ''}
                                         onChange={handleChange}
                                         className="input"
                                     >
-                                        <option value="" disabled hidden selected>Jenis Bisnis</option>
+                                        <option value="default" disabled>Jenis Bisnis</option>
                                         <option value="Makanan">Makanan</option>
                                         <option value="Minuman">Minuman</option>
                                         <option value="Elektronik">Elektronik</option>
@@ -151,7 +151,7 @@ export default function PengaturanPage() {
                                         id="alamat"
                                         rows="4"
                                         className="rounded w-100"
-                                        value={values.address}
+                                        value={values.address || ''}
                                         onChange={handleChange}
                                     >
                                     </textarea>
@@ -174,13 +174,13 @@ export default function PengaturanPage() {
                             </div>
                         </div>
                         <div className="d-flex flex-column my-4">
+                            {selectedFile &&
+                                <div>
+                                    <img src={preview} alt={preview} style={{ width: "250px", height: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginTop: "5px" }} />
+                                </div>
+                            }
                             <input type="file" accept="image/*" className="image-input" onChange={onSelectFile} name="logo" />
                         </div>
-                        {selectedFile &&
-                            <div>
-                                <img src={preview} alt={preview} style={{ width: "250px", height: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginTop: "5px" }} />
-                            </div>
-                        }
                     </div>
                     <div className="btn-simpan">
                         <button type="submit" className="btn-primary mt-4"><AiOutlineCheck className="me-2" />Simpan</button>
