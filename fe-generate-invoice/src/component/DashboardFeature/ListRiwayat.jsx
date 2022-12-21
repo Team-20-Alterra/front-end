@@ -6,10 +6,17 @@ import { randomColor } from '../../utils/randomColor'
 import { Link } from "react-router-dom";
 import { statusBadge } from './StatusBadge'
 import { Pagination } from '../../utils/Pagination'
+import { useDispatch } from 'react-redux'
+import { handleBerhasilInvoice } from '../../store/riwayat'
 
 const ListRiwayat = ({ riwayats, status }) => {
 
   const [riwayatSlice, setRiwayatSlice] = useState([])
+  const dispatch = useDispatch()
+
+  const handleFilterBerhasil = () => {
+    dispatch(handleBerhasilInvoice())
+  }
 
   const [paginationState, setPaginationState] = useState({
     pageCount: 0,
@@ -46,7 +53,7 @@ const ListRiwayat = ({ riwayats, status }) => {
             <a href="/" >Semua</a>
           </li>
           <li>
-            <a href="/">Selesai</a>
+            <button onClick={handleFilterBerhasil}>Selesai</button>
           </li>
           <li>
             <a href="/">On Proses</a>
