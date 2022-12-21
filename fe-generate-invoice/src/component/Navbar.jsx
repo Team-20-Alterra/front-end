@@ -64,7 +64,7 @@ const Navbar = ({}) => {
                     <div className="dropdown me-3">
                         <a className="text-white m-0" id="dropdownUser1" data-bs-toggle="dropdown">
                             <BiBell className="IconNotif" />
-                            <span className="badge rounded-pill badge-notification bg-danger">{countNotif}</span>
+                            <span className="badge rounded-pill badge-notification bg-danger">{notifikasi.length}</span>
                         </a>
                         <ul className="dropdown-menu dropdown-menu-light shadow navNotif">
                             <li className="headerNotif">Notifikasi</li>

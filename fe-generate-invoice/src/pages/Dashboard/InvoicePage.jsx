@@ -33,6 +33,7 @@ const InvoicePage = () => {
         user_id: selected.id,
         discount: convert,
         total: Number(total),
+        sub_total: subTotal,
         snote: noteAndNotif.note,
         title: noteAndNotif.title,
         body: noteAndNotif.body
