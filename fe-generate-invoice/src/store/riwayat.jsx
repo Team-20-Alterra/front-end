@@ -15,6 +15,28 @@ const initialState = {
 export const riwayatInvoice = createSlice({
     name: 'riwayat_invoice',
     initialState: initialState,
+    reducers: {
+        handleBerhasilInvoice: (state) => {
+            state.data = state.data.filter((invoice) => {
+                return invoice.status === 'Berhasil'
+            })
+        },
+        handleGagalInvoice: (state) => {
+            state.data = state.data.filter((invoice) => {
+                return invoice.status === 'Gagal'
+            })
+        },
+        handleMenungguKonfirmasinvoice: (state) => {
+            state.data = state.data.filter((invoice) => {
+                return invoice.status === 'Menunggu Konfirmasi'
+            })
+        },
+        handleDalamProsesInvoice: (state) => {
+            state.data = state.data.filter((invoice) => {
+                return invoice.status === 'Dalam Proses'
+            })
+        }
+    },
     extraReducers(builder){
         builder
             .addCase(getRiwayat.fulfilled, (state, action) => {
@@ -30,5 +52,6 @@ export const riwayatInvoice = createSlice({
 
 export const selectRiwayatInvoice = (state) => state.riwayatInvoiceData.data;
 export const getStatusRiwayatInvoice = (state) => state.riwayatInvoiceData.status;
+export const {handleBerhasilInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice, handleDalamProsesInvoice} = riwayatInvoice.actions
 
 export default riwayatInvoice.reducer
