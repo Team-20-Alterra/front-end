@@ -16,7 +16,7 @@ const Grafik = ({ berhasil, gagal, belumBayar }) => {
               type: 'pie'
             },
             labels: ['Sudah Bayar', 'Gagal Bayar', 'Belum Bayar'],
-            colors: ['#7AD182', '#DC4747', '#EEC555']
+            colors: ['#7AD182', '#DC4747', '#808080']
           }
         }
       />

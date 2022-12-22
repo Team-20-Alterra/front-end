@@ -51,7 +51,7 @@ const DetailsInvoicePage = () => {
         e.preventDefault();
 
         const templateParams = {
-            email : 'musyaffa560@gmail.com',
+            email : 'zhafranafif97@gmail.com',
             to_name : invoices?.customer?.name,
             admin_email: invoices?.Businnes?.email,
             from_name: invoices?.Businnes?.name,
@@ -123,9 +123,16 @@ const DetailsInvoicePage = () => {
                             <th style="padding: 6px;">Harga Satuan</th>
                             <th style="padding: 6px;">Total</th>
                         </tr>
-                    <thead>
-                    <tbody id="table_main" id="table_body">
-                        
+                    </thead>
+                    <tbody>
+                    ${invoices?.Item?.map((item) => (
+                        <tr key={item.ID}>
+                            <td>{item.name}</td>
+                            <td>{item.unit_price}</td>
+                            <td>{item.amount}</td>
+                            <td>{item.total_price}</td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
@@ -148,30 +155,21 @@ const DetailsInvoicePage = () => {
                         <div>Rp. ${invoices.total}</div>
                     </div>
                 </div>
-                <script>
-                ${invoices?.Item?.map((invoice) => {
-                        let tableData = "";
-                        tableData += 
-                        <tr key={invoice.ID}>
-                            <td>{invoice.name}</td>
-                            <td>{invoice.unit_price}</td>
-                            <td>{invoice.amount}</td>
-                            <td>{invoice.total_price}</td>
-                        </tr>
-                        return document.getElementById("table_body").innerHTML = tableData;
-                    })}
-                </script>
             `
         }
 
         emailjs.send('service_5kk2tek', 'template_39ozxp2', templateParams, '1GBjYQKzmcCzyWl_X')
             .then((result) => {
                 console.log(result.text);
+                console.log(templateParams.my_html)
             }, (error) => {
-                console.log(error.text);
+                console.log(error);
             });
-    }
+    }   
 
+    console.log(invoices?.Item?.map((item) => item))
+
+    
 
     return (
         <div className="container-content mb-5-content" >
