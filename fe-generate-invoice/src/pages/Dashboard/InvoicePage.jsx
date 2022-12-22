@@ -243,7 +243,7 @@ const InvoicePage = () => {
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-2'>
                     <div className='invoice-item__subtotal'>
                         <div className='fw-bold'>Subtotal</div>
-                        <div>{subTotal?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) || ''}</div>
+                        <div value={subTotal}>{subTotal?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) || ''}</div>
                     </div>
                     {btnDiscount ? (
                         <div className='invoice-item__diskon align-self-end'>
@@ -260,7 +260,7 @@ const InvoicePage = () => {
                     )}
                     <div className='invoice-item__total'>
                         <div className='fw-bold'>Total</div>
-                        <div>{total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
+                        <div value={total}>{total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                     </div>
                     <button type='submit' className='btn-primary align-self-end w-75 mt-2' onClick={updateInvoice}>Kirim Invoice</button>
                 </div>

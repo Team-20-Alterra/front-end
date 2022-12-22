@@ -6,14 +6,18 @@ import { Link } from "react-router-dom";
 import Moment from 'react-moment';
 import { statusBadge } from './StatusBadge'
 import { Pagination } from '../../utils/Pagination'
-import { useDispatch, useSelector } from 'react-redux'
-import { handleBerhasilInvoice, handleDalamProsesInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice } from '../../store/riwayat'
+import { useDispatch } from 'react-redux'
+import { handleAllStatus, handleBerhasilInvoice, handleDalamProsesInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice } from '../../store/riwayat'
 
 const ListRiwayat = ({ riwayats, status }) => {
 
   const [riwayatSlice, setRiwayatSlice] = useState([])
+  const [search, setSearch] = useState("")
   const dispatch = useDispatch()
 
+  const handleAllStatusInvoice = () => {
+    dispatch(handleAllStatus())
+  }
 
   const handleFilterBerhasil = () => {
     dispatch(handleBerhasilInvoice())
@@ -51,33 +55,46 @@ const ListRiwayat = ({ riwayats, status }) => {
         startIndex + (startIndex + paginationState.pageSize - riwayats.length) :
         startIndex + paginationState.pageSize
 
-      setRiwayatSlice(riwayats.slice(startIndex, lastIndex))
+      if(search === ""){
+        setRiwayatSlice(riwayats.slice(startIndex, lastIndex))
+      }else{
+        setRiwayatSlice(
+          riwayats.filter(value => {
+            return value.customer.name.toLowerCase().includes(search.toLowerCase())
+          }).slice(startIndex, lastIndex)
+        )
+      } 
     }
-  }, [paginationState.pageSize, paginationState.currentPage, riwayats, status])
+  }, [paginationState.pageSize, paginationState.currentPage, search, riwayats, status])
 
   return (
     <>
       <div className='riwayat-page__navbar'>
         <ul>
           <li>
-            <a href="/" >Semua</a>
+            <div onClick={handleAllStatusInvoice} style={{cursor: 'pointer'}}>Semua</div>
           </li>
           <li>
-            <button onClick={handleFilterBerhasil}>Selesai</button>
+            <div onClick={handleFilterBerhasil} style={{cursor: 'pointer'}}>Selesai</div>
           </li>
           <li>
-            <button onClick={handleFilterDalamProses}>On Proses</button>
+            <div onClick={handleFilterDalamProses} style={{cursor: 'pointer'}}>On Proses</div>
           </li>
           <li>
-            <button onClick={handleFilterMenungguKonfirmasi}>Pending</button>
+            <div onClick={handleFilterMenungguKonfirmasi} style={{cursor: 'pointer'}}>Pending</div>
           </li>
           <li>
-            <button onClick={handleFilterGagal}>Gagal</button>
+            <div onClick={handleFilterGagal} style={{cursor: 'pointer'}}>Gagal</div>
           </li>
         </ul>
       </div>
       <div className='riwayat-page__searchbar'>
-        <input type="text" placeholder='Cari' />
+        <input 
+            type="text" 
+            placeholder='Cari' 
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }} />
         <ButtonFilter />
       </div>
       <div className='d-flex flex-column'>
@@ -116,7 +133,15 @@ const ListRiwayat = ({ riwayats, status }) => {
       </div >
       <div className='d-flex mt-5 justify-content-center'>
         <Pagination currentPage={paginationState.currentPage} onPageChange={onPageChange}
-          pageCount={Math.ceil(riwayats.length / paginationState.pageSize)} />
+          pageCount={Math.ceil(riwayats.filter((value) => {
+            if(search === ""){
+              return value
+            }else if(
+              value.customer.name.toLowerCase().includes(search.toLowerCase())
+            ){
+              return value
+            }
+          }).length / paginationState.pageSize)} />
       </div>
     </>
   )
