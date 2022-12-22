@@ -5,7 +5,7 @@ import { randomColor } from '../../utils/randomColor'
 import { Link } from "react-router-dom";
 import { statusBadge } from './StatusBadge'
 import { Pagination } from '../../utils/Pagination'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { handleAllStatus, handleBerhasilInvoice, handleDalamProsesInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice } from '../../store/riwayat'
 
 const ListRiwayat = ({ riwayats, status }) => {
