@@ -10,6 +10,7 @@ export default function PengaturanPage() {
     const [banks, setBanks] = useState([])
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState()
+    const [btnSimpan, setBtnSimpan] = useState(true)
 
     useEffect(() => {
         axiosInstance.get('/business/user')
@@ -30,6 +31,7 @@ export default function PengaturanPage() {
             ...values,
             [event.target.name]: event.target.value
         })
+        setBtnSimpan(false)
     }
     useEffect(() => {
         if (!selectedFile) {
@@ -47,6 +49,8 @@ export default function PengaturanPage() {
             return
         }
         setSelectedFile(e.target.files[0])
+        setBtnSimpan(false)
+
     }
 
     const handleEdittingPengaturan = (e) => {
@@ -161,7 +165,7 @@ export default function PengaturanPage() {
                                         Rekening Terdaftar
                                     </label>
                                     {banks.map((bank) => (
-                                        <div className="rekening-content d-flex flex-rows align-items-center mb-4" key={bank.Bank.ID}>
+                                        <div className="rekening-content d-flex flex-rows align-items-center mb-4" key={bank?.Bank?.id}>
                                             <img src={bank.Bank.logo} alt="" className="img-rekening" />
                                             <div className="rekening-data d-flex flex-column">
                                                 <div className="fw-bold">{bank.Bank.name}</div>
@@ -183,7 +187,7 @@ export default function PengaturanPage() {
                         </div>
                     </div>
                     <div className="btn-simpan">
-                        <button type="submit" className="btn-primary mt-4"><AiOutlineCheck className="me-2" />Simpan</button>
+                        <button type="submit" className="btn-primary mt-4" disabled={btnSimpan}><AiOutlineCheck className="me-2" />Simpan</button>
                     </div>
                 </form>
             </div>

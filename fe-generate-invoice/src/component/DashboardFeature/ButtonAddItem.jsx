@@ -4,7 +4,6 @@ import { HiPlus } from 'react-icons/hi'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { axiosInstance } from '../../config/axiosInstance'
-import InvoicePage from '../../pages/Dashboard/InvoicePage'
 
 const ButtonAddItem = ({ getItemData }) => {
     const { ID } = useParams()
@@ -53,6 +52,7 @@ const ButtonAddItem = ({ getItemData }) => {
                     autoClose: 3000
                 })
                 getItemData()
+                document.getElementById('closeModal').click();
             })
             .catch((error) => {
                 toast.error(error.response.data.message, {
@@ -81,7 +81,7 @@ const ButtonAddItem = ({ getItemData }) => {
                                     <input type="text" placeholder='Total Harga' name='total_price' onChange={handleChange} />
                                 </div>
                                 <div className="btn-modal d-flex justify-content-center">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <button type="button" id='closeModal' className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button className='btn-primary' type="submit">Tambahkan</button>
                                 </div>
                             </form>

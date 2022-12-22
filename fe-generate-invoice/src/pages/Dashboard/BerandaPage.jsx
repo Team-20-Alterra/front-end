@@ -99,7 +99,7 @@ const BerandaPage = () => {
                             <div className='history-ket'>
                                 <div className='history-list'>Kepada</div>
                                 <div className='history-list'>ID Invoice</div>
-                                <div className='history-list'>Type</div>
+                                <div className='history-list'>Total</div>
                                 <div className='history-list'>Status</div>
                             </div>
                             <div className='wrap-invoice-aktif'>
@@ -110,7 +110,7 @@ const BerandaPage = () => {
                                             <div># {invoice?.customer?.ID}</div>
                                         </div>
                                         <div className='history-detail'>#{invoice?.ID}</div>
-                                        <div className='history-detail'>{invoice.type}</div>
+                                        <div className='history-detail'>{invoice.total.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                                         <div className='history-ket-status'>
                                             <div className='text-history-status'
                                                 style={invoice.status === 'Dalam Proses' ?

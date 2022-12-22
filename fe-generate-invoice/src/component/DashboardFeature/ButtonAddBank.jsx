@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 const ButtonAddBank = ({ values }) => {
     const [APIData, setAPIData] = useState([])
     const [searchTerm, setSearchTerm] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [selectedID, setSelectedID] = useState()
     const [searchResults, setSearchResults] = useState([]);
 
@@ -15,7 +16,7 @@ const ButtonAddBank = ({ values }) => {
             .then((response) => {
                 setAPIData(response.data.data);
             })
-    }, [])
+    }, [loading])
 
     const searchItems = (event) => {
         setSearchTerm({
@@ -46,7 +47,12 @@ const ButtonAddBank = ({ values }) => {
             bank_id: +selectedID
         }
         ).then((response) => {
-            console.log(response)
+            toast.success('Rekening Berhasil Ditambahkan', {
+                position: "top-right",
+                autoClose: 2000
+            })
+            setLoading((prev) => !prev);
+            document.getElementById('closeModal').click();
         }).catch((error) => {
             console.log(error)
         })
@@ -68,8 +74,8 @@ const ButtonAddBank = ({ values }) => {
                                 {searchTerm ? (
                                     <div className="card" >
                                         {searchResults.map((data) => (
-                                            <ul className="list-group list-group-flush">
-                                                <button type='button' className="list-group-item text-start" value={data.id} name='name' onClick={handleSelected} key={data.id}>{data.code} - {data.name}</button>
+                                            <ul className="list-group list-group-flush" key={data.id}>
+                                                <button type='button' className="list-group-item text-start" value={data.id} name='name' onClick={handleSelected}>{data.code} - {data.name}</button>
                                             </ul>
                                         ))
                                         }
@@ -78,7 +84,7 @@ const ButtonAddBank = ({ values }) => {
                                 <h6 className='mt-4'>Nomor Rekening</h6>
                                 <input type="text" className='inputModal' placeholder="No Rekening..." name='no_rek' value={searchTerm.no_rek} onChange={searchItems} />
                                 <div className="btn-modal">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <button type="button" id='closeModal' className="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button className='btn-primary' type="submit" onClick={handleTambahBank}>Tambahkan</button>
                                 </div>
                             </form>

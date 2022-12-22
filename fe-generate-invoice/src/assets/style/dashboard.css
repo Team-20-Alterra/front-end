@@ -909,6 +909,20 @@ textarea#alamat:focus {
   cursor: pointer;
 }
 
+.watermark {
+  position: absolute;
+  z-index: -1;
+  top: 40%;
+  left: 25%;
+  padding: 32px 128px;
+  opacity: 0.3;
+  transform: rotate(-25deg);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  font-size: 150px;
+  width: fit-content;
+}
+
 @keyframes shake {
   10%,
   90% {
@@ -951,7 +965,7 @@ textarea#alamat:focus {
   background-color: #a8bbbf;
 }
 
-.head-email{
+.head-email {
   display: flex;
   gap: 10px;
   font-size: 18px;
