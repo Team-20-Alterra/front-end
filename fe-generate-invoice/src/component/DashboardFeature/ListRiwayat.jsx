@@ -11,6 +11,7 @@ import { handleAllStatus, handleBerhasilInvoice, handleDalamProsesInvoice, handl
 const ListRiwayat = ({ riwayats, status }) => {
 
   const [riwayatSlice, setRiwayatSlice] = useState([])
+  const [search, setSearch] = useState("")
   const dispatch = useDispatch()
 
   const handleAllStatusInvoice = () => {
@@ -53,10 +54,17 @@ const ListRiwayat = ({ riwayats, status }) => {
         startIndex + (startIndex + paginationState.pageSize - riwayats.length) :
         startIndex + paginationState.pageSize
 
-      setRiwayatSlice(riwayats.slice(startIndex, lastIndex))
+      if(search === ""){
+        setRiwayatSlice(riwayats.slice(startIndex, lastIndex))
+      }else{
+        setRiwayatSlice(
+          riwayats.filter(value => {
+            return value.customer.name.toLowerCase().includes(search.toLowerCase())
+          }).slice(startIndex, lastIndex)
+        )
+      } 
     }
-  }, [paginationState.pageSize, paginationState.currentPage, riwayats, status])
-
+  }, [paginationState.pageSize, paginationState.currentPage, search, riwayats, status])
 
   return (
     <>
@@ -80,7 +88,12 @@ const ListRiwayat = ({ riwayats, status }) => {
         </ul>
       </div>
       <div className='riwayat-page__searchbar'>
-        <input type="text" placeholder='Cari' />
+        <input 
+            type="text" 
+            placeholder='Cari' 
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }} />
         <ButtonFilter />
       </div>
       <div className='d-flex flex-column'>
@@ -114,7 +127,15 @@ const ListRiwayat = ({ riwayats, status }) => {
       </div>
       <div className='d-flex mt-5 justify-content-center'>
         <Pagination currentPage={paginationState.currentPage} onPageChange={onPageChange}
-          pageCount={Math.ceil(riwayats.length / paginationState.pageSize)} />
+          pageCount={Math.ceil(riwayats.filter((value) => {
+            if(search === ""){
+              return value
+            }else if(
+              value.customer.name.toLowerCase().includes(search.toLowerCase())
+            ){
+              return value
+            }
+          }).length / paginationState.pageSize)} />
       </div>
     </>
   )
