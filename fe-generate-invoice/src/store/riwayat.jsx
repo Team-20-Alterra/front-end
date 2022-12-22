@@ -9,6 +9,7 @@ export const getRiwayat = createAsyncThunk("riwayat/invoice", async() => {
 
 const initialState = {
     data: {},
+    dataStatus: {},
     status: "idle"
 }
 
@@ -16,23 +17,29 @@ export const riwayatInvoice = createSlice({
     name: 'riwayat_invoice',
     initialState: initialState,
     reducers: {
+        handleAllStatus: (state) => {
+            state.data = state.dataStatus.map((invoice) => {
+                return invoice
+            })
+        },
+
         handleBerhasilInvoice: (state) => {
-            state.data = state.data.filter((invoice) => {
+            state.data = state.dataStatus.filter((invoice) => {
                 return invoice.status === 'Berhasil'
             })
         },
         handleGagalInvoice: (state) => {
-            state.data = state.data.filter((invoice) => {
+            state.data = state.dataStatus.filter((invoice) => {
                 return invoice.status === 'Gagal'
             })
         },
         handleMenungguKonfirmasinvoice: (state) => {
-            state.data = state.data.filter((invoice) => {
+            state.data = state.dataStatus.filter((invoice) => {
                 return invoice.status === 'Menunggu Konfirmasi'
             })
         },
         handleDalamProsesInvoice: (state) => {
-            state.data = state.data.filter((invoice) => {
+            state.data = state.dataStatus.filter((invoice) => {
                 return invoice.status === 'Dalam Proses'
             })
         }
@@ -41,10 +48,12 @@ export const riwayatInvoice = createSlice({
         builder
             .addCase(getRiwayat.fulfilled, (state, action) => {
                 state.data = action.payload
+                state.dataStatus = action.payload
                 state.status = "success"
             })
             .addCase(getRiwayat.pending, (state) => {
                 state.data = {}
+                state.dataStatus = {}
                 state.status = "loading"
             })
     }
@@ -52,6 +61,6 @@ export const riwayatInvoice = createSlice({
 
 export const selectRiwayatInvoice = (state) => state.riwayatInvoiceData.data;
 export const getStatusRiwayatInvoice = (state) => state.riwayatInvoiceData.status;
-export const {handleBerhasilInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice, handleDalamProsesInvoice} = riwayatInvoice.actions
+export const {handleAllStatus, handleBerhasilInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice, handleDalamProsesInvoice} = riwayatInvoice.actions
 
 export default riwayatInvoice.reducer

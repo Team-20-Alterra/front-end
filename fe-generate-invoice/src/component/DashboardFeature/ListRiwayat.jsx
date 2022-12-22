@@ -6,13 +6,16 @@ import { Link } from "react-router-dom";
 import { statusBadge } from './StatusBadge'
 import { Pagination } from '../../utils/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
-import { handleBerhasilInvoice, handleDalamProsesInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice } from '../../store/riwayat'
+import { handleAllStatus, handleBerhasilInvoice, handleDalamProsesInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice } from '../../store/riwayat'
 
 const ListRiwayat = ({ riwayats, status }) => {
 
   const [riwayatSlice, setRiwayatSlice] = useState([])
   const dispatch = useDispatch()
 
+  const handleAllStatusInvoice = () => {
+    dispatch(handleAllStatus())
+  }
 
   const handleFilterBerhasil = () => {
     dispatch(handleBerhasilInvoice())
@@ -54,24 +57,25 @@ const ListRiwayat = ({ riwayats, status }) => {
     }
   }, [paginationState.pageSize, paginationState.currentPage, riwayats, status])
 
+
   return (
     <>
       <div className='riwayat-page__navbar'>
         <ul>
           <li>
-            <a href="/" >Semua</a>
+            <div onClick={handleAllStatusInvoice} style={{cursor: 'pointer'}}>Semua</div>
           </li>
           <li>
-            <button onClick={handleFilterBerhasil}>Selesai</button>
+            <div onClick={handleFilterBerhasil} style={{cursor: 'pointer'}}>Selesai</div>
           </li>
           <li>
-            <button onClick={handleFilterDalamProses}>On Proses</button>
+            <div onClick={handleFilterDalamProses} style={{cursor: 'pointer'}}>On Proses</div>
           </li>
           <li>
-            <button onClick={handleFilterMenungguKonfirmasi}>Pending</button>
+            <div onClick={handleFilterMenungguKonfirmasi} style={{cursor: 'pointer'}}>Pending</div>
           </li>
           <li>
-            <button onClick={handleFilterGagal}>Gagal</button>
+            <div onClick={handleFilterGagal} style={{cursor: 'pointer'}}>Gagal</div>
           </li>
         </ul>
       </div>
