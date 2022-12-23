@@ -9,13 +9,11 @@ import RiwayatPage from '../pages/Dashboard/RiwayatPage';
 import InvoicePage from '../pages/Dashboard/InvoicePage';
 import DetailsInvoicePage from '../pages/Dashboard/DetailsInvoicePage';
 import { useState } from 'react';
-import { useCallback } from 'react';
-import { axiosInstance } from '../config/axiosInstance';
-import { useEffect } from 'react';
+import SendEmailPage from '../pages/Dashboard/SendEmailPage';
 
 const Layout = () => {
     const [profile, setProfile] = useState()
-    
+
 
     return (
         <div className="container-fluid p-0">
@@ -32,6 +30,7 @@ const Layout = () => {
                         <Route path='pengaturan' element={<PengaturanPage />} />
                         <Route path='riwayat' element={<RiwayatPage />} />
                         <Route path='riwayat/:id' element={<DetailsInvoicePage />} />
+                        <Route path='send-email/:id' element={<SendEmailPage />} />
                         <Route path='invoices/:ID' element={<InvoicePage />} />
                     </Routes>
                 </div>

@@ -3,14 +3,16 @@ import ButtonFilter from '../../component/DashboardFeature/ButtonFilter'
 import { initialName } from '../../utils/initialName'
 import { randomColor } from '../../utils/randomColor'
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
 import { statusBadge } from './StatusBadge'
 import { Pagination } from '../../utils/Pagination'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { handleAllStatus, handleBerhasilInvoice, handleDalamProsesInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice } from '../../store/riwayat'
 
 const ListRiwayat = ({ riwayats, status }) => {
 
   const [riwayatSlice, setRiwayatSlice] = useState([])
+  const [search, setSearch] = useState("")
   const dispatch = useDispatch()
 
   const handleAllStatusInvoice = () => {
@@ -53,10 +55,17 @@ const ListRiwayat = ({ riwayats, status }) => {
         startIndex + (startIndex + paginationState.pageSize - riwayats.length) :
         startIndex + paginationState.pageSize
 
-      setRiwayatSlice(riwayats.slice(startIndex, lastIndex))
+      if(search === ""){
+        setRiwayatSlice(riwayats.slice(startIndex, lastIndex))
+      }else{
+        setRiwayatSlice(
+          riwayats.filter(value => {
+            return value.customer.name.toLowerCase().includes(search.toLowerCase())
+          }).slice(startIndex, lastIndex)
+        )
+      } 
     }
-  }, [paginationState.pageSize, paginationState.currentPage, riwayats, status])
-
+  }, [paginationState.pageSize, paginationState.currentPage, search, riwayats, status])
 
   return (
     <>
@@ -80,15 +89,20 @@ const ListRiwayat = ({ riwayats, status }) => {
         </ul>
       </div>
       <div className='riwayat-page__searchbar'>
-        <input type="text" placeholder='Cari' />
+        <input 
+            type="text" 
+            placeholder='Cari' 
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }} />
         <ButtonFilter />
       </div>
       <div className='d-flex flex-column'>
         <div className="head d-flex flex-row" >
           <div className='list'>Kepada</div>
           <div className='list'>ID Invoice</div>
-          <div className='list'>Jatuh Tempo</div>
           <div className='list'>Tanggal Bayar</div>
+          <div className='list text-center'>Total Item</div>
           <div className='list'>Jumlah</div>
           <div className='list d-flex justify-content-center'>Status</div>
         </div>
@@ -103,18 +117,31 @@ const ListRiwayat = ({ riwayats, status }) => {
                   {riwayat.customer.name}
                 </div>
                 <div className='datas'># {riwayat.ID}</div>
-                <div className='datas'>{riwayat?.billing_date?.slice(0, 19)}</div>
-                <div className='datas'>{riwayat?.Checkout.length === 0 ? "-" : riwayat.Checkout[0].billing_date.slice(0, 10)}</div>
+                <div className='datas text-center'>{riwayat?.Checkout.length === 0 ? "-" : (
+                  <Moment format='DD MMMM YYYY , hh:mm a '>{riwayat.Checkout[0].CreatedAt}</Moment>
+                )
+                }
+                </div>
+                <div className='datas text-center'>{riwayat.Item.length}</div>
                 <div className='datas'>{riwayat.total.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                 <div className='datas d-flex justify-content-center'>{statusBadge(riwayat.status)}</div>
               </div>
             </Link>
           </div>
-        ))}
-      </div>
+        ))
+        }
+      </div >
       <div className='d-flex mt-5 justify-content-center'>
         <Pagination currentPage={paginationState.currentPage} onPageChange={onPageChange}
-          pageCount={Math.ceil(riwayats.length / paginationState.pageSize)} />
+          pageCount={Math.ceil(riwayats.filter((value) => {
+            if(search === ""){
+              return value
+            }else if(
+              value.customer.name.toLowerCase().includes(search.toLowerCase())
+            ){
+              return value
+            }
+          }).length / paginationState.pageSize)} />
       </div>
     </>
   )

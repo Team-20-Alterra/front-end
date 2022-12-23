@@ -5,11 +5,12 @@ import { HiPlus } from 'react-icons/hi'
 import { useState } from 'react'
 import { axiosInstance } from '../../config/axiosInstance'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 const InvoicePage = () => {
     const { ID } = useParams()
+    const navigate = useNavigate()
     const [businessData, setBusinessData] = useState()
     const [APIData, setAPIData] = useState([])
     const [searchTerm, setSearchTerm] = useState("");
@@ -132,10 +133,11 @@ const InvoicePage = () => {
             body: values.body
         }
         ).then((response) => {
-            toast.success(response.data.message, {
+            toast.success('Invoice Berhasil Dibuat dan Dikirim Notif Ke User', {
                 position: "top-right",
-                autoClose: 1000
+                autoClose: 3000
             })
+            navigate('/admin/riwayat')
         })
             .catch((error) => {
                 toast.error('Pastikan Semua Input Sudah Terisi', {
@@ -241,7 +243,7 @@ const InvoicePage = () => {
                 <div className='invoice-item__pricing d-flex justify-content-end flex-column gap-2'>
                     <div className='invoice-item__subtotal'>
                         <div className='fw-bold'>Subtotal</div>
-                        <div>{subTotal?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) || ''}</div>
+                        <div value={subTotal}>{subTotal?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' }) || ''}</div>
                     </div>
                     {btnDiscount ? (
                         <div className='invoice-item__diskon align-self-end'>
@@ -258,7 +260,7 @@ const InvoicePage = () => {
                     )}
                     <div className='invoice-item__total'>
                         <div className='fw-bold'>Total</div>
-                        <div>{total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
+                        <div value={total}>{total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                     </div>
                     <button type='submit' className='btn-primary align-self-end w-75 mt-2' onClick={updateInvoice}>Kirim Invoice</button>
                 </div>

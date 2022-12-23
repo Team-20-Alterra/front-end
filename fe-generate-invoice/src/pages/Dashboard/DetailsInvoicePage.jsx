@@ -12,7 +12,6 @@ const DetailsInvoicePage = () => {
     const [loading, setLoading] = useState(true)
     const [handleDisabled, setHandleDisabled] = useState(true)
     const navigate = useNavigate()
-    console.log(invoices)
 
     useEffect(() => {
         axiosInstance.get(`/invoices/${id}`)
@@ -39,6 +38,7 @@ const DetailsInvoicePage = () => {
                         autoClose: 1000
                     })
                     setHandleDisabled(true)
+                    navigate(`/admin/send-email/${id}`)
                 })
                 .catch((error) => {
                     console.log(error)
@@ -51,7 +51,7 @@ const DetailsInvoicePage = () => {
         e.preventDefault();
 
         const templateParams = {
-            email : 'zhafranafif97@gmail.com',
+            email : invoices?.customer?.email,
             to_name : invoices?.customer?.name,
             admin_email: invoices?.Businnes?.email,
             from_name: invoices?.Businnes?.name,
@@ -124,17 +124,12 @@ const DetailsInvoicePage = () => {
                             <th style="padding: 6px;">Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    ${invoices?.Item?.map((item) => (
-                        <tr key={item.ID}>
-                            <td>{item.name}</td>
-                            <td>{item.unit_price}</td>
-                            <td>{item.amount}</td>
-                            <td>{item.total_price}</td>
-                        </tr>
-                    ))}
-                    </tbody>
                 </table>
+                <ul>
+                    ${invoices.Item.map((item) => (
+                        <li>{item.name}</li>
+                    ))}
+                </ul>
             </div>
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
                 <div className='invoice-item__note' style="font-size: 20px; margin-bottom: 10px">
@@ -167,14 +162,11 @@ const DetailsInvoicePage = () => {
             });
     }   
 
-    console.log(invoices?.Item?.map((item) => item))
-
-    
 
     return (
         <div className="container-content mb-5-content" >
             <div className='text-kembali' onClick={handleGoBack}><HiChevronLeft size={24} /> Kembali</div>
-            <div>{statusBadge(invoices.status)}</div>
+            <div className='mt-3'>{statusBadge(invoices.status)}</div>
             <div className="headerInvoice d-flex align-items-center justify-content-between">
                 <img src={invoices?.Businnes?.logo} alt="Logo" />
                 <div className='flex-column text-end'>
@@ -231,7 +223,7 @@ const DetailsInvoicePage = () => {
                 <table className='table-invoice text-center' cellPadding="12px">
                     <thead>
                         <tr>
-                            <th>Item</th>
+                            <th>Nama Item</th>
                             <th>Jumlah</th>
                             <th>Harga Satuan</th>
                             <th>Total Harga</th>
@@ -241,9 +233,9 @@ const DetailsInvoicePage = () => {
                         {invoices?.Item?.map((item) => (
                             <tr key={item.ID}>
                                 <td>{item.name}</td>
-                                <td>{item.unit_price}</td>
                                 <td>{item.amount}</td>
-                                <td>{item.total_price}</td>
+                                <td>{item.unit_price.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</td>
+                                <td>{item.total_price.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -258,7 +250,7 @@ const DetailsInvoicePage = () => {
                 <div className='d-flex justify-content-end flex-column gap-2'>
                     <div className='invoice-item__subtotal'>
                         <div>Subtotal</div>
-                        <div>Rp. {invoices.sub_total}</div>
+                        <div>{invoices?.sub_total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                     </div>
                     <div className='invoice-item__diskon d-flex justify-content-between'>
                         <div>Diskon</div>
@@ -266,7 +258,7 @@ const DetailsInvoicePage = () => {
                     </div>
                     <div className='invoice-item__total'>
                         <div>Total</div>
-                        <div>Rp. {invoices.total}</div>
+                        <div>{invoices?.total?.toLocaleString('id-ID', { currency: 'IDR', style: 'currency' })}</div>
                     </div>
                     <button type='button' value={'Review'} className='btn-review' onClick={handleStatus}>Review</button>
                     <button type='button' value={'Berhasil'} className='btn-lunas' onClick={handleStatus} disabled={handleDisabled}>Lunas</button>

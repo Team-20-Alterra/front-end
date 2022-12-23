@@ -26,7 +26,7 @@ const ListPelanggan = ({ search, pelanggan, handleDeleteUser }) => {
         }
       }).map((val, index) => (
         <div className="container-list d-flex flex-row align-items-center" key={index} >
-          <div className='pelanggan d-flex align-items-center'>
+          <div className='pelanggan d-flex align-items-center' id={val.customer?.name}>
             <div className='box' style={{ background: `#${randomColor()}` }}>
               {initialName((val.customer?.name))}
             </div>
