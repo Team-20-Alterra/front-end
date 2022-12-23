@@ -51,11 +51,16 @@ const DetailsInvoicePage = () => {
         e.preventDefault();
 
         const templateParams = {
-            email: 'musyaffa560@gmail.com',
+            email: 'kerabatfauzan@gmail.com',
             to_name: invoices?.customer?.name,
             admin_email: invoices?.Businnes?.email,
             from_name: invoices?.Businnes?.name,
             my_html: `
+            <html>
+            <head>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            </head>
+            <body>
             <div className="container-content mb-5-content">
             <div className="headerInvoice d-flex align-items-center justify-content-between">
                 <img src=${invoices?.Businnes?.logo} alt="Logo" style="width: 100px; height: 100px;" />
@@ -124,11 +129,12 @@ const DetailsInvoicePage = () => {
                             <th style="padding: 6px;">Total</th>
                         </tr>
                     <thead>
-                    <tbody id="table_main" id="table_body">
-                        
-                    </tbody>
                 </table>
-            </div>
+                <td>${invoices?.Item?.map((invoice) => invoice.name`</td></tr>`)}
+                <td>${invoices?.Item?.map((invoice) => invoice.unit_price)}</td>
+                <td>${invoices?.Item?.map((invoice) => invoice.amount)}</td>
+                <td>${invoices?.Item?.map((invoice) => invoice.total_price)}</td>              
+            </td>
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
                 <div className='invoice-item__note' style="font-size: 20px; margin-bottom: 10px">
                     Catatan:
@@ -148,19 +154,8 @@ const DetailsInvoicePage = () => {
                         <div>Rp. ${invoices.total}</div>
                     </div>
                 </div>
-                <script >
-                ${invoices?.Item?.map((invoice) => {
-                let tableData = "";
-                tableData +=
-                    <tr key={invoice.ID}>
-                        <td>{invoice.name}</td>
-                        <td>{invoice.unit_price}</td>
-                        <td>{invoice.amount}</td>
-                        <td>{invoice.total_price}</td>
-                    </tr>
-                return document.getElementById("table_body").innerHTML = tableData;
-            })}
-                </script>
+            </body>
+            </html>
             `
         }
 

@@ -4,8 +4,11 @@ const Auth = {
         return Cookies.set("cookiename", token, { expires: 1 })
     },
     isLoggedIn() {
-        if (Cookies.get("cookiename")) return true
-        return null
+        if (Cookies.get("cookiename")) {
+            return true;
+        } else {
+            return false;
+        }
     },
     isLoggedOut() {
         return Cookies.remove("cookiename")

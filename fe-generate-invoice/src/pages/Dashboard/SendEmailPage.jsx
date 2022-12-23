@@ -18,6 +18,7 @@ const SendEmailPage = () => {
   const handleGoBack = () => {
     navigate('/admin/riwayat')
   }
+  
   return (
     <div className="container-content mb-5-content" >
       <div className="d-flex justify-content-between">
@@ -120,7 +121,7 @@ const SendEmailPage = () => {
           </div>
           <div className='invoice-item__diskon d-flex justify-content-between'>
             <div>Diskon</div>
-            <div>{invoices.discount}</div>
+            <div>{invoices.discount} %</div>
           </div>
           <div className='invoice-item__total'>
             <div>Total</div>

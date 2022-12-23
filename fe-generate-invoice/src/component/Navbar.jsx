@@ -67,7 +67,7 @@ const Navbar = ({ }) => {
                             <li><hr className="dropdown-divider" /></li>
                             <div className="wrap-notif">
                                 {notifikasi.map((notif) => (
-                                    <div value={notif.invoice_id} onClick={(e) => handleClickNotif(e.target.value)}>
+                                    <Link to={`riwayat/${notif.invoice_id}`}>
                                         <li key={notif.ID}>
                                             <a className="dropdown-item" >
                                                 <p className='unreadNotif m-0' style={notif.is_readAmin ? {} : { fontWeight: '700' }}>{notif.title}</p>
@@ -75,7 +75,7 @@ const Navbar = ({ }) => {
                                                 <p className='footerNotif m-0'><HiOutlineClock /> <Moment fromNow>{notif.CreatedAt}</Moment></p>
                                             </a>
                                         </li>
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
                         </ul>
