@@ -51,8 +51,8 @@ const DetailsInvoicePage = () => {
         e.preventDefault();
 
         const templateParams = {
-            email: 'kerabatfauzan@gmail.com',
-            to_name: invoices?.customer?.name,
+            email : invoices?.customer?.email,
+            to_name : invoices?.customer?.name,
             admin_email: invoices?.Businnes?.email,
             from_name: invoices?.Businnes?.name,
             my_html: `
@@ -128,13 +128,14 @@ const DetailsInvoicePage = () => {
                             <th style="padding: 6px;">Harga Satuan</th>
                             <th style="padding: 6px;">Total</th>
                         </tr>
-                    <thead>
+                    </thead>
                 </table>
-                <td>${invoices?.Item?.map((invoice) => invoice.name`</td></tr>`)}
-                <td>${invoices?.Item?.map((invoice) => invoice.unit_price)}</td>
-                <td>${invoices?.Item?.map((invoice) => invoice.amount)}</td>
-                <td>${invoices?.Item?.map((invoice) => invoice.total_price)}</td>              
-            </td>
+                <ul>
+                    ${invoices.Item.map((item) => (
+                        <li>{item.name}</li>
+                    ))}
+                </ul>
+            </div>
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
                 <div className='invoice-item__note' style="font-size: 20px; margin-bottom: 10px">
                     Catatan:
@@ -154,18 +155,17 @@ const DetailsInvoicePage = () => {
                         <div>Rp. ${invoices.total}</div>
                     </div>
                 </div>
-            </body>
-            </html>
             `
         }
 
         emailjs.send('service_5kk2tek', 'template_39ozxp2', templateParams, '1GBjYQKzmcCzyWl_X')
             .then((result) => {
                 console.log(result.text);
+                console.log(templateParams.my_html)
             }, (error) => {
-                console.log(error.text);
+                console.log(error);
             });
-    }
+    }   
 
 
     return (

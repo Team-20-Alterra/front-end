@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from 'react'
 import { BiBell } from 'react-icons/bi'
 import { HiArrowRightOnRectangle, HiOutlineClock } from 'react-icons/hi2'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useParams } from 'react-router-dom'
 import Moment from 'react-moment'
 import { axiosInstance } from '../config/axiosInstance'
 import Auth from '../utils/Auth/Auth'
+import defaultProfile from '../assets/image/defaultProfile.png'
 
 
 const Navbar = ({ }) => {
@@ -49,11 +50,14 @@ const Navbar = ({ }) => {
         Auth.isLoggedOut()
         navigate("/")
     }
+    console.log(profile)
     return (
         <>
             <nav className="dashboard-navbar navbar sticky-top">
                 <a className="navbar-brand d-flex align-items-center justify-content-center">
-                    <img src={profile?.data?.logo} alt="Logo" className="imgNavbar d-inline-block align-text-top rounded-circle" />
+                    {profile.data?.logo ? (<img src={profile?.data?.logo} alt="Logo" className="imgNavbar d-inline-block align-text-top rounded-circle" />) : (
+                        <img src={defaultProfile} alt="Logo" className='imgNavbar rounded-circle me-1' />
+                    )}
                     <p className='TextNavbar m-0'>{profile?.data?.name}</p>
                 </a>
                 <div className="d-flex">
@@ -82,7 +86,9 @@ const Navbar = ({ }) => {
                     </div>
                     <div className="me-3">
                         <a className=" text-white text-decoration-none">
-                            <img src={profile?.data?.admin?.photo} alt="Profile" className="imgNavbar rounded-circle me-1" />
+                            {profile?.data?.admin?.photo ? (<img src={profile?.data?.admin?.photo} alt="Profile" className="imgNavbar rounded-circle me-1" />): (
+                                <img src={defaultProfile} alt="Profile" className='imgNavbar rounded-circle me-1' />
+                            )}
                             <strong className='TextNavbar me-2'>{profile?.data?.admin?.name}</strong>
                         </a>
                         <a><HiArrowRightOnRectangle size={24} style={{ color: "white", cursor: "pointer", marginLeft: "16px" }} onClick={handleLogOut} /></a>
