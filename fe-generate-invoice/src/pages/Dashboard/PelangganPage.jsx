@@ -23,6 +23,7 @@ const PelangganPage = () => {
         }
       })
   }, [loading])
+  console.log(pelanggan)
 
   const handleDeleteUser = (e) => {
     e.preventDefault()
