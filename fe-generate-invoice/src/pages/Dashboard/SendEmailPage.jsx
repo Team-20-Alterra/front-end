@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { axiosInstance } from '../../config/axiosInstance'
 import { HiChevronLeft } from 'react-icons/hi'
 import emailjs from '@emailjs/browser';
+import { toast } from 'react-toastify';
 
 const SendEmailPage = () => {
   const { id } = useParams()
@@ -137,8 +138,10 @@ const SendEmailPage = () => {
 
     emailjs.send('service_5kk2tek', 'template_39ozxp2', templateParams, '1GBjYQKzmcCzyWl_X')
         .then((result) => {
-            console.log(result.text);
-            console.log(templateParams.my_html)
+          toast.success('Email telah berhasil di kirim ke user!', {
+            position: "top-right",
+            autoClose: 1000
+            })
         }, (error) => {
             console.log(error);
         });
