@@ -1,4 +1,4 @@
-import {  AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck } from "react-icons/ai";
 import HeaderDashboard from "../../component/DashboardFeature/HeaderDashboard";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
@@ -8,6 +8,9 @@ import ButtonAddBank from "../../component/DashboardFeature/ButtonAddBank";
 export default function PengaturanPage() {
     const [values, setValues] = useState([])
     const [banks, setBanks] = useState([])
+    const [selectedFile, setSelectedFile] = useState()
+    const [preview, setPreview] = useState()
+    const [btnSimpan, setBtnSimpan] = useState(true)
 
     useEffect(() => {
         axiosInstance.get('/business/user')
@@ -21,13 +24,33 @@ export default function PengaturanPage() {
             .then((response) => {
                 setBanks(response.data.data)
             })
-    }, [])
+    }, [values])
 
     const handleChange = (event) => {
         setValues({
             ...values,
             [event.target.name]: event.target.value
         })
+        setBtnSimpan(false)
+    }
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined)
+            return
+        }
+        const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [selectedFile])
+
+    const onSelectFile = e => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined)
+            return
+        }
+        setSelectedFile(e.target.files[0])
+        setBtnSimpan(false)
+
     }
 
     const handleEdittingPengaturan = (e) => {
@@ -37,10 +60,8 @@ export default function PengaturanPage() {
         editFormData.append("email", values.email)
         editFormData.append("no_telp", values.no_telp)
         editFormData.append("address", values.address)
-        editFormData.append("reminder", values.reminder)
-        editFormData.append("due_date", values.due_date)
         editFormData.append("type", values.type)
-        editFormData.append("logo", values.logo)
+        editFormData.append("logo", new Blob([selectedFile], { type: 'image/png' }))
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -49,6 +70,7 @@ export default function PengaturanPage() {
         try {
             axiosInstance.put('/business',
                 editFormData,
+                console.log(editFormData),
                 config
             )
                 .then((response) => {
@@ -64,6 +86,7 @@ export default function PengaturanPage() {
             })
         }
     }
+
     return (
         <>
             <div className="container-content">
@@ -80,7 +103,7 @@ export default function PengaturanPage() {
                                 name="name"
                                 placeholder="Nama Bisnis"
                                 id="namabisnis"
-                                value={values.name}
+                                value={values.name || ''}
                                 onChange={handleChange}
                             />
                             <div className="mt-4 d-flex flex-row form-part">
@@ -94,7 +117,7 @@ export default function PengaturanPage() {
                                         name="email"
                                         placeholder="Email Bisnis"
                                         id="emailBisnis"
-                                        value={values.email}
+                                        value={values.email || ''}
                                         onChange={handleChange}
                                     />
                                     <label className="d-flex flex-column mt-4 judul">
@@ -106,7 +129,7 @@ export default function PengaturanPage() {
                                         name="no_telp"
                                         placeholder="Nomor Telp"
                                         id="nomorBisnis"
-                                        value={values.no_telp}
+                                        value={values.no_telp || ''}
                                         onChange={handleChange}
                                     />
                                     <label className="d-flex flex-column mt-4 judul">
@@ -115,11 +138,11 @@ export default function PengaturanPage() {
                                     <select
                                         name="type"
                                         id="type"
-                                        value={values.type}
+                                        value={values.type || ''}
                                         onChange={handleChange}
                                         className="input"
                                     >
-                                        <option value="" disabled hidden selected>Jenis Bisnis</option>
+                                        <option value="default" disabled>Jenis Bisnis</option>
                                         <option value="Makanan">Makanan</option>
                                         <option value="Minuman">Minuman</option>
                                         <option value="Elektronik">Elektronik</option>
@@ -133,54 +156,20 @@ export default function PengaturanPage() {
                                         id="alamat"
                                         rows="4"
                                         className="rounded w-100"
-                                        value={values.address}
+                                        value={values.address || ''}
                                         onChange={handleChange}
                                     >
                                     </textarea>
                                 </div>
                                 <div className="form-part-right">
-                                    <label className="d-flex flex-column judul">
-                                        Pengingat Otomatis
-                                    </label>
-                                    <select
-                                        name="reminder"
-                                        id="reminder"
-                                        value={values.reminder}
-                                        onChange={handleChange}
-                                        className="input"
-                                    >
-                                        <option value="" disabled hidden selected>Pengingat Otomatis</option>
-                                        <option value="1 Hari">1 Hari</option>
-                                        <option value="5 Hari">5 Hari</option>
-                                        <option value="10 Hari">10 Hari</option>
-                                        <option value="20 Hari">20 Hari</option>
-                                        <option value="30 Hari">30 Hari</option>
-                                    </select>
-                                    <label className="d-flex flex-column mt-4 judul">
-                                        Jatuh Tempo
-                                    </label>
-                                    <select
-                                        name="due_date"
-                                        id="tempo"
-                                        value={values.due_date}
-                                        onChange={handleChange}
-                                        className="input"
-                                    >
-                                        <option value="" disabled hidden selected>Jatuh Tempo</option>
-                                        <option value="1 Hari">1 Hari</option>
-                                        <option value="7 Hari">7 Hari</option>
-                                        <option value="14 Hari">14 Hari</option>
-                                        <option value="21 Hari">21 Hari</option>
-                                        <option value="30 Hari">30 Hari</option>
-                                    </select>
                                     <label className="d-flex flex-column mt-4 judul">
                                         Rekening Terdaftar
                                     </label>
                                     {banks.map((bank) => (
-                                        <div className="rekening-content d-flex flex-rows align-items-center mb-4" key={bank.Bank.ID}>
+                                        <div className="rekening-content d-flex flex-rows align-items-center mb-4" key={bank?.Bank?.id}>
                                             <img src={bank.Bank.logo} alt="" className="img-rekening" />
                                             <div className="rekening-data d-flex flex-column">
-                                                <div className="head">{bank.Bank.name}</div>
+                                                <div className="fw-bold">{bank.Bank.name}</div>
                                                 <div>{bank.account_number}</div>
                                             </div>
                                         </div>
@@ -190,11 +179,16 @@ export default function PengaturanPage() {
                             </div>
                         </div>
                         <div className="d-flex flex-column my-4">
-                            <input type="file" accept="image/*" className="image-input" onChange={handleChange} name="logo" />
+                            {selectedFile &&
+                                <div>
+                                    <img src={preview} alt={preview} style={{ width: "250px", height: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginTop: "5px" }} />
+                                </div>
+                            }
+                            <input type="file" accept="image/*" className="image-input" onChange={onSelectFile} name="logo" />
                         </div>
                     </div>
                     <div className="btn-simpan">
-                        <button type="submit" className="btn-primary mt-4"><AiOutlineCheck className="me-2" />Simpan</button>
+                        <button type="submit" className="btn-primary mt-4" disabled={btnSimpan}><AiOutlineCheck className="me-2" />Simpan</button>
                     </div>
                 </form>
             </div>

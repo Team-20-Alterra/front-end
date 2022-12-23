@@ -10,26 +10,28 @@ import InvoicePage from '../pages/Dashboard/InvoicePage';
 import PengaturanPage from '../pages/Dashboard/Pengaturan';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const sidebar = () => {
     const navigate = useNavigate()
     const handleAddInvoice = () => {
         const config = {
             headers: {
-            Authorization: `Bearer ${Cookies.get("cookiename")}`
+                Authorization: `Bearer ${Cookies.get("cookiename")}`
+            }
         }
-    }
         axiosInstance.post('/invoices', config)
             .then((response) => {
-                navigate(`invoice/${response.data.data.ID}`)
+                navigate(`invoice/${response.data.IdInvoice}`)
+                window.location.reload()
                 return <InvoicePage />
             })
             .catch((error) => {
                 toast.error(error.response.data.message, {
                     position: "top-right",
                     autoClose: "3000"
+                })
             })
-        })
     }
     return (
         <div className="d-flex flex-column align-items-center sticky-top containerSidebar" >
@@ -46,10 +48,10 @@ const sidebar = () => {
                     </div>
                 </NavLink>
                 <NavLink
+                    to={"invoice"}
                     onClick={handleAddInvoice}
                     className={({ isActive }) =>
-                        isActive ?
-                            'nav-link active' : 'nav-link'
+                        isActive ? 'nav-link active' : 'nav-link'
                     }
                 >
                     <div className="containerMenu d-flex align-items-center">

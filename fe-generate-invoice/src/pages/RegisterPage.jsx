@@ -78,16 +78,15 @@ const RegisterPage = () => {
               placeholder="Kata Sandi"
               className="input mt-7"
               name='Password'
-              {...register("Password", { required: true, minLength: 8, pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]/i })}
+              {...register("Password", { required: true, minLength: 8, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ })}
               onChange={handleChange}
             />
           </div>
           <div className='input_error mb-1'>
             {errors?.Password?.type === "required" && <p><i className="bi bi-exclamation-circle"></i> This field is required!</p>}
-            {errors?.Password?.type === "minLength" && <p><i className="bi bi-exclamation-circle"></i> Harus minimal 8 karakter</p>}
-            {errors?.Password?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Gunakan huruf kapital, huruf kecil dan angka numerik</p>}
+            {errors?.Password?.type === "minLength" && <p><i className="bi bi-exclamation-circle"></i>minimal 8 karakter!</p>}
+            {errors?.Password?.type === "pattern" && <p><i className="bi bi-exclamation-circle"></i> Gunakan kombinasi huruf kapital, huruf kecil dan angka numerik</p>}
           </div>
-          <h1 className='textDetailSandi m-0'>Kata sandi minimal 8 karakter. Gunakan huruf kapital, huruf kecil dan angka numerik.</h1>
           <button className='btn-primary mt-3' type='submit' id='ButtonBerikutnya'>Berikutnya</button>
         </form>
         <h6 style={{ textAlign: "center", marginTop: "32px", fontSize: "14px", marginBottom: "0" }}>Sudah punya akun? <a href="/login" style={{ color: "#297061", fontWeight: "bold", textDecoration: "underline" }}>Masuk</a></h6>

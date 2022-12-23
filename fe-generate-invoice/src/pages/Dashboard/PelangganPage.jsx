@@ -11,17 +11,19 @@ const PelangganPage = () => {
   const [empty, setEmpty] = useState(false)
   const [pelanggan, setPelanggan] = useState([])
   const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     axiosInstance.get('/add-customer/businness')
       .then((response) => {
-        if (response.data.data.length === 0) {
+        if (response.data.data === null) {
           setEmpty(true)
         } else {
           setPelanggan(response.data.data)
         }
       })
   }, [loading])
+  console.log(pelanggan)
 
   const handleDeleteUser = (e) => {
     e.preventDefault()
@@ -45,7 +47,6 @@ const PelangganPage = () => {
 
   }
 
-
   return (
     <div className="container-content">
       <HeaderDashboard name="Pelanggan" />
@@ -55,10 +56,17 @@ const PelangganPage = () => {
         ) : (
           <>
             <div className="subHeader d-flex align-items-center justify-content-between">
-              <input type="text" className="search w-25" placeholder="Cari" />
+              <input 
+                type="text" 
+                className="search w-25" 
+                placeholder="Cari"
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                }} 
+              />
               <ButtonAddPelanggan setLoading={setLoading} />
             </div>
-            <ListPelanggan pelanggan={pelanggan} handleDeleteUser={handleDeleteUser} />
+            <ListPelanggan search={search} pelanggan={pelanggan} handleDeleteUser={handleDeleteUser} />
           </>
         )
       }

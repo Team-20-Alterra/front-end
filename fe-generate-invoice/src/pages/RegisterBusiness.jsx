@@ -34,8 +34,9 @@ const RegisterBusiness = () => {
   const getBankData = () => {
     axiosInstance.get('/banks')
       .then((response) => {
-       const dataBank = response.data.bank
+       const dataBank = response.data.data
        setBankData(dataBank)
+
       })
       .catch((error) => {
       console.log(error)
@@ -78,7 +79,10 @@ const RegisterBusiness = () => {
       navigate("/admin")
     })
       .catch((error) => {
-      console.log(error)
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 3000
+      })
     })
   };
 
@@ -99,6 +103,7 @@ const RegisterBusiness = () => {
     }
     setSelectedFile(e.target.files[0])
   }
+
   return (
     <>
       <div className="Wrap">
@@ -144,7 +149,7 @@ const RegisterBusiness = () => {
                 Bank
               </option>
               {bankData?.map((item) => (
-                <option value={item.ID} key={item.ID}>{item.code} - {item.name}</option>
+                <option value={item.id} key={item.id}>{item.code} - {item.name}</option>
               ))}
             </select>
             

@@ -7,10 +7,6 @@ body {
   font-family: "Poppins";
   margin: 0;
 }
-.icon-delete:hover {
-  color: red;
-  cursor: pointer;
-}
 .dashboard-navbar {
   padding: 11px 24px;
 }
@@ -76,8 +72,15 @@ nav {
 .IconNotif {
   height: 27px;
   width: 27px;
-  margin-top: 9px;
 }
+.IconNotif:hover {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
 .dropdown-menu:hover {
   background-color: #d4e2df;
 }
@@ -112,23 +115,25 @@ nav {
 }
 .navNotif {
   width: 400px !important;
-  margin-top: 16px !important;
+  margin-top: 22px !important;
+}
+.wrap-notif {
+  max-height: 400px !important;
+  overflow: auto;
 }
 .dropdown-menu.navNotif {
   left: -190px !important;
 }
 .unreadNotif {
-  font-weight: 600;
   font-size: 14px;
   margin-bottom: 4px;
 }
 .bodyNotif {
-  font-weight: 400;
   font-size: 12px;
   margin-bottom: 0;
 }
 .footerNotif {
-  font-size: 12px;
+  font-size: 11px;
   color: #9a9a9a;
 }
 .container-content {
@@ -415,6 +420,10 @@ button.add-rekening:hover {
   border-radius: 15px;
   padding-left: 10px;
 }
+.container-list:hover {
+  color: #000;
+  opacity: 0.8;
+}
 .head-pelanggan .list {
   width: 23%;
 }
@@ -454,20 +463,11 @@ button.add-rekening:hover {
 .dashboard-satu {
   display: flex;
   flex-direction: column;
+  width: 50%;
 }
 .total-balance {
   display: flex;
   flex-direction: column;
-}
-.box-total-balance-satu {
-  display: flex;
-  flex-direction: column;
-  background-color: #d9d9d9;
-  width: 370px;
-  height: 133px;
-  margin-right: 40px;
-  margin-bottom: 16px;
-  border-radius: 5px;
 }
 .total-balance-top {
   display: flex;
@@ -476,7 +476,6 @@ button.add-rekening:hover {
 .total-balance-bottom {
   display: flex;
   flex-direction: row;
-  margin-right: 40px;
   margin-bottom: 16px;
   border-radius: 5px;
 }
@@ -484,38 +483,27 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: column;
   background-color: #f5c1b7;
-  width: 333px;
-  height: 99px;
+  padding: 16px 24px;
+  width: 50%;
   margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 5px;
-}
-.box-total-balance-bottom-1 p.invoice-total {
-  padding-left: 24px;
-  padding-top: 16px;
-  font-size: 14px;
 }
 .box-total-balance-bottom-2 {
   display: flex;
   flex-direction: column;
+  padding: 16px 24px;
   background-color: #bce8c1;
-  width: 333px;
-  height: 99px;
+  width: 50%;
   margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 5px;
-}
-.box-total-balance-bottom-2 p.invoice-total {
-  padding-left: 24px;
-  padding-top: 16px;
-  font-size: 14px;
 }
 .box-total-balance-top {
   display: flex;
   flex-direction: column;
   background-color: #d4e2df;
-  width: 682px;
-  height: 99px;
+  padding: 16px 24px;
   margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 5px;
@@ -524,23 +512,14 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 16px;
 }
-.tagihan-total button {
-  background: none;
-  margin-right: 24px;
-  color: #297061;
-  border: none;
-  margin-bottom: 40px;
-  size: 19px;
-}
-.tagihan-total p {
-  font-weight: bold;
+.tagihan-count {
+  font-weight: 600;
   font-size: 20px;
-  padding-left: 24px;
 }
-.box-total-balance-top p.tagihan-judul {
-  padding-left: 24px;
-  padding-top: 16px;
+.tagihan-judul {
+  font-weight: 400;
   font-size: 14px;
 }
 
@@ -548,8 +527,8 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: column;
   background-color: #d4e2df;
-  width: 682px;
-  height: 512px;
+  padding: 16px 24px;
+  margin-right: 16px;
   border-radius: 5px;
 }
 .box-balance-2 p {
@@ -566,51 +545,66 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: column;
   background-color: #d4e2df;
-  width: 439px;
-  height: 758px;
+  height: 100%;
   border-radius: 5px;
+  padding: 12px 16px;
 }
 .history-ket {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 24px;
-  margin-right: 24px;
 }
-.history-ket p {
+.history-list {
+  font-weight: bold;
   font-size: 12px;
+  width: 25%;
+  margin: 16px 0;
+  text-align: center;
 }
 .history-ket-isi {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 16px;
-  margin-right: 16px;
-  background-color: white;
-  padding: 13px;
-  align-items: center;
-  border-radius: 15px;
-}
-.history-ket-isi-nama {
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
   justify-content: center;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  font-weight: 400;
+  font-size: 11px;
+  padding: 8px 0;
+  margin-bottom: 15px;
 }
-.history-ket-isi-nama p {
-  margin: -16px;
-  margin-right: 16px;
+.history-detail {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.history-ket-status p {
-  background-color: #eec555;
+.text-history-status {
   border-radius: 15px;
   font-weight: bold;
+  padding: 4px 8px;
 }
-.box-history-inv p {
-  font-size: 14px;
-  font-weight: bold;
-  padding: 16px;
-  color: #000;
+.history-ket-status {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-beranda {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 8px 0px;
+}
+.chart-container {
+  background-color: #d4e2df;
+  padding: 16px 24px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin-right: 16px;
+  height: 100%;
+}
+.apexcharts-legend {
+  right: 35px !important;
+}
+.wrap-invoice-aktif {
+  height: 500px;
 }
 /* Dashboard */
 
@@ -669,14 +663,23 @@ button.add-rekening:hover {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-.add-item_button {
-  border: none;
-  background-color: #297061;
-  color: #fafafa;
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+
+.input-diskon {
   border-radius: 5px;
+  outline: var(--primary-color) !important;
+}
+.input-diskon-text {
+  background-color: white;
+  margin-left: 5px;
+}
+.input-textarea {
+  outline-color: var(--primary-color);
+  border-radius: 5px;
+  border: 1px solid #abb1b7;
+  padding: 10px;
+}
+.invoice-item__notif {
+  font-size: 13px;
 }
 .invoice-item__subtotal {
   background-color: #d4e2df;
@@ -703,15 +706,22 @@ button.add-rekening:hover {
 .invoice-item__diskon {
   padding: 8px 16px;
 }
-.invoice-item__pricing button {
+.btn-diskon {
   border: none;
-  background-color: #297061;
+  background-color: white;
   padding: 8px;
-  color: white;
+  color: #297061;
   border-radius: 5px;
   width: 80%;
   align-self: flex-end;
+  font-weight: bold;
 }
+
+.invoice-input_diskon {
+  padding: 15px 0;
+  color: var(--primary-color);
+}
+
 .invoice-item__note {
   font-weight: 600;
   font-size: 16px;
@@ -725,6 +735,10 @@ button.add-rekening:hover {
   width: 80%;
   align-self: flex-end;
 }
+.btn-review:hover:enabled {
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  transform: translateY(-1px);
+}
 .btn-lunas {
   border: none;
   background: #297061;
@@ -734,6 +748,13 @@ button.add-rekening:hover {
   width: 80%;
   align-self: flex-end;
 }
+.btn-lunas:disabled {
+  background: #94b8b0;
+}
+.btn-lunas:hover:enabled {
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  transform: translateY(-1px);
+}
 .btn-gagal {
   border: 1px solid #952e19;
   padding: 10px 16px;
@@ -742,6 +763,14 @@ button.add-rekening:hover {
   border-radius: 4px;
   width: 80%;
   align-self: flex-end;
+}
+.btn-gagal:disabled {
+  border: 1px solid #f5c1b7;
+  color: #f5c1b7;
+}
+.btn-gagal:hover:enabled {
+  box-shadow: 0 15px 15px -15px rgba(41, 112, 97, 0.7);
+  transform: translateY(-1px);
 }
 .badge-berhasil {
   font-weight: 600;
@@ -793,8 +822,6 @@ button.add-rekening:hover {
   display: flex;
   flex-direction: column;
 }
-.head-invoice .judul {
-}
 .w-40 {
   width: 40%;
 }
@@ -806,6 +833,14 @@ button.add-rekening:hover {
 }
 .row-detail {
   height: 199px;
+}
+.input-riwayat {
+  border: 1px solid #abb1b7;
+  outline-color: var(--primary-color);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-weight: 400;
+  font-size: 16px;
 }
 /* Invoice */
 .item-modal__container input {
@@ -878,6 +913,20 @@ textarea#alamat:focus {
   cursor: pointer;
 }
 
+.watermark {
+  position: absolute;
+  z-index: -1;
+  top: 40%;
+  left: 25%;
+  padding: 32px 128px;
+  opacity: 0.3;
+  transform: rotate(-25deg);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  font-size: 150px;
+  width: fit-content;
+}
+
 @keyframes shake {
   10%,
   90% {
@@ -899,4 +948,38 @@ textarea#alamat:focus {
   60% {
     transform: translate3d(4px, 0, 0);
   }
+}
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 17px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+
+.head-email {
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+}
+.kirim-email{
+  background: transparent;
+  border: none;
+  background-color: #297061;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
 }

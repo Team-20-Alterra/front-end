@@ -1,37 +1,43 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import RiwayatEmpty from '../../component/DashboardFeature/RiwayatEmpty'
 import HeaderDashboard from '../../component/DashboardFeature/HeaderDashboard'
 import ListRiwayat from '../../component/DashboardFeature/ListRiwayat'
 import { axiosInstance } from '../../config/axiosInstance'
+import {
+    getRiwayat,
+    selectRiwayatInvoice,
+    getStatusRiwayatInvoice
+} from '../../store/riwayat'
 
 const RiwayatPage = () => {
-    const [empty, setEmpty] = useState(false)
-    const [riwayats, setRiwayats] = useState([])
+    const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
 
+    //riwayat redux
+    const riwayatData = useSelector(selectRiwayatInvoice)
+    const riwayatStatus = useSelector(getStatusRiwayatInvoice)
+
     useEffect(() => {
-        axiosInstance.get('/invoices/status')
-            .then((response) => {
-                if (response.data.data.length === 0) {
-                    setEmpty(true)
-                } else {
-                    setRiwayats(response.data.data)
-                }
-            })
-    }, [loading])
+        dispatch(getRiwayat())
+    }, [dispatch])
 
     return (
         <div className='container-content'>
             <HeaderDashboard name="Riwayat" />
-            {
-                empty ? (
-                    <RiwayatEmpty />
-                ) : (
-                    <div className='riwayat-list__container'>
-                        <ListRiwayat riwayats={riwayats} />
-                    </div>
-                )
+            {riwayatStatus === "success" ?
+                <div>
+                    {
+                        riwayatData.length === 0 ? (<RiwayatEmpty />) :
+                            (
+                                <div className='riwayat-list__container'>
+                                    <ListRiwayat riwayats={riwayatData} status={riwayatStatus} />
+                                </div>
+                            )
+                    }
+                </div> : loading
             }
+
         </div>
     )
 }
