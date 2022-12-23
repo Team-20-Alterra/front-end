@@ -21,7 +21,6 @@ const RiwayatPage = () => {
     useEffect(() => {
         dispatch(getRiwayat())
     }, [dispatch])
-
     return (
         <div className='container-content'>
             <HeaderDashboard name="Riwayat" />
