@@ -118,7 +118,7 @@ nav {
   margin-top: 22px !important;
 }
 .wrap-notif {
-  height: 400px !important;
+  max-height: 400px !important;
   overflow: auto;
 }
 .dropdown-menu.navNotif {
@@ -419,6 +419,10 @@ button.add-rekening:hover {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   padding-left: 10px;
+}
+.container-list:hover {
+  color: #000;
+  opacity: 0.8;
 }
 .head-pelanggan .list {
   width: 23%;

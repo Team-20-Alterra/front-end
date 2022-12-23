@@ -55,15 +55,15 @@ const ListRiwayat = ({ riwayats, status }) => {
         startIndex + (startIndex + paginationState.pageSize - riwayats.length) :
         startIndex + paginationState.pageSize
 
-      if(search === ""){
+      if (search === "") {
         setRiwayatSlice(riwayats.slice(startIndex, lastIndex))
-      }else{
+      } else {
         setRiwayatSlice(
           riwayats.filter(value => {
             return value.customer.name.toLowerCase().includes(search.toLowerCase())
           }).slice(startIndex, lastIndex)
         )
-      } 
+      }
     }
   }, [paginationState.pageSize, paginationState.currentPage, search, riwayats, status])
 
@@ -72,29 +72,29 @@ const ListRiwayat = ({ riwayats, status }) => {
       <div className='riwayat-page__navbar'>
         <ul>
           <li>
-            <div onClick={handleAllStatusInvoice} style={{cursor: 'pointer'}}>Semua</div>
+            <div onClick={handleAllStatusInvoice} style={{ cursor: 'pointer' }}>Semua</div>
           </li>
           <li>
-            <div onClick={handleFilterBerhasil} style={{cursor: 'pointer'}}>Selesai</div>
+            <div onClick={handleFilterBerhasil} style={{ cursor: 'pointer' }}>Selesai</div>
           </li>
           <li>
-            <div onClick={handleFilterDalamProses} style={{cursor: 'pointer'}}>On Proses</div>
+            <div onClick={handleFilterDalamProses} style={{ cursor: 'pointer' }}>Dalam Proses</div>
           </li>
           <li>
-            <div onClick={handleFilterMenungguKonfirmasi} style={{cursor: 'pointer'}}>Pending</div>
+            <div onClick={handleFilterMenungguKonfirmasi} style={{ cursor: 'pointer' }}>Menunggu Konfirmasi</div>
           </li>
           <li>
-            <div onClick={handleFilterGagal} style={{cursor: 'pointer'}}>Gagal</div>
+            <div onClick={handleFilterGagal} style={{ cursor: 'pointer' }}>Gagal</div>
           </li>
         </ul>
       </div>
       <div className='riwayat-page__searchbar'>
-        <input 
-            type="text" 
-            placeholder='Cari' 
-            onChange={(event) => {
-              setSearch(event.target.value);
-            }} />
+        <input
+          type="text"
+          placeholder='Cari'
+          onChange={(event) => {
+            setSearch(event.target.value);
+          }} />
         <ButtonFilter />
       </div>
       <div className='d-flex flex-column'>
@@ -134,11 +134,11 @@ const ListRiwayat = ({ riwayats, status }) => {
       <div className='d-flex mt-5 justify-content-center'>
         <Pagination currentPage={paginationState.currentPage} onPageChange={onPageChange}
           pageCount={Math.ceil(riwayats.filter((value) => {
-            if(search === ""){
+            if (search === "") {
               return value
-            }else if(
+            } else if (
               value.customer.name.toLowerCase().includes(search.toLowerCase())
-            ){
+            ) {
               return value
             }
           }).length / paginationState.pageSize)} />
