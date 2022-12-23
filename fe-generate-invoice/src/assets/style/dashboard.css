@@ -974,3 +974,12 @@ textarea#alamat:focus {
   gap: 10px;
   font-size: 18px;
 }
+.kirim-email{
+  background: transparent;
+  border: none;
+  background-color: #297061;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}

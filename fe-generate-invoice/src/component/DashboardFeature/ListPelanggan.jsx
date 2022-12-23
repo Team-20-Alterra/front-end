@@ -40,7 +40,7 @@ const ListPelanggan = ({ search, pelanggan, handleDeleteUser }) => {
               className='bi bi-trash3-fill delete-icon__item'
               style={{ color: "red", fontSize: "24px" }}
               size={24}
-              value={val.ID}
+              value={val.id}
               onClick={(e) => handleDeleteUser(e)}></i>
           </div>
         </div>

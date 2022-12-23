@@ -55,7 +55,7 @@ const Navbar = () => {
         <>
             <nav className="dashboard-navbar navbar sticky-top">
                 <a className="navbar-brand d-flex align-items-center justify-content-center">
-                    {profile?.data?.logo ? (<img src={profile?.data?.logo} alt="Logo" className="imgNavbar d-inline-block align-text-top rounded-circle" />) : (
+                    {profile?.data?.logo ? <img src={profile?.data?.logo} alt="Logo" className="imgNavbar d-inline-block align-text-top rounded-circle" />: (
                         <img src={defaultProfile} alt="Logo" className='imgNavbar rounded-circle me-1' />
                     )}
                     <p className='TextNavbar m-0'>{profile?.data?.name}</p>
