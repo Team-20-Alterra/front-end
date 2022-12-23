@@ -8,12 +8,23 @@ import { statusBadge } from './StatusBadge'
 import { Pagination } from '../../utils/Pagination'
 import { useDispatch } from 'react-redux'
 import { handleAllStatus, handleBerhasilInvoice, handleDalamProsesInvoice, handleGagalInvoice, handleMenungguKonfirmasinvoice } from '../../store/riwayat'
+import { axiosInstance } from '../../config/axiosInstance';
 
 const ListRiwayat = ({ riwayats, status }) => {
 
   const [riwayatSlice, setRiwayatSlice] = useState([])
   const [search, setSearch] = useState("")
   const dispatch = useDispatch()
+  const [riwayat, setRiwayat] = useState()
+
+  useEffect(() => {
+    axiosInstance.get('/invoices')
+      .then((response) => {
+        setRiwayat(response.data)
+      }).catch((error) => {
+      console.log(error)
+    })
+  }, [])
 
   const handleAllStatusInvoice = () => {
     dispatch(handleAllStatus())
@@ -66,6 +77,7 @@ const ListRiwayat = ({ riwayats, status }) => {
       }
     }
   }, [paginationState.pageSize, paginationState.currentPage, search, riwayats, status])
+  console.log(riwayat)
 
   return (
     <>
@@ -106,7 +118,7 @@ const ListRiwayat = ({ riwayats, status }) => {
           <div className='list'>Jumlah</div>
           <div className='list d-flex justify-content-center'>Status</div>
         </div>
-        {riwayatSlice.map((riwayat) => (
+        {riwayat?.invoices?.map((riwayat) => (
           <div key={riwayat.ID} >
             <Link to={`${riwayat.ID}`}>
               <div className="container-list d-flex flex-row align-items-center">
