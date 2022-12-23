@@ -137,7 +137,7 @@ const InvoicePage = () => {
                 position: "top-right",
                 autoClose: 3000
             })
-            // navigate('/admin/riwayat')
+            navigate('/admin/riwayat')
         })
             .catch((error) => {
                 toast.error('Pastikan Semua Input Sudah Terisi', {
