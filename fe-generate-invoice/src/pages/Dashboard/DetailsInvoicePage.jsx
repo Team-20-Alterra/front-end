@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { axiosInstance } from '../../config/axiosInstance'
 import { HiChevronLeft } from 'react-icons/hi'
@@ -9,7 +9,6 @@ import { statusBadge } from '../../component/DashboardFeature/StatusBadge'
 const DetailsInvoicePage = () => {
     const { id } = useParams()
     const [invoices, setInvoices] = useState([])
-    const [loading, setLoading] = useState(true)
     const [handleDisabled, setHandleDisabled] = useState(true)
     const navigate = useNavigate()
 
@@ -28,7 +27,6 @@ const DetailsInvoicePage = () => {
         if (e.target.value === 'Review') {
             setHandleDisabled(false)
         } else {
-            console.log(e.target.value)
             await axiosInstance.put(`/invoices/update-status/${id}`, {
                 status: e.target.value
             })
@@ -51,8 +49,8 @@ const DetailsInvoicePage = () => {
         e.preventDefault();
 
         const templateParams = {
-            email : invoices?.customer?.email,
-            to_name : invoices?.customer?.name,
+            email: invoices?.customer?.email,
+            to_name: invoices?.customer?.name,
             admin_email: invoices?.Businnes?.email,
             from_name: invoices?.Businnes?.name,
             my_html: `
@@ -132,8 +130,8 @@ const DetailsInvoicePage = () => {
                 </table>
                 <ul>
                     ${invoices.Item.map((item) => (
-                        <li>{item.name}</li>
-                    ))}
+                <li>{item.name}</li>
+            ))}
                 </ul>
             </div>
             <div className='invoice-item__summary mt-5 d-flex justify-content-between'>
@@ -160,12 +158,11 @@ const DetailsInvoicePage = () => {
 
         emailjs.send('service_5kk2tek', 'template_39ozxp2', templateParams, '1GBjYQKzmcCzyWl_X')
             .then((result) => {
-                console.log(result.text);
                 console.log(templateParams.my_html)
             }, (error) => {
                 console.log(error);
             });
-    }   
+    }
 
 
     return (

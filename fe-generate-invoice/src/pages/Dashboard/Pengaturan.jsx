@@ -70,6 +70,7 @@ export default function PengaturanPage() {
         try {
             axiosInstance.put('/business',
                 editFormData,
+                console.log(editFormData),
                 config
             )
                 .then((response) => {
